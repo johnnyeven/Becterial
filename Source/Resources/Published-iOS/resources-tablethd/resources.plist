@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>resources/1.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1095, 1997}, {48, 48}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{91, 91}, {48, 48}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{349, 1923}, {94, 94}}</string>
+			<key>offset</key>
+			<string>{23, -23}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{91, 91}, {94, 94}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/3.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{207, 1923}, {94, 140}}</string>
+			<key>offset</key>
+			<string>{23, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{91, 45}, {94, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/4.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1283, 143}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/5.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1425, 1}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/6.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1709, 1}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/7.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1851, 1}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/8.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1283, 1}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/9.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1567, 1}, {140, 140}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{45, 45}, {140, 140}}</string>
+			<key>sourceSize</key>
+			<string>{230, 230}</string>
+		</dict>
+		<key>resources/close_highlight.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1095, 1923}, {72, 72}}</string>
+			<key>offset</key>
+			<string>{1, -1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{11, 11}, {72, 72}}</string>
+			<key>sourceSize</key>
+			<string>{92, 92}</string>
+		</dict>
+		<key>resources/close_normal.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{445, 1923}, {92, 92}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {92, 92}}</string>
+			<key>sourceSize</key>
+			<string>{92, 92}</string>
+		</dict>
+		<key>resources/number_combine.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{539, 1923}, {554, 86}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{3, 1}, {554, 86}}</string>
+			<key>sourceSize</key>
+			<string>{560, 88}</string>
+		</dict>
+		<key>resources/restart_highlight.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{111, 1923}, {94, 98}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{7, 7}, {94, 98}}</string>
+			<key>sourceSize</key>
+			<string>{108, 112}</string>
+		</dict>
+		<key>resources/restart_normal.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1923}, {108, 112}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {108, 112}}</string>
+			<key>sourceSize</key>
+			<string>{108, 112}</string>
+		</dict>
+		<key>resources/scene_bg.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {1280, 1920}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {1280, 1920}}</string>
+			<key>sourceSize</key>
+			<string>{1280, 1920}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 2048}</string>
+		<key>textureFileName</key>
+		<string>resources.png</string>
+	</dict>
+</dict>
+</plist>

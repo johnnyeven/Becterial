@@ -115,6 +115,52 @@
         Becterial *target = [list objectAtIndex:(arc4random() % count)];
         target.level = becterial.level;
         becterial.level = 0;
+
+        [self isEvolution:target];
+    }
+}
+
+-(BOOL)isEvolution:(Becterial *)becterial
+{
+    int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
+    int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
+    int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
+    int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
+    Becterial *other;
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    int count = 0;
+
+    for(int i = startX; i <= endX; i++)
+    {
+        for(int j = startY; j <= endY; j++)
+        {
+            if(i != becterial.positionX && j != becterial.positionY)
+            {
+                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                if(other.level == becterial.level)
+                {
+                    count++;
+                    [list addObject:other];
+                }
+            }
+        }
+    }
+
+    if(count >= 2)
+    {
+        remain++;
+        becterial.level++;
+        for(int m = 0; m < [list count]; m++)
+        {
+            other = [list objectAtIndex:m];
+            other.level = 0;
+        }
+        [self isEvolution:becterial];
+        return YES;
+    }
+    else
+    {
+        return NO;
     }
 }
 

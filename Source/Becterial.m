@@ -8,15 +8,9 @@
 
 #import "Becterial.h"
 #import "MainScene.h"
-
-static const NSString BecterialTouched = @"Becterial.BecterialTouched";
+#import "define.h"
 
 @implementation Becterial
-
-@synthesize newBecterial;
-@synthesize level;
-@synthesize positionX;
-@synthesize positionY;
 
 -(void)didLoadFromCCB
 {
@@ -27,7 +21,7 @@ static const NSString BecterialTouched = @"Becterial.BecterialTouched";
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     MainScene *s = (MainScene *)self.parent.parent;
-    if(s.remain > 0 && level == 0)
+    if(s.remain > 0 && _level == 0)
     {
         s.current = s.current + 1;
         s.remain = s.remain - 1;
@@ -35,7 +29,7 @@ static const NSString BecterialTouched = @"Becterial.BecterialTouched";
         // self.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/1.png"];
         self.level = 1;
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:BecterialTouched object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BECTERIAL_MESSAGE object:self];
 
         self.newBecterial = NO;
     }

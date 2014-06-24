@@ -8,6 +8,7 @@
 
 #import "MainScene.h"
 #import "Becterial.h"
+#import "define.h"
 #import <CCLabelAtlas.h>
 
 @implementation MainScene
@@ -21,7 +22,7 @@
 
 -(void)didLoadFromCCB
 {
-    _remain = 10;
+    _remain = 1000;
     _current = 0;
     
     _lblScore = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
@@ -37,7 +38,7 @@
     _lblRemain = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
-    [_lblRemain setString:@"10"];
+    [_lblRemain setString:@"1000"];
 }
 
 -(void)onEnter
@@ -60,9 +61,10 @@
             [_tmp addObject:_b];
             [_container addChild:_b];
         }
+        [_becterialContainer addObject:_tmp];
     }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecterialTouched:) name:Becterial.BecterialTouched object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecterialTouched:) name:BECTERIAL_MESSAGE object:nil];
 }
 
 -(void)onBecterialTouched:(NSNotification *)notification
@@ -79,7 +81,8 @@
 
             if(!_becterial.newBecterial)
             {
-                [self moveBecterial:_becterial];
+//                [self moveBecterial:_becterial];
+                [self isEvolution:_becterial];
             }
         }
     }
@@ -87,6 +90,7 @@
 
 -(void)moveBecterial:(Becterial *)becterial
 {
+    NSLog(@"x=%i, y=%i", becterial.positionX, becterial.positionY);
     int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
     int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
     int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
@@ -98,13 +102,10 @@
     {
         for(int j = startY; j <= endY; j++)
         {
-            if(i != becterial.positionX && j != becterial.positionY)
+            other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+            if(other.level == 0)
             {
-                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                if(other.level == 0)
-                {
-                    [list addObject:other];
-                }
+                [list addObject:other];
             }
         }
     }
@@ -122,46 +123,55 @@
 
 -(BOOL)isEvolution:(Becterial *)becterial
 {
-    int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
-    int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
-    int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
-    int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
-    Becterial *other;
-    NSMutableArray *list = [[NSMutableArray alloc] init];
-    int count = 0;
-
-    for(int i = startX; i <= endX; i++)
+    NSLog(@"x=%i, y=%i", becterial.positionX, becterial.positionY);
+    if (becterial.level > 0)
     {
-        for(int j = startY; j <= endY; j++)
+        int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
+        int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
+        int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
+        int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
+        Becterial *other;
+        NSMutableArray *list = [[NSMutableArray alloc] init];
+        int count = 0;
+        
+        for(int i = startX; i <= endX; i++)
         {
-            if(i != becterial.positionX && j != becterial.positionY)
+            for(int j = startY; j <= endY; j++)
             {
-                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                if(other.level == becterial.level)
+                if(i != becterial.positionX || j != becterial.positionY)
                 {
-                    count++;
-                    [list addObject:other];
+                    other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                    if(other.level == becterial.level)
+                    {
+                        count++;
+                        [list addObject:other];
+                    }
                 }
             }
         }
-    }
-
-    if(count >= 2)
-    {
-        remain++;
-        becterial.level++;
-        for(int m = 0; m < [list count]; m++)
+        
+        if(count >= 2)
         {
-            other = [list objectAtIndex:m];
-            other.level = 0;
+            self.remain++;
+            becterial.level++;
+            for(int m = 0; m < [list count]; m++)
+            {
+                other = [list objectAtIndex:m];
+                other.level = 0;
+            }
+            
+            for(int i = startX; i <= endX; i++)
+            {
+                for(int j = startY; j <= endY; j++)
+                {
+                    other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                    [self isEvolution:other];
+                }
+            }
+            return YES;
         }
-        [self isEvolution:becterial];
-        return YES;
     }
-    else
-    {
-        return NO;
-    }
+    return NO;
 }
 
 -(void)update:(CCTime)delta

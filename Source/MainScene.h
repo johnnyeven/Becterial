@@ -7,6 +7,7 @@
 //
 
 #import "CCNode.h"
+#import "Becterial.h"
 
 @interface MainScene : CCNode
 

@@ -59,6 +59,7 @@
 
 - (CCScene*) startScene
 {
+    [[CCDirector sharedDirector] setDisplayStats:YES];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

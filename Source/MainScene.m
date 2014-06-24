@@ -61,6 +61,61 @@
             [_container addChild:_b];
         }
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecterialTouched:) name:Becterial.BecterialTouched object:nil];
+}
+
+-(void)onBecterialTouched:(NSNotification *)notification
+{
+    Becterial *_becterial;
+    NSMutableArray *_tmp;
+
+    for(int i = 0; i < [_becterialContainer count]; i++)
+    {
+        _tmp = [_becterialContainer objectAtIndex:i];
+        for(int j = 0; j < [_tmp count]; j++)
+        {
+            _becterial = [_tmp objectAtIndex:j];
+
+            if(!_becterial.newBecterial)
+            {
+                [self moveBecterial:_becterial];
+            }
+        }
+    }
+}
+
+-(void)moveBecterial:(Becterial *)becterial
+{
+    int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
+    int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
+    int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
+    int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
+    Becterial *other;
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+
+    for(int i = startX; i <= endX; i++)
+    {
+        for(int j = startY; j <= endY; j++)
+        {
+            if(i != becterial.positionX && j != becterial.positionY)
+            {
+                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                if(other.level == 0)
+                {
+                    [list addObject:other];
+                }
+            }
+        }
+    }
+
+    int count = [list count];
+    if(count > 0)
+    {
+        Becterial *target = [list objectAtIndex:(arc4random() % count)];
+        target.level = becterial.level;
+        becterial.level = 0;
+    }
 }
 
 -(void)update:(CCTime)delta

@@ -81,8 +81,8 @@
 
             if(!_becterial.newBecterial)
             {
-//                [self moveBecterial:_becterial];
-                [self isEvolution:_becterial];
+                [self moveBecterial:_becterial];
+//                [self isEvolution:_becterial];
             }
         }
     }
@@ -90,7 +90,6 @@
 
 -(void)moveBecterial:(Becterial *)becterial
 {
-    NSLog(@"x=%i, y=%i", becterial.positionX, becterial.positionY);
     int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
     int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
     int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
@@ -111,13 +110,23 @@
     }
 
     int count = [list count];
+    int l = 0;
     if(count > 0)
     {
         Becterial *target = [list objectAtIndex:(arc4random() % count)];
-        target.level = becterial.level;
+        
+        Becterial *tmp = [becterial clone];
+        [_container addChild:tmp];
+        l = becterial.level;
         becterial.level = 0;
-
-        [self isEvolution:target];
+        CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(target.position.x, target.position.y)];
+        CCActionRemove *aRemove = [CCActionRemove action];
+        CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
+        {
+            target.level = l;
+            [self isEvolution:target];
+        }];
+        [tmp runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
     }
 }
 
@@ -163,10 +172,9 @@
 
                 CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(becterial.position.x, becterial.position.y)];
                 CCActionRemove *aRemove = [CCActionRemove action];
-                CCActionCallBlock *aCallBlock = nil;
                 if(!isCallback)
                 {
-                    aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
+                    CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
                     {
                         self.remain++;
                         becterial.level++;
@@ -174,15 +182,19 @@
                         {
                             for(int j = startY; j <= endY; j++)
                             {
-                                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                                Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
                                 [self isEvolution:other];
                             }
                         }
                         NSLog(@"callback");
                     }];
                     isCallback = YES;
+                    [tmp runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
                 }
-                [tmp runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
+                else
+                {
+                    [tmp runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove]]];
+                }
             }
             return YES;
         }

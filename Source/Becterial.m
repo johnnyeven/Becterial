@@ -46,11 +46,14 @@
 -(Becterial *)clone
 {
     Becterial *b = (Becterial *)[CCBReader load:@"Becterial"];
-    b.level = level;
-    b.positionX = positionX;
-    b.positionY = positionY;
+    b.level = self.level;
+    b.positionX = self.positionX;
+    b.positionY = self.positionY;
     b.newBecterial = NO;
     b.position = ccp(self.position.x, self.position.y);
+    b.anchorPoint = ccp(0.f, 0.f);
+    
+    return b;
 }
 
 @end

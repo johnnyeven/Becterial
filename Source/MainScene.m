@@ -81,8 +81,8 @@
 
             if(!_becterial.newBecterial)
             {
-                [self moveBecterial:_becterial];
-//                [self isEvolution:_becterial];
+//                [self moveBecterial:_becterial];
+                [self isEvolution:_becterial];
             }
         }
     }

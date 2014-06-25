@@ -152,26 +152,47 @@
         
         if(count >= 2)
         {
-            self.remain++;
-            becterial.level++;
+            Becterial *tmp;
+            BOOL isCallback = NO;
             for(int m = 0; m < [list count]; m++)
             {
                 other = [list objectAtIndex:m];
+                tmp = [other clone];
+                [_container addChild:tmp];
                 other.level = 0;
-            }
-            
-            for(int i = startX; i <= endX; i++)
-            {
-                for(int j = startY; j <= endY; j++)
+
+                CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(becterial.position.x, becterial.position.y)];
+                CCActionRemove *aRemove = [CCActionRemove action];
+                CCActionCallBlock *aCallBlock = nil;
+                if(!isCallback)
                 {
-                    other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                    [self isEvolution:other];
+                    aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
+                    {
+                        self.remain++;
+                        becterial.level++;
+                        for(int i = startX; i <= endX; i++)
+                        {
+                            for(int j = startY; j <= endY; j++)
+                            {
+                                other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                                [self isEvolution:other];
+                            }
+                        }
+                        NSLog(@"callback");
+                    }];
+                    isCallback = YES;
                 }
+                [tmp runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
             }
             return YES;
         }
     }
     return NO;
+}
+
+-(void)becterialMoveCallback
+{
+
 }
 
 -(void)update:(CCTime)delta

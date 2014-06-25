@@ -26,7 +26,6 @@
         s.current = s.current + 1;
         s.remain = s.remain - 1;
         
-        // self.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/1.png"];
         self.level = 1;
 
         [[NSNotificationCenter defaultCenter] postNotificationName:BECTERIAL_MESSAGE object:self];
@@ -42,6 +41,16 @@
 		_level = level;
         self.spriteFrame = [CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"resources/%i.png", level]];
 	}
+}
+
+-(Becterial *)clone
+{
+    Becterial *b = (Becterial *)[CCBReader load:@"Becterial"];
+    b.level = level;
+    b.positionX = positionX;
+    b.positionY = positionY;
+    b.newBecterial = NO;
+    b.position = ccp(self.position.x, self.position.y);
 }
 
 @end

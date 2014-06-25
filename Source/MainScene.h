@@ -17,5 +17,6 @@
 -(void)onBecterialTouched:(NSNotification *)notification;
 -(void)moveBecterial:(Becterial *)becterial;
 -(BOOL)isEvolution:(Becterial *)becterial;
+-(void)becterialMoveCallback;
 
 @end

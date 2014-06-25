@@ -15,4 +15,6 @@
 @property (nonatomic) int positionX;
 @property (nonatomic) int positionY;
 
+-(Becterial *)clone;
+
 @end

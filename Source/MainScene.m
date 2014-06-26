@@ -106,20 +106,20 @@
     for(int i = 0; i < [_becterialList count]; i++)
     {
         _becterial = [_becterialList objectAtIndex:i];
-//      if(!_becterial.newBecterial)
+        if(!_becterial.newBecterial)
         {
             [self moveBecterial:_becterial];
 //          [self isEvolution:_becterial];
+        }
+        else
+        {
+            _becterial.newBecterial = NO;
         }
     }
 }
 
 -(void)moveBecterial:(Becterial *)becterial
 {
-    if(becterial.newBecterial)
-    {
-        becterial.newBecterial = NO;
-    }
     int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
     int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
     int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
@@ -204,17 +204,17 @@
                     {
                         self.remain++;
                         becterial.level++;
-//                        for(int i = startX; i <= endX; i++)
-//                        {
-//                            for(int j = startY; j <= endY; j++)
-//                            {
-//                                if([[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
-//                                {
-//                                    Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                        for(int i = startX; i <= endX; i++)
+                        {
+                            for(int j = startY; j <= endY; j++)
+                            {
+                                if([[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
+                                {
+                                    Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
                                     [self isEvolution:other];
-//                                }
-//                            }
-//                        }
+                                }
+                            }
+                        }
                         self.current = [_becterialList count];
                         runningAction--;
                     }];
@@ -234,9 +234,13 @@
     return NO;
 }
 
--(void)becterialMoveCallback
+-(void)evolution
 {
-
+    for(int i = 0; i < [_becterialList count]; i++)
+    {
+        Becterial *b = [_becterialList objectAtIndex:i];
+        [self isEvolution:b];
+    }
 }
 
 -(void)update:(CCTime)delta

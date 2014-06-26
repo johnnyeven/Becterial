@@ -18,6 +18,8 @@
     CCLabelAtlas *_lblCurrent;
     CCNode *_container;
     NSMutableArray *_becterialContainer;
+    NSMutableArray *_becterialList;
+    int runningAction;
 }
 
 -(void)didLoadFromCCB
@@ -52,20 +54,13 @@
     for (int i = 0; i < capacity; i++)
     {
         NSMutableArray *_tmp = [NSMutableArray arrayWithCapacity:capacity];
-        // for (int j = 0; j < capacity; j++)
-        // {
-        //     Becterial *_b = (Becterial *)[CCBReader load:@"Becterial"];
-        //     _b.anchorPoint = ccp(0.f, 0.f);
-        //     _b.positionX = i;
-        //     _b.positionY = j;
-        //     _b.level = 0;
-        //     _b.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/0.png"];
-        //     _b.position = ccp(i * 60.5f, j * 60.5f);
-        //     [_tmp addObject:_b];
-        //     [_container addChild:_b];
-        // }
+        for (int j = 0; j < capacity; j++)
+        {
+            [_tmp addObject:[NSNull null]];
+        }
         [_becterialContainer addObject:_tmp];
     }
+    _becterialList = [[NSMutableArray alloc] init];
 
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecterialTouched:) name:BECTERIAL_MESSAGE object:nil];
 }
@@ -73,72 +68,73 @@
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint position = [touch locationInWorld];
-    position = [[CCDirector sharedDirector] convertToGL:position];
     position = [_container convertToNodeSpace:position];
 
     int x = position.x / 60.5f;
     int y = position.y / 60.5f;
+    
+    if (x > 4 || y > 4)
+    {
+        return;
+    }
+    
+    if(runningAction == 0 && [[_becterialContainer objectAtIndex:x] objectAtIndex:y] == [NSNull null])
+    {
+        self.remain = _remain - 1;
+        
+        Becterial *_b = (Becterial *)[CCBReader load:@"Becterial"];
+        _b.anchorPoint = ccp(0.f, 0.f);
+        _b.positionX = x;
+        _b.positionY = y;
+        _b.level = 1;
+        _b.position = ccp(x * 60.5f, y * 60.5f);
+        [_container addChild:_b];
 
-    Becterial *_b = (Becterial *)[CCBReader load:@"Becterial"];
-    _b.anchorPoint = ccp(0.f, 0.f);
-    _b.positionX = x;
-    _b.positionY = y;
-    _b.level = 1;
-    _b.position = ccp(x * 60.5f, y * 60.5f);
-    [_container addChild:_b];
+        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:x];
+        [_tmp replaceObjectAtIndex:y withObject:_b];
+        [_becterialList addObject:_b];
 
-    NSMutableArray *_tmp = [_becterialContainer objectAtIndex:x];
-    [_tmp replaceObjectAtIndex:y withObject:_b];
-
-    [self onBecterialTouched];
+        [self onBecterialTouched];
+        
+        self.current = [_becterialList count];
+    }
 }
 
 -(void)onBecterialTouched
 {
     Becterial *_becterial;
-    NSMutableArray *_tmp;
-
-    for(int i = 0; i < [_becterialContainer count]; i++)
+    for(int i = 0; i < [_becterialList count]; i++)
     {
-        _tmp = [_becterialContainer objectAtIndex:i];
-        for(int j = 0; j < [_tmp count]; j++)
+        _becterial = [_becterialList objectAtIndex:i];
+//      if(!_becterial.newBecterial)
         {
-            _becterial = [_tmp objectAtIndex:j];
-
-            if(_becterial)
-            {
-                if(!_becterial.newBecterial)
-                {
-                    [self moveBecterial:_becterial];
-                    // [self isEvolution:_becterial];
-                }
-                else
-                {
-                    _becterial.newBecterial = NO;
-                }
-            }
+            [self moveBecterial:_becterial];
+//          [self isEvolution:_becterial];
         }
     }
 }
 
 -(void)moveBecterial:(Becterial *)becterial
 {
+    if(becterial.newBecterial)
+    {
+        becterial.newBecterial = NO;
+    }
     int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
     int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
     int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
     int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
-    Becterial *other;
     NSMutableArray *list = [[NSMutableArray alloc] init];
 
     for(int i = startX; i <= endX; i++)
     {
         for(int j = startY; j <= endY; j++)
         {
-            other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-            if(!other)
+            if((i != becterial.positionX || j != becterial.positionY) &&
+               [[_becterialContainer objectAtIndex:i] objectAtIndex:j] == [NSNull null])
             {
                 CGPoint position = ccp(i, j);
-                [list addObject:position];
+                [list addObject:[NSValue valueWithCGPoint:position]];
             }
         }
     }
@@ -146,9 +142,9 @@
     int count = [list count];
     if(count > 0)
     {
-        CGPoint *p = [list objectAtIndex:(arc4random() % count)];
-        [[_becterialContainer objectAtIndex:becterial.positionX] replaceObjectAtIndex:becterial.positionY withObject:null];
+        CGPoint p = [(NSValue *)[list objectAtIndex:(arc4random() % count)] CGPointValue];
         [[_becterialContainer objectAtIndex:p.x] replaceObjectAtIndex:p.y withObject:becterial];
+        [[_becterialContainer objectAtIndex:becterial.positionX] replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
         becterial.positionX = p.x;
         becterial.positionY = p.y;
 
@@ -156,14 +152,15 @@
         CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
         {
             [self isEvolution:becterial];
+            runningAction--;
         }];
         [becterial runAction:[CCActionSequence actionWithArray:@[aMoveTo, aCallBlock]]];
+        runningAction++;
     }
 }
 
 -(BOOL)isEvolution:(Becterial *)becterial
 {
-    NSLog(@"x=%i, y=%i", becterial.positionX, becterial.positionY);
     if (becterial.level > 0)
     {
         int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
@@ -178,10 +175,11 @@
         {
             for(int j = startY; j <= endY; j++)
             {
-                if(i != becterial.positionX || j != becterial.positionY)
+                if((i != becterial.positionX || j != becterial.positionY) &&
+                   [[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
                 {
                     other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                    if(other && other.level == becterial.level)
+                    if(other.level == becterial.level)
                     {
                         count++;
                         [list addObject:other];
@@ -192,15 +190,11 @@
         
         if(count >= 2)
         {
-            Becterial *tmp;
             BOOL isCallback = NO;
             for(int m = 0; m < [list count]; m++)
             {
                 other = [list objectAtIndex:m];
-                [[_becterialContainer objectAtIndex:other.positionX] replaceObjectAtIndex:other.positionY withObject:null];
-                // tmp = [other clone];
-                // [_container addChild:tmp];
-                // other.level = 0;
+                [[_becterialContainer objectAtIndex:other.positionX] replaceObjectAtIndex:other.positionY withObject:[NSNull null]];
 
                 CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(becterial.position.x, becterial.position.y)];
                 CCActionRemove *aRemove = [CCActionRemove action];
@@ -210,23 +204,29 @@
                     {
                         self.remain++;
                         becterial.level++;
-                        for(int i = startX; i <= endX; i++)
-                        {
-                            for(int j = startY; j <= endY; j++)
-                            {
-                                Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                                [self isEvolution:other];
-                            }
-                        }
-                        NSLog(@"callback");
+//                        for(int i = startX; i <= endX; i++)
+//                        {
+//                            for(int j = startY; j <= endY; j++)
+//                            {
+//                                if([[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
+//                                {
+//                                    Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
+                                    [self isEvolution:other];
+//                                }
+//                            }
+//                        }
+                        self.current = [_becterialList count];
+                        runningAction--;
                     }];
                     isCallback = YES;
                     [other runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
+                    runningAction++;
                 }
                 else
                 {
                     [other runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove]]];
                 }
+                [_becterialList removeObjectIdenticalTo:other];
             }
             return YES;
         }

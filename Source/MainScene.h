@@ -14,7 +14,7 @@
 @property (nonatomic) int current;
 @property (nonatomic) int remain;
 
--(void)onBecterialTouched:(NSNotification *)notification;
+-(void)onBecterialTouched;
 -(void)moveBecterial:(Becterial *)becterial;
 -(BOOL)isEvolution:(Becterial *)becterial;
 -(void)becterialMoveCallback;

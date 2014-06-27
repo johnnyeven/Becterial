@@ -179,10 +179,11 @@
                    [[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
                 {
                     other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                    if(other.level == becterial.level)
+                    if(other.level == becterial.level && !other.evolution)
                     {
                         count++;
                         [list addObject:other];
+                        other.evolution = YES;
                     }
                 }
             }
@@ -243,10 +244,10 @@
     }
 }
 
--(void)update:(CCTime)delta
-{
+// -(void)update:(CCTime)delta
+// {
     
-}
+// }
 
 -(void)reset
 {

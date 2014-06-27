@@ -7,8 +7,6 @@
 //
 
 #import "Becterial.h"
-#import "MainScene.h"
-#import "define.h"
 
 @implementation Becterial
 
@@ -16,6 +14,7 @@
 {
     // self.userInteractionEnabled = YES;
     self.newBecterial = YES;
+    self.evolution = NO;
 }
 
 // -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event

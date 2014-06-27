@@ -9,7 +9,7 @@
 #import "MainScene.h"
 #import "Becterial.h"
 #import "define.h"
-#import <CCLabelAtlas.h>
+#import "CCLabelAtlas.h"
 
 @implementation MainScene
 {

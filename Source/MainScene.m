@@ -151,15 +151,18 @@
         CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(p.x * 60.5f, p.y * 60.5f)];
         CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
         {
-            [self isEvolution:becterial];
             runningAction--;
+            if(runningAction == 0)
+            {
+                [self evolution];
+            }
         }];
         [becterial runAction:[CCActionSequence actionWithArray:@[aMoveTo, aCallBlock]]];
         runningAction++;
     }
 }
 
--(BOOL)isEvolution:(Becterial *)becterial
+-(void)isEvolution:(Becterial *)becterial
 {
     if (becterial.level > 0)
     {
@@ -179,11 +182,10 @@
                    [[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
                 {
                     other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                    if(other.level == becterial.level && !other.evolution)
+                    if(other.level == becterial.level)
                     {
                         count++;
                         [list addObject:other];
-                        other.evolution = YES;
                     }
                 }
             }
@@ -205,19 +207,12 @@
                     {
                         self.remain++;
                         becterial.level++;
-                        for(int i = startX; i <= endX; i++)
-                        {
-                            for(int j = startY; j <= endY; j++)
-                            {
-                                if([[_becterialContainer objectAtIndex:i] objectAtIndex:j] != [NSNull null])
-                                {
-                                    Becterial *other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
-                                    [self isEvolution:other];
-                                }
-                            }
-                        }
                         self.current = [_becterialList count];
                         runningAction--;
+                        if(runningAction == 0)
+                        {
+                            [self evolution];
+                        }
                     }];
                     isCallback = YES;
                     [other runAction:[CCActionSequence actionWithArray:@[aMoveTo, aRemove, aCallBlock]]];
@@ -229,10 +224,8 @@
                 }
                 [_becterialList removeObjectIdenticalTo:other];
             }
-            return YES;
         }
     }
-    return NO;
 }
 
 -(void)evolution
@@ -243,11 +236,6 @@
         [self isEvolution:b];
     }
 }
-
-// -(void)update:(CCTime)delta
-// {
-    
-// }
 
 -(void)reset
 {

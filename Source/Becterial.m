@@ -12,24 +12,8 @@
 
 -(void)didLoadFromCCB
 {
-    // self.userInteractionEnabled = YES;
     self.newBecterial = YES;
-    self.evolution = NO;
 }
-
-// -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-// {
-//     MainScene *s = (MainScene *)self.parent.parent;
-//     if(s.remain > 0 && _level == 0)
-//     {
-//         s.current = s.current + 1;
-//         s.remain = s.remain - 1;
-        
-//         self.level = 1;
-
-//         [[NSNotificationCenter defaultCenter] postNotificationName:BECTERIAL_MESSAGE object:self];
-//     }
-// }
 
 -(void)setLevel:(int)level
 {

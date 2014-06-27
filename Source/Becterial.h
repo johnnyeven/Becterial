@@ -11,7 +11,6 @@
 @interface Becterial : CCSprite
 
 @property (nonatomic) BOOL newBecterial;
-@property (nonatomic) BOOL evolution;
 @property (nonatomic) int level;
 @property (nonatomic) int positionX;
 @property (nonatomic) int positionY;

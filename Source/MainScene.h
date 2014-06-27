@@ -16,7 +16,7 @@
 
 -(void)onBecterialTouched;
 -(void)moveBecterial:(Becterial *)becterial;
--(BOOL)isEvolution:(Becterial *)becterial;
+-(void)isEvolution:(Becterial *)becterial;
 -(void)evolution;
 
 @end

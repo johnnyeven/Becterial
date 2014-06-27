@@ -61,8 +61,6 @@
         [_becterialContainer addObject:_tmp];
     }
     _becterialList = [[NSMutableArray alloc] init];
-
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecterialTouched:) name:BECTERIAL_MESSAGE object:nil];
 }
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -109,7 +107,6 @@
         if(!_becterial.newBecterial)
         {
             [self moveBecterial:_becterial];
-//          [self isEvolution:_becterial];
         }
         else
         {

@@ -28,7 +28,6 @@
     if(self)
     {
         numberSpriteArr = [[NSMutableArray alloc] init];
-        _score = -1;
         return self;
     }
     return nil;
@@ -42,6 +41,21 @@
 
 -(void)setScore:(int)score
 {
+    if(score == 0)
+    {
+        _score = score;
+        [self removeAllChildren];
+        [numberSpriteArr removeAllObjects];
+        
+        NSString *fileName = [NSString stringWithFormat:@"number/number_%i.png", 0];
+        CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];
+        [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
+        numSprite.anchorPoint = ccp(0, 0);
+        numSprite.position = ccp(0, 0);
+        [numberSpriteArr addObject:numSprite];
+        [self addChild:numSprite];
+        return;
+    }
     if(_score != score)
     {
         _score = score;
@@ -60,7 +74,7 @@
         int count = [arr count];
         for(int i = count - 1; i >= 0; i--)
         {
-            NSString *fileName = [NSString stringWithFormat:@"number_%i.png", [[arr objectAtIndex:i] intValue]];
+            NSString *fileName = [NSString stringWithFormat:@"number/number_%i.png", [[arr objectAtIndex:i] intValue]];
             CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];
             [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
             numSprite.anchorPoint = ccp(0, 0);

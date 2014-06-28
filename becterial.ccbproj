@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>cocos2dUpdateIgnoredVersions</key>
-	<array>
-		<string>3.1.1</string>
-	</array>
+	<array/>
 	<key>defaultOrientation</key>
 	<integer>1</integer>
 	<key>designTarget</key>
@@ -47,7 +45,7 @@
 	<key>publishEnablediPhone</key>
 	<true/>
 	<key>publishEnvironment</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>publishResolution_android_phone</key>
 	<true/>
 	<key>publishResolution_android_phonehd</key>

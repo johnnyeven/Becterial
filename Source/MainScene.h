@@ -11,6 +11,7 @@
 
 @interface MainScene : CCNode
 
+@property (nonatomic) int score;
 @property (nonatomic) int current;
 @property (nonatomic) int remain;
 

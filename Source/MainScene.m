@@ -9,7 +9,6 @@
 #import "MainScene.h"
 #import "Becterial.h"
 #import "define.h"
-#import "CCLabelAtlas.h"
 #import "PZLabelScore.h"
 
 @implementation MainScene
@@ -93,6 +92,7 @@
         [self onBecterialTouched];
         
         self.current = [_becterialList count];
+        self.score = self.score + 1;
     }
 }
 
@@ -200,7 +200,7 @@
                 {
                     CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
                     {
-                        self.remain++;
+//                        self.remain++;
                         becterial.level++;
                         self.current = [_becterialList count];
                         runningAction--;
@@ -219,6 +219,8 @@
                 }
                 [_becterialList removeObjectIdenticalTo:other];
             }
+            int score = [list count] * other.level * 10 + becterial.level * 10;
+            self.score = self.score + score;
         }
     }
 }
@@ -240,6 +242,15 @@
 -(void)back
 {
     
+}
+
+-(void)setScore:(int)score
+{
+    if(_score != score)
+    {
+        _score = score;
+        _lblScore.score = score;
+    }
 }
 
 -(void)setCurrent:(int)current

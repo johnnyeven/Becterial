@@ -10,8 +10,11 @@
 
 @interface PZLabelScore : CCNode
 
+@property (nonatomic) int padding;
 @property (nonatomic) int score;
+@property (nonatomic) int itemWidth;
+@property (nonatomic) int itemHeight;
 
-+(id)initWithScore:(int)score fileName:(NSString *)fileName itemWidth:(int)itemWidth itemHeight:(int)itemHeight
++(id)initWithScore:(int)score fileName:(NSString *)fileName itemWidth:(int)itemWidth itemHeight:(int)itemHeight;
 
 @end

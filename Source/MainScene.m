@@ -10,12 +10,13 @@
 #import "Becterial.h"
 #import "define.h"
 #import "CCLabelAtlas.h"
+#import "PZLabelScore.h"
 
 @implementation MainScene
 {
-    CCLabelAtlas *_lblScore;
+    PZLabelScore *_lblScore;
     CCLabelAtlas *_lblRemain;
-    CCLabelAtlas *_lblCurrent;
+    PZLabelScore *_lblCurrent;
     CCNode *_container;
     NSMutableArray *_becterialContainer;
     NSMutableArray *_becterialList;
@@ -27,15 +28,13 @@
     _remain = 1000;
     _current = 0;
     
-    _lblScore = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
+    _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblScore.position = ccp(10.f, 415.f);
     [self addChild:_lblScore];
-    [_lblScore setString:@"0"];
     
-    _lblCurrent = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
+    _lblCurrent = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblCurrent.position = ccp(169.f, 368.f);
     [self addChild:_lblCurrent];
-    [_lblCurrent setString:@"0"];
     
     _lblRemain = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
     _lblRemain.position = ccp(169.f, 334.f);
@@ -249,7 +248,7 @@
     if(_current != current)
     {
         _current = current;
-        [_lblCurrent setString:[NSString stringWithFormat:@"%i", _current]];
+        _lblCurrent.score = current;
     }
 }
 

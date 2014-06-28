@@ -15,7 +15,7 @@
 @implementation MainScene
 {
     PZLabelScore *_lblScore;
-    CCLabelAtlas *_lblRemain;
+    PZLabelScore *_lblRemain;
     PZLabelScore *_lblCurrent;
     CCNode *_container;
     NSMutableArray *_becterialContainer;
@@ -36,10 +36,9 @@
     _lblCurrent.position = ccp(169.f, 368.f);
     [self addChild:_lblCurrent];
     
-    _lblRemain = [CCLabelAtlas labelWithString:@"0" charMapFile:@"resources/number_combine.png" itemWidth:14 itemHeight:22 startCharMap:'0'];
+    _lblRemain = [PZLabelScore initWithScore:1000 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
-    [_lblRemain setString:@"1000"];
 
     self.userInteractionEnabled = YES;
 }
@@ -257,7 +256,7 @@
     if(_remain != remain)
     {
         _remain = remain;
-        [_lblRemain setString:[NSString stringWithFormat:@"%i", _remain]];
+        _lblRemain.score = remain;
     }
 }
 

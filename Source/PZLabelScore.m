@@ -28,6 +28,7 @@
     if(self)
     {
         numberSpriteArr = [[NSMutableArray alloc] init];
+        _score = -1;
         return self;
     }
     return nil;
@@ -60,7 +61,6 @@
         for(int i = count - 1; i >= 0; i--)
         {
             NSString *fileName = [NSString stringWithFormat:@"number_%i.png", [[arr objectAtIndex:i] intValue]];
-            NSLog(@"%@", fileName);
             CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];
             [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
             numSprite.anchorPoint = ccp(0, 0);

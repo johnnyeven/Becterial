@@ -37,6 +37,7 @@
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
+		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,8 @@
 		BE12CB45195861F2006F775D /* Becterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Becterial.h; path = Source/Becterial.h; sourceTree = "<group>"; };
 		BE12CB46195861F2006F775D /* Becterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Becterial.m; path = Source/Becterial.m; sourceTree = "<group>"; };
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
+		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 				BE12CB46195861F2006F775D /* Becterial.m */,
 				BE8751C0195DD999001D86B1 /* PZLabelScore.h */,
 				BE8751C1195DD999001D86B1 /* PZLabelScore.m */,
+				BE1835A4195FE9DF00860689 /* Killer.h */,
+				BE1835A5195FE9DF00860689 /* Killer.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
+				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

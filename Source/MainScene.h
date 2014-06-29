@@ -14,10 +14,14 @@
 @property (nonatomic) int score;
 @property (nonatomic) int current;
 @property (nonatomic) int remain;
+@property (nonatomic) int killerCount;
 
 -(void)onBecterialTouched;
+-(void)checkEnemy;
 -(void)moveBecterial:(Becterial *)becterial;
 -(void)isEvolution:(Becterial *)becterial;
 -(void)evolution;
+-(CCNode *)container;
+-(void)useKiller:(int)x andY:(int)y;
 
 @end

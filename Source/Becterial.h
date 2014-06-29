@@ -12,6 +12,7 @@
 
 @property (nonatomic) BOOL newBecterial;
 @property (nonatomic) int level;
+@property (nonatomic) int type;
 @property (nonatomic) int positionX;
 @property (nonatomic) int positionY;
 

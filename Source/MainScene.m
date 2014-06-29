@@ -13,6 +13,7 @@
 
 @implementation MainScene
 {
+    CCLabelTTF *_lblKillerCount;
     PZLabelScore *_lblScore;
     PZLabelScore *_lblRemain;
     PZLabelScore *_lblCurrent;
@@ -40,6 +41,8 @@
     [self addChild:_lblRemain];
 
     self.userInteractionEnabled = YES;
+    
+    self.killerCount = 10;
 }
 
 -(void)onEnter
@@ -77,7 +80,7 @@
     {
         self.remain = _remain - 1;
         
-        Becterial *_b = (Becterial *)[CCBReader load:@"Becterial"];
+        Becterial *_b = [[Becterial alloc] init];
         _b.anchorPoint = ccp(0.f, 0.f);
         _b.positionX = x;
         _b.positionY = y;
@@ -88,11 +91,46 @@
         NSMutableArray *_tmp = [_becterialContainer objectAtIndex:x];
         [_tmp replaceObjectAtIndex:y withObject:_b];
         [_becterialList addObject:_b];
-
+        
+        [self checkEnemy];
         [self onBecterialTouched];
         
         self.current = [_becterialList count];
         self.score = self.score + 1;
+    }
+}
+
+-(void)checkEnemy
+{
+    if ((arc4random() % 100) < 30)
+    {
+        NSMutableArray *list = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [_becterialContainer count]; i++)
+        {
+            NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
+            for (int j = 0; j < [tmp count]; j++)
+            {
+                if([tmp objectAtIndex:j] == [NSNull null])
+                {
+                    CGPoint p = ccp(i, j);
+                    [list addObject:[NSValue valueWithCGPoint:p]];
+                }
+            }
+        }
+        
+        CGPoint position = [[list objectAtIndex:(arc4random() % [list count])] CGPointValue];
+        Becterial *enemy = [[Becterial alloc] init];
+        enemy.positionX = position.x;
+        enemy.positionY = position.y;
+        enemy.anchorPoint = ccp(0.f, 0.f);
+        enemy.type = 1;
+        enemy.level = 1;
+        enemy.position = ccp(position.x * 60.5f, position.y * 60.5f);
+        [_container addChild:enemy];
+        
+        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
+        [_tmp replaceObjectAtIndex:position.y withObject:enemy];
+        [_becterialList addObject:enemy];
     }
 }
 
@@ -168,6 +206,7 @@
         Becterial *other;
         NSMutableArray *list = [[NSMutableArray alloc] init];
         int count = 0;
+        BOOL isEnemy = (becterial.type == 1);
         
         for(int i = startX; i <= endX; i++)
         {
@@ -179,6 +218,10 @@
                     other = [[_becterialContainer objectAtIndex:i] objectAtIndex:j];
                     if(other.level == becterial.level)
                     {
+                        if(other.type == 1)
+                        {
+                            isEnemy = YES;
+                        }
                         count++;
                         [list addObject:other];
                     }
@@ -200,8 +243,17 @@
                 {
                     CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
                     {
-//                        self.remain++;
-                        becterial.level++;
+                        if(isEnemy)
+                        {
+                            NSMutableArray *tmp = [_becterialContainer objectAtIndex:becterial.positionX];
+                            [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
+                            [_becterialList removeObjectIdenticalTo:becterial];
+                            [_container removeChild:becterial];
+                        }
+                        else
+                        {
+                            becterial.level++;
+                        }
                         self.current = [_becterialList count];
                         runningAction--;
                         if(runningAction == 0)
@@ -268,6 +320,39 @@
     {
         _remain = remain;
         _lblRemain.score = remain;
+    }
+}
+
+-(void)setKillerCount:(int)killerCount
+{
+    if(_killerCount != killerCount)
+    {
+        _killerCount = killerCount;
+        [_lblKillerCount setString:[NSString stringWithFormat:@"%i", killerCount]];
+    }
+}
+
+-(CCNode *)container
+{
+    return _container;
+}
+
+-(void)useKiller:(int)x andY:(int)y
+{
+    if([[_becterialContainer objectAtIndex:x] objectAtIndex:y] == [NSNull null])
+    {
+        return;
+    }
+    
+    Becterial *b = [[_becterialContainer objectAtIndex:x] objectAtIndex:y];
+    if(b.type == 1)
+    {
+        NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
+        [tmp replaceObjectAtIndex:y withObject:[NSNull null]];
+        [_becterialList removeObjectIdenticalTo:b];
+        [_container removeChild:b];
+        self.killerCount--;
+        self.current = [_becterialList count];
     }
 }
 

@@ -10,9 +10,14 @@
 
 @implementation Becterial
 
--(void)didLoadFromCCB
+-(id)init
 {
-    self.newBecterial = YES;
+    self = [super init];
+    if(self)
+    {
+        self.newBecterial = YES;
+    }
+    return self;
 }
 
 -(void)setLevel:(int)level
@@ -20,7 +25,7 @@
 	if(_level != level)
 	{
 		_level = level;
-        self.spriteFrame = [CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"resources/%i.png", level]];
+        self.spriteFrame = [CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"resources/%i%i.png", _type, level]];
 	}
 }
 
@@ -28,6 +33,7 @@
 {
     Becterial *b = (Becterial *)[CCBReader load:@"Becterial"];
     b.level = self.level;
+    b.type = self.type;
     b.positionX = self.positionX;
     b.positionY = self.positionY;
     b.newBecterial = NO;

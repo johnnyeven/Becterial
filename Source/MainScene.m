@@ -206,7 +206,7 @@
         Becterial *other;
         NSMutableArray *list = [[NSMutableArray alloc] init];
         int count = 0;
-        BOOL isEnemy = (becterial.type == 1);
+        BOOL isEnemy = NO;
         
         for(int i = startX; i <= endX; i++)
         {

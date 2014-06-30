@@ -25,7 +25,7 @@
 
 -(void)didLoadFromCCB
 {
-    _remain = 1000;
+    _remain = 200;
     _current = 0;
     
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
@@ -36,7 +36,7 @@
     _lblCurrent.position = ccp(169.f, 368.f);
     [self addChild:_lblCurrent];
     
-    _lblRemain = [PZLabelScore initWithScore:1000 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblRemain = [PZLabelScore initWithScore:200 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
     
@@ -117,8 +117,8 @@
 
 -(void)checkEnemy
 {
-    if ((arc4random() % 100) < 30)
-    {
+//    if ((arc4random() % 100) < 30)
+//    {
         NSMutableArray *list = [[NSMutableArray alloc] init];
         for (int i = 0; i < [_becterialContainer count]; i++)
         {
@@ -146,7 +146,7 @@
         NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
         [_tmp replaceObjectAtIndex:position.y withObject:enemy];
         [_becterialList addObject:enemy];
-    }
+//    }
 }
 
 -(void)onBecterialTouched
@@ -178,7 +178,8 @@
     {
         for(int j = startY; j <= endY; j++)
         {
-            if((i != becterial.positionX || j != becterial.positionY) &&
+            if(((i == becterial.positionX && j != becterial.positionY) ||
+               (i != becterial.positionX && j == becterial.positionY)) &&
                [[_becterialContainer objectAtIndex:i] objectAtIndex:j] == [NSNull null])
             {
                 CGPoint position = ccp(i, j);
@@ -261,7 +262,7 @@
                 {
                     CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
                     {
-                        if(isEnemy)
+                        if(isEnemy && becterial.type == 0)
                         {
                             NSMutableArray *tmp = [_becterialContainer objectAtIndex:becterial.positionX];
                             [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];

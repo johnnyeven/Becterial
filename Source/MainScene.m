@@ -42,8 +42,6 @@
     
     self.killerCount = 10;
     self.userInteractionEnabled = YES;
-
-    [self loadGame];
 }
 
 -(void)onEnter
@@ -61,7 +59,23 @@
         }
         [_becterialContainer addObject:_tmp];
     }
-    _becterialList = [[NSMutableArray alloc] init];
+    
+    if([self loadGame])
+    {
+        for (int i = 0; i < [_becterialList count]; i++)
+        {
+            Becterial *b = [_becterialList objectAtIndex:i];
+            b.anchorPoint = ccp(0.f, 0.f);
+            NSMutableArray *tmp = [_becterialContainer objectAtIndex:b.positionX];
+            [tmp replaceObjectAtIndex:b.positionY withObject:b];
+            b.position = ccp(b.positionX * 60.5f, b.positionY * 60.5f);
+            [_container addChild:b];
+        }
+    }
+    else
+    {
+        _becterialList = [[NSMutableArray alloc] init];
+    }
 }
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -379,10 +393,10 @@
     NSString *file = [path stringByAppendingPathComponent:@"savegame"];
     NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-        _score, @"score",
-        _current, @"current",
-        _remain, @"remain",
-        _killerCount, @"killerCount",
+        [NSNumber numberWithInt:_score], @"score",
+        [NSNumber numberWithInt:_current], @"current",
+        [NSNumber numberWithInt:_remain], @"remain",
+        [NSNumber numberWithInt:_killerCount], @"killerCount",
         becterials, @"becterials", nil
     ];
     [data writeToFile:file atomically:NO];
@@ -392,12 +406,18 @@
 {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *file = [path stringByAppendingPathComponent:@"savegame"];
-    NSDictionary *data = [[[NSDictionary alloc] initWithContentsOfFile:file] autorelease];
-    self.score = [data objectForKey:@"score"];
-    self.current = [data objectForKey:@"current"];
-    self.remain = [data objectForKey:@"remain"];
-    self.killerCount = [data objectForKey:@"killerCount"];
-    _becterialList = [NSKeyedArchiver unarchiveObjectWithData:[data objectForKey:@"becterials"]];
+    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:file];
+    
+    if(data == nil)
+    {
+        return NO;
+    }
+    
+    self.score = [[data objectForKey:@"score"] intValue];
+    self.current = [[data objectForKey:@"current"] intValue];
+    self.remain = [[data objectForKey:@"remain"] intValue];
+    self.killerCount = [[data objectForKey:@"killerCount"] intValue];
+    _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"becterials"]];
 
     return YES;
 }

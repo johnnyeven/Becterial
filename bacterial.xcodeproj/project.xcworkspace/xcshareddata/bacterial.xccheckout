@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7A338FC4-C076-4557-941D-50C6F240098C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>bacterial</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D5E91892-0572-4BED-8AB1-AC34D328ED2E</key>
+		<string>ssh://github.com/johnnyeven/Becterial.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>bacterial.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D5E91892-0572-4BED-8AB1-AC34D328ED2E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/johnnyeven/Becterial.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D5E91892-0572-4BED-8AB1-AC34D328ED2E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D5E91892-0572-4BED-8AB1-AC34D328ED2E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>becterial.spritebuilder</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -36,6 +36,7 @@
 		B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
 		B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B4117B978D7009739AE /* CoreText.framework */; };
 		BE058A9D19619405005271F1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE058A9C19619405005271F1 /* StoreKit.framework */; };
+		BE058AA01961976D005271F1 /* ScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BE058A9F1961976D005271F1 /* ScoreScene.m */; };
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
@@ -95,6 +96,8 @@
 		B77F1B4117B978D7009739AE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libObjectiveChipmunk.a; path = "../libs/cocos2d-iphone/external/Chipmunk/xcode/build/Debug-iphoneos/libObjectiveChipmunk.a"; sourceTree = "<group>"; };
 		BE058A9C19619405005271F1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BE058A9E1961976D005271F1 /* ScoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScoreScene.h; path = Source/ScoreScene.h; sourceTree = "<group>"; };
+		BE058A9F1961976D005271F1 /* ScoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScoreScene.m; path = Source/ScoreScene.m; sourceTree = "<group>"; };
 		BE12CB45195861F2006F775D /* Becterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Becterial.h; path = Source/Becterial.h; sourceTree = "<group>"; };
 		BE12CB46195861F2006F775D /* Becterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Becterial.m; path = Source/Becterial.m; sourceTree = "<group>"; };
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
@@ -151,6 +154,8 @@
 				BE8751C1195DD999001D86B1 /* PZLabelScore.m */,
 				BE1835A4195FE9DF00860689 /* Killer.h */,
 				BE1835A5195FE9DF00860689 /* Killer.m */,
+				BE058A9E1961976D005271F1 /* ScoreScene.h */,
+				BE058A9F1961976D005271F1 /* ScoreScene.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				BE058AA01961976D005271F1 /* ScoreScene.m in Sources */,
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,

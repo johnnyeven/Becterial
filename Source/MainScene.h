@@ -17,13 +17,14 @@
 @property (nonatomic) int killerCount;
 
 -(void)onBecterialTouched;
--(void)checkEnemy;
--(void)moveBecterial:(Becterial *)becterial;
+-(void)generateEnemy;
+-(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y;
 -(BOOL)isEvolution:(Becterial *)becterial;
 -(BOOL)evolution;
 -(CCNode *)container;
 -(void)useKiller:(int)x andY:(int)y;
 -(void)saveGame;
 -(BOOL)loadGame;
+-(void)checkResult;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MainScene.h"
+#import "ScoreScene.h"
 #import "Becterial.h"
 #import "define.h"
 #import "PZLabelScore.h"
@@ -78,44 +79,7 @@
     }
 }
 
--(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    CGPoint position = [touch locationInWorld];
-    position = [_container convertToNodeSpace:position];
-
-    int x = position.x / 60.5f;
-    int y = position.y / 60.5f;
-    
-    if (x > 4 || y > 4)
-    {
-        return;
-    }
-    
-    if(runningAction == 0 && [[_becterialContainer objectAtIndex:x] objectAtIndex:y] == [NSNull null])
-    {
-        self.remain = _remain - 1;
-        
-        Becterial *_b = [[Becterial alloc] init];
-        _b.anchorPoint = ccp(0.f, 0.f);
-        _b.positionX = x;
-        _b.positionY = y;
-        _b.level = 1;
-        _b.position = ccp(x * 60.5f, y * 60.5f);
-        [_container addChild:_b];
-
-        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:x];
-        [_tmp replaceObjectAtIndex:y withObject:_b];
-        [_becterialList addObject:_b];
-        
-        [self checkEnemy];
-        [self onBecterialTouched];
-        
-        self.current = [_becterialList count];
-        self.score = self.score + 1;
-    }
-}
-
--(void)checkEnemy
+-(void)generateEnemy
 {
 //    if ((arc4random() % 100) < 30)
 //    {
@@ -151,53 +115,21 @@
 
 -(void)onBecterialTouched
 {
-    Becterial *_becterial;
-    for(int i = 0; i < [_becterialList count]; i++)
-    {
-        _becterial = [_becterialList objectAtIndex:i];
-        if(!_becterial.newBecterial)
-        {
-            [self moveBecterial:_becterial];
-        }
-        else
-        {
-            _becterial.newBecterial = NO;
-        }
-    }
 }
 
--(void)moveBecterial:(Becterial *)becterial
+-(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y
 {
-    int startX = fmin(fmax(becterial.positionX - 1, 0), 4);
-    int endX = fmin(fmax(becterial.positionX + 1, 0), 4);
-    int startY = fmin(fmax(becterial.positionY - 1, 0), 4);
-    int endY = fmin(fmax(becterial.positionY + 1, 0), 4);
-    NSMutableArray *list = [[NSMutableArray alloc] init];
-
-    for(int i = startX; i <= endX; i++)
+    NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
+    if([tmp objectAtIndex:y] == [NSNull null])
     {
-        for(int j = startY; j <= endY; j++)
-        {
-            if(((i == becterial.positionX && j != becterial.positionY) ||
-               (i != becterial.positionX && j == becterial.positionY)) &&
-               [[_becterialContainer objectAtIndex:i] objectAtIndex:j] == [NSNull null])
-            {
-                CGPoint position = ccp(i, j);
-                [list addObject:[NSValue valueWithCGPoint:position]];
-            }
-        }
-    }
-
-    int count = [list count];
-    if(count > 0)
-    {
-        CGPoint p = [(NSValue *)[list objectAtIndex:(arc4random() % count)] CGPointValue];
-        [[_becterialContainer objectAtIndex:p.x] replaceObjectAtIndex:p.y withObject:becterial];
-        [[_becterialContainer objectAtIndex:becterial.positionX] replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
-        becterial.positionX = p.x;
-        becterial.positionY = p.y;
-
-        CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(p.x * 60.5f, p.y * 60.5f)];
+        [tmp replaceObjectAtIndex:y withObject:becterial];
+        tmp = [_becterialContainer objectAtIndex:becterial.positionX];
+        [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
+        becterial.positionX = x;
+        becterial.positionY = y;
+        [self generateEnemy];
+        
+        CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(x * 60.5f, y * 60.5f)];
         CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
         {
             runningAction--;
@@ -316,6 +248,50 @@
     return result;
 }
 
+-(void)putNewBacterial
+{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [_becterialContainer count]; i++)
+    {
+        NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
+        for (int j = 0; j < [tmp count]; j++)
+        {
+            if([tmp objectAtIndex:j] == [NSNull null])
+            {
+                CGPoint p = ccp(i, j);
+                [list addObject:[NSValue valueWithCGPoint:p]];
+            }
+        }
+    }
+    
+    int count = [list count];
+    if(count > 0)
+    {
+        CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
+        Becterial *b = [[Becterial alloc] init];
+        b.positionX = position.x;
+        b.positionY = position.y;
+        b.anchorPoint = ccp(0.f, 0.f);
+        b.type = 0;
+        b.level = 1;
+        b.position = ccp(position.x * 60.5f, position.y * 60.5f);
+        [_container addChild:b];
+        
+        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
+        [_tmp replaceObjectAtIndex:position.y withObject:b];
+        [_becterialList addObject:b];
+        
+        self.current = [_becterialList count];
+        
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+    }
+    
+    [self checkResult];
+}
+
 -(void)reset
 {
     
@@ -385,6 +361,33 @@
         self.current = [_becterialList count];
 
         [self saveGame];
+    }
+}
+
+-(void)checkResult
+{
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [_becterialContainer count]; i++)
+    {
+        NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
+        for (int j = 0; j < [tmp count]; j++)
+        {
+            if([tmp objectAtIndex:j] == [NSNull null])
+            {
+                CGPoint p = ccp(i, j);
+                [list addObject:[NSValue valueWithCGPoint:p]];
+            }
+        }
+    }
+    
+    int count = [list count];
+    if(count == 0)
+    {
+        ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
+        [scoreScene setScore:_score];
+        CCScene *scene = [CCScene new];
+        [scene addChild:scoreScene];
+        [[CCDirector sharedDirector] replaceScene:scene];
     }
 }
 

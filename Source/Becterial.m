@@ -7,8 +7,13 @@
 //
 
 #import "Becterial.h"
+#import "MainScene.h"
 
 @implementation Becterial
+{
+    CGFloat _lastX;
+    CGFloat _lastY;
+}
 
 -(id)init
 {
@@ -18,6 +23,62 @@
         self.newBecterial = YES;
     }
     return self;
+}
+
+-(void)onEnter
+{
+    [super onEnter];
+    self.userInteractionEnabled = YES;
+}
+
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint position = [touch locationInNode:self.parent];
+    _lastX = position.x;
+    _lastY = position.y;
+}
+
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint position = [touch locationInNode:self.parent];
+    if(abs(position.x - _lastX) > 1)
+    {
+        MainScene *scene = (MainScene *)self.parent.parent;
+        if(abs(position.x - _lastX) > abs(position.y - _lastY))
+        {
+            if(position.x < _lastX)
+            {
+                if(_positionX > 0)
+                {
+                    [scene moveBecterial:self x:_positionX - 1 y:_positionY];
+                }
+            }
+            else
+            {
+                if(_positionX < 4)
+                {
+                    [scene moveBecterial:self x:_positionX + 1 y:_positionY];
+                }
+            }
+        }
+        else
+        {
+            if(position.y < _lastY)
+            {
+                if(_positionY > 0)
+                {
+                    [scene moveBecterial:self x:_positionX y:_positionY - 1];
+                }
+            }
+            else
+            {
+                if(_positionY < 4)
+                {
+                    [scene moveBecterial:self x:_positionX y:_positionY + 1];
+                }
+            }
+        }
+    }
 }
 
 -(void)setLevel:(int)level

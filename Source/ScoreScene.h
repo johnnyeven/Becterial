@@ -10,4 +10,6 @@
 
 @interface ScoreScene : CCNode
 
+-(void)setScore:(int)score;
+
 @end

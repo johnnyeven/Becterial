@@ -43,4 +43,28 @@
     return b;
 }
 
+//序列化
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt:_level forKey:@"level"];
+    [aCoder encodeInt:_type forKey:@"type"];
+    [aCoder encodeInt:_positionX forKey:@"positionX"];
+    [aCoder encodeInt:_positionY forKey:@"positionY"];
+}
+
+//反序列化
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if(self = [super init])
+    {
+        self.type = [aDecoder decodeIntForKey:@"type"];
+        self.level = [aDecoder decodeIntForKey:@"level"];
+        self.positionX = [aDecoder decodeIntForKey:@"positionX"];
+        self.positionY = [aDecoder decodeIntForKey:@"positionY"];
+        self.newBecterial = NO;
+    }
+
+    return self;
+}
+
 @end

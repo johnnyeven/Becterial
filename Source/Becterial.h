@@ -8,7 +8,7 @@
 
 #import "CCSprite.h"
 
-@interface Becterial : CCSprite
+@interface Becterial : CCSprite<NSCoding>
 
 @property (nonatomic) BOOL newBecterial;
 @property (nonatomic) int level;

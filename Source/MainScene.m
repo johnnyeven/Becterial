@@ -39,10 +39,11 @@
     _lblRemain = [PZLabelScore initWithScore:1000 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
-
-    self.userInteractionEnabled = YES;
     
     self.killerCount = 10;
+    self.userInteractionEnabled = YES;
+
+    [self loadGame];
 }
 
 -(void)onEnter
@@ -187,7 +188,10 @@
             runningAction--;
             if(runningAction == 0)
             {
-                [self evolution];
+                if(![self evolution])
+                {
+                    [self saveGame];
+                }
             }
         }];
         [becterial runAction:[CCActionSequence actionWithArray:@[aMoveTo, aCallBlock]]];
@@ -195,7 +199,7 @@
     }
 }
 
--(void)isEvolution:(Becterial *)becterial
+-(BOOL)isEvolution:(Becterial *)becterial
 {
     if (becterial.level > 0)
     {
@@ -258,7 +262,10 @@
                         runningAction--;
                         if(runningAction == 0)
                         {
-                            [self evolution];
+                            if(![self evolution])
+                            {
+                                [self saveGame];
+                            }
                         }
                     }];
                     isCallback = YES;
@@ -273,17 +280,25 @@
             }
             int score = [list count] * other.level * 10 + becterial.level * 10;
             self.score = self.score + score;
+
+            return YES;
         }
     }
+    return NO;
 }
 
--(void)evolution
+-(BOOL)evolution
 {
+    BOOL result = YES;
     for(int i = 0; i < [_becterialList count]; i++)
     {
         Becterial *b = [_becterialList objectAtIndex:i];
-        [self isEvolution:b];
+        if(![self isEvolution:b])
+        {
+            result = NO;
+        }
     }
+    return result;
 }
 
 -(void)reset
@@ -353,7 +368,38 @@
         [_container removeChild:b];
         self.killerCount--;
         self.current = [_becterialList count];
+
+        [self saveGame];
     }
+}
+
+-(void)saveGame
+{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"savegame"];
+    NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
+    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+        _score, @"score",
+        _current, @"current",
+        _remain, @"remain",
+        _killerCount, @"killerCount",
+        becterials, @"becterials", nil
+    ];
+    [data writeToFile:file atomically:NO];
+}
+
+-(BOOL)loadGame
+{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"savegame"];
+    NSDictionary *data = [[[NSDictionary alloc] initWithContentsOfFile:file] autorelease];
+    self.score = [data objectForKey:@"score"];
+    self.current = [data objectForKey:@"current"];
+    self.remain = [data objectForKey:@"remain"];
+    self.killerCount = [data objectForKey:@"killerCount"];
+    _becterialList = [NSKeyedArchiver unarchiveObjectWithData:[data objectForKey:@"becterials"]];
+
+    return YES;
 }
 
 @end

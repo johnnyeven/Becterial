@@ -19,9 +19,11 @@
 -(void)onBecterialTouched;
 -(void)checkEnemy;
 -(void)moveBecterial:(Becterial *)becterial;
--(void)isEvolution:(Becterial *)becterial;
--(void)evolution;
+-(BOOL)isEvolution:(Becterial *)becterial;
+-(BOOL)evolution;
 -(CCNode *)container;
 -(void)useKiller:(int)x andY:(int)y;
+-(void)saveGame;
+-(BOOL)loadGame;
 
 @end

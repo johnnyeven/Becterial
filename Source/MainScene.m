@@ -250,42 +250,47 @@
 
 -(void)putNewBacterial
 {
-    NSMutableArray *list = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [_becterialContainer count]; i++)
+    if(_remain > 0)
     {
-        NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
-        for (int j = 0; j < [tmp count]; j++)
+        NSMutableArray *list = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [_becterialContainer count]; i++)
         {
-            if([tmp objectAtIndex:j] == [NSNull null])
+            NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
+            for (int j = 0; j < [tmp count]; j++)
             {
-                CGPoint p = ccp(i, j);
-                [list addObject:[NSValue valueWithCGPoint:p]];
+                if([tmp objectAtIndex:j] == [NSNull null])
+                {
+                    CGPoint p = ccp(i, j);
+                    [list addObject:[NSValue valueWithCGPoint:p]];
+                }
             }
         }
-    }
-    
-    int count = [list count];
-    if(count > 0)
-    {
-        CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
-        Becterial *b = [[Becterial alloc] init];
-        b.positionX = position.x;
-        b.positionY = position.y;
-        b.anchorPoint = ccp(0.f, 0.f);
-        b.type = 0;
-        b.level = 1;
-        b.position = ccp(position.x * 60.5f, position.y * 60.5f);
-        [_container addChild:b];
         
-        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
-        [_tmp replaceObjectAtIndex:position.y withObject:b];
-        [_becterialList addObject:b];
-        
-        self.current = [_becterialList count];
-        
-        if(![self evolution])
+        int count = [list count];
+        if(count > 0)
         {
-            [self saveGame];
+            CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
+            Becterial *b = [[Becterial alloc] init];
+            b.positionX = position.x;
+            b.positionY = position.y;
+            b.anchorPoint = ccp(0.f, 0.f);
+            b.type = 0;
+            b.level = 1;
+            b.position = ccp(position.x * 60.5f, position.y * 60.5f);
+            [_container addChild:b];
+            
+            NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
+            [_tmp replaceObjectAtIndex:position.y withObject:b];
+            [_becterialList addObject:b];
+            
+            self.score++;
+            self.remain--;
+            self.current = [_becterialList count];
+            
+            if(![self evolution])
+            {
+                [self saveGame];
+            }
         }
     }
     

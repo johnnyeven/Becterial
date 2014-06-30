@@ -8,6 +8,7 @@
 
 #import "ScoreScene.h"
 #import "PZLabelScore.h"
+#import "UMSocial.h"
 
 @implementation ScoreScene
 {
@@ -38,7 +39,12 @@
 
 -(void)share
 {
-    
+    [UMSocialSnsService presentSnsIconSheetView:(UIViewController *)[CCDirector sharedDirector].view.nextResponder
+                                         appKey:@"53b031e856240b128d1615f7"
+                                      shareText:@"从IOS发来的测试"
+                                     shareImage:nil
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,nil]
+                                       delegate:nil];
 }
 
 @end

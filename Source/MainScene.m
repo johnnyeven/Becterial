@@ -26,7 +26,7 @@
 
 -(void)didLoadFromCCB
 {
-    _remain = 200;
+    _remain = 500;
     _current = 0;
     
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
@@ -37,7 +37,7 @@
     _lblCurrent.position = ccp(169.f, 368.f);
     [self addChild:_lblCurrent];
     
-    _lblRemain = [PZLabelScore initWithScore:200 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblRemain = [PZLabelScore initWithScore:500 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
     
@@ -306,8 +306,9 @@
 {
     self.score = 0;
     self.current = 0;
-    self.remain = 200;
+    self.remain = 500;
     [_becterialList removeAllObjects];
+    [_container removeAllChildren];
     [self saveGame];
     [self prepareStage];
 }

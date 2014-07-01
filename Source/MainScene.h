@@ -27,5 +27,6 @@
 -(void)saveGame;
 -(BOOL)loadGame;
 -(void)checkResult;
+-(void)reset;
 
 @end

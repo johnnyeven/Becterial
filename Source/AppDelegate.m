@@ -25,6 +25,7 @@
 
 #import "cocos2d.h"
 #import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
@@ -55,6 +56,7 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     [UMSocialData setAppKey:@"53b031e856240b128d1615f7"];
+    [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
     
     return YES;
 }

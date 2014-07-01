@@ -35,7 +35,7 @@
 
 -(void)back
 {
-    MainScene *main = [CCBReader load:@"MainScene"];
+    MainScene *main = (MainScene *)[CCBReader load:@"MainScene"];
     CCScene *scene = [CCScene new];
     [scene addChild:main];
     [main reset];

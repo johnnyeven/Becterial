@@ -55,6 +55,11 @@
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
+		BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */; };
+		BE89CE001962F0A800994D13 /* store.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFF1962F0A800994D13 /* store.png */; };
+		BE89CE021962F17C00994D13 /* btnClose.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE011962F17C00994D13 /* btnClose.png */; };
+		BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE071962FF6F00994D13 /* CashStoreView.m */; };
+		BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE0A1963007C00994D13 /* CashStoreViewController.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +155,13 @@
 		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
 		BE89CDF71962EE2200994D13 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		BE89CDF81962EE2200994D13 /* MobClickGameAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickGameAnalytics.h; sourceTree = "<group>"; };
+		BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashStoreView.xib; path = Source/CashStoreView.xib; sourceTree = "<group>"; };
+		BE89CDFF1962F0A800994D13 /* store.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store.png; path = Source/store.png; sourceTree = "<group>"; };
+		BE89CE011962F17C00994D13 /* btnClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btnClose.png; path = Source/btnClose.png; sourceTree = "<group>"; };
+		BE89CE061962FF6F00994D13 /* CashStoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreView.h; path = Source/CashStoreView.h; sourceTree = "<group>"; };
+		BE89CE071962FF6F00994D13 /* CashStoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreView.m; path = Source/CashStoreView.m; sourceTree = "<group>"; };
+		BE89CE091963007C00994D13 /* CashStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreViewController.h; path = Source/CashStoreViewController.h; sourceTree = "<group>"; };
+		BE89CE0A1963007C00994D13 /* CashStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreViewController.m; path = Source/CashStoreViewController.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +204,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BE89CDFC1962F06A00994D13 /* CashStore */,
 				BE89CDF51962EE2200994D13 /* UmengGameAnalytics */,
 				BE058AC91961B955005271F1 /* Wechat */,
 				BE058AA31961B18E005271F1 /* UMSocial_Sdk_3.3.8 */,
@@ -367,6 +380,20 @@
 			path = UmengGameAnalytics;
 			sourceTree = "<group>";
 		};
+		BE89CDFC1962F06A00994D13 /* CashStore */ = {
+			isa = PBXGroup;
+			children = (
+				BE89CE061962FF6F00994D13 /* CashStoreView.h */,
+				BE89CE071962FF6F00994D13 /* CashStoreView.m */,
+				BE89CE011962F17C00994D13 /* btnClose.png */,
+				BE89CDFF1962F0A800994D13 /* store.png */,
+				BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */,
+				BE89CE091963007C00994D13 /* CashStoreViewController.h */,
+				BE89CE0A1963007C00994D13 /* CashStoreViewController.m */,
+			);
+			name = CashStore;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -455,9 +482,11 @@
 				BE058AC51961B18E005271F1 /* UMSLoginViewController.xib in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				BE058AC11961B18E005271F1 /* UMSCommentInputController.xib in Resources */,
+				BE89CE021962F17C00994D13 /* btnClose.png in Resources */,
 				BE12CB4A19586256006F775D /* Images.xcassets in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				BE89CE001962F0A800994D13 /* store.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				BE058AC21961B18E005271F1 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -475,6 +504,7 @@
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
+				BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +516,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */,
 				BE058AA01961976D005271F1 /* ScoreScene.m in Sources */,
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
+				BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */,
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
@@ -603,7 +635,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",
@@ -648,7 +680,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",

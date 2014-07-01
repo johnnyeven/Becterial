@@ -12,6 +12,8 @@
 #import "define.h"
 #import "PZLabelScore.h"
 
+#import "CashStoreViewController.h"
+
 @implementation MainScene
 {
     CCLabelTTF *_lblKillerCount;
@@ -315,7 +317,8 @@
 
 -(void)back
 {
-    
+//    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+//    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
 }
 
 -(void)setScore:(int)score

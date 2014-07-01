@@ -317,8 +317,8 @@
 
 -(void)back
 {
-//    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
-//    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
+    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
 }
 
 -(void)setScore:(int)score
@@ -420,7 +420,7 @@
         [NSNumber numberWithInt:_current], @"current",
         [NSNumber numberWithInt:_remain], @"remain",
         [NSNumber numberWithInt:_killerCount], @"killerCount",
-        becterials, @"becterials", nil
+        becterials, @"bacterials", nil
     ];
     [data writeToFile:file atomically:NO];
 }
@@ -440,7 +440,11 @@
     self.current = [[data objectForKey:@"current"] intValue];
     self.remain = [[data objectForKey:@"remain"] intValue];
     self.killerCount = [[data objectForKey:@"killerCount"] intValue];
-    _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"becterials"]];
+    _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
+    if(_becterialList == nil)
+    {
+        _becterialList = [[NSMutableArray alloc] init];
+    }
 
     return YES;
 }

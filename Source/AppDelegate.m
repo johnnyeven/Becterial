@@ -24,6 +24,7 @@
  */
 
 #import "cocos2d.h"
+#import "UMSocial.h"
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
@@ -53,6 +54,7 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
+    [UMSocialData setAppKey:@"53b031e856240b128d1615f7"];
     
     return YES;
 }

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Apportable. All rights reserved.
 //
 
+#import "MainScene.h"
 #import "ScoreScene.h"
 #import "PZLabelScore.h"
 #import "UMSocial.h"
@@ -34,7 +35,11 @@
 
 -(void)back
 {
-    
+    MainScene *main = [CCBReader load:@"MainScene"];
+    CCScene *scene = [CCScene new];
+    [scene addChild:main];
+    [main reset];
+    [[CCDirector sharedDirector] replaceScene:scene];
 }
 
 -(void)share

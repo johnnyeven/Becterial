@@ -45,10 +45,8 @@
     self.userInteractionEnabled = YES;
 }
 
--(void)onEnter
+-(void)prepareStage
 {
-    [super onEnter];
-    
     int capacity = 5;
     _becterialContainer = [NSMutableArray arrayWithCapacity:capacity];
     for (int i = 0; i < capacity; i++)
@@ -77,6 +75,13 @@
     {
         _becterialList = [[NSMutableArray alloc] init];
     }
+}
+
+-(void)onEnter
+{
+    [super onEnter];
+
+    [self prepareStage];
 }
 
 -(void)generateEnemy
@@ -299,7 +304,12 @@
 
 -(void)reset
 {
-    
+    self.score = 0;
+    self.current = 0;
+    self.remain = 200;
+    [_becterialList removeAllObjects];
+    [self saveGame];
+    [self prepareStage];
 }
 
 -(void)back

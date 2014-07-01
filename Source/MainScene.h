@@ -16,6 +16,7 @@
 @property (nonatomic) int remain;
 @property (nonatomic) int killerCount;
 
+-(void)prepareStage;
 -(void)onBecterialTouched;
 -(void)generateEnemy;
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y;

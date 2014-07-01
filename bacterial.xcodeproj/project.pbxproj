@@ -54,6 +54,7 @@
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
+		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,9 @@
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
+		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
+		BE89CDF71962EE2200994D13 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		BE89CDF81962EE2200994D13 /* MobClickGameAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickGameAnalytics.h; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
+				BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */,
 				BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				BE058A9D19619405005271F1 /* StoreKit.framework in Frameworks */,
@@ -187,6 +192,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BE89CDF51962EE2200994D13 /* UmengGameAnalytics */,
 				BE058AC91961B955005271F1 /* Wechat */,
 				BE058AA31961B18E005271F1 /* UMSocial_Sdk_3.3.8 */,
 				BEACFDCB1959C592003C5AA7 /* define.h */,
@@ -349,6 +355,16 @@
 				BE058ACE1961B955005271F1 /* WXApiObject.h */,
 			);
 			path = Wechat;
+			sourceTree = "<group>";
+		};
+		BE89CDF51962EE2200994D13 /* UmengGameAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */,
+				BE89CDF71962EE2200994D13 /* MobClick.h */,
+				BE89CDF81962EE2200994D13 /* MobClickGameAnalytics.h */,
+			);
+			path = UmengGameAnalytics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,6 +609,7 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",
 					"$(PROJECT_DIR)/Wechat",
 					"$(PROJECT_DIR)/TencentOpenAPI",
+					"$(PROJECT_DIR)/UmengGameAnalytics",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -637,6 +654,7 @@
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",
 					"$(PROJECT_DIR)/Wechat",
 					"$(PROJECT_DIR)/TencentOpenAPI",
+					"$(PROJECT_DIR)/UmengGameAnalytics",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",

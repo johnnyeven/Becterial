@@ -24,6 +24,7 @@
  */
 
 #import "cocos2d.h"
+#import "MobClick.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 
@@ -55,8 +56,11 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
+    [MobClick startWithAppkey:@"53b031e856240b128d1615f7"];
     [UMSocialData setAppKey:@"53b031e856240b128d1615f7"];
     [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
+    
+    [MobClick setLogEnabled:YES];
     
     return YES;
 }

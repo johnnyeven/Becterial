@@ -42,8 +42,7 @@
     _lblRemain = [PZLabelScore initWithScore:500 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRemain.position = ccp(169.f, 334.f);
     [self addChild:_lblRemain];
-    
-    self.killerCount = 10;
+
     self.userInteractionEnabled = YES;
 }
 
@@ -76,6 +75,7 @@
     else
     {
         _becterialList = [[NSMutableArray alloc] init];
+        self.killerCount = 10;
     }
 }
 

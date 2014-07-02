@@ -13,7 +13,6 @@
 
 @property (nonatomic) int score;
 @property (nonatomic) int current;
-@property (nonatomic) int remain;
 @property (nonatomic) int killerCount;
 
 -(void)prepareStage;

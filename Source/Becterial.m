@@ -13,6 +13,7 @@
 {
     CGFloat _lastX;
     CGFloat _lastY;
+    MainScene *mainScene;
 }
 
 -(id)init
@@ -28,36 +29,40 @@
 -(void)onEnter
 {
     [super onEnter];
+
+    mainScene = (MainScene *)self.parent.parent;
     self.userInteractionEnabled = YES;
 }
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CGPoint position = [touch locationInNode:self.parent];
-    _lastX = position.x;
-    _lastY = position.y;
+    if(_type == 0)
+    {
+        CGPoint position = [touch locationInNode:self.parent];
+        _lastX = position.x;
+        _lastY = position.y;
+    }
 }
 
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint position = [touch locationInNode:self.parent];
-    if(abs(position.x - _lastX) > 1)
+    if(abs(position.x - _lastX) > 1 && _type == 0 && mainScene.biomass > 0)
     {
-        MainScene *scene = (MainScene *)self.parent.parent;
         if(abs(position.x - _lastX) > abs(position.y - _lastY))
         {
             if(position.x < _lastX)
             {
                 if(_positionX > 0)
                 {
-                    [scene moveBecterial:self x:_positionX - 1 y:_positionY];
+                    [mainScene moveBecterial:self x:_positionX - 1 y:_positionY];
                 }
             }
             else
             {
                 if(_positionX < 4)
                 {
-                    [scene moveBecterial:self x:_positionX + 1 y:_positionY];
+                    [mainScene moveBecterial:self x:_positionX + 1 y:_positionY];
                 }
             }
         }
@@ -67,14 +72,14 @@
             {
                 if(_positionY > 0)
                 {
-                    [scene moveBecterial:self x:_positionX y:_positionY - 1];
+                    [mainScene moveBecterial:self x:_positionX y:_positionY - 1];
                 }
             }
             else
             {
                 if(_positionY < 4)
                 {
-                    [scene moveBecterial:self x:_positionX y:_positionY + 1];
+                    [mainScene moveBecterial:self x:_positionX y:_positionY + 1];
                 }
             }
         }

@@ -10,5 +10,7 @@
 #define becterial_define_h
 
 #define BECTERIAL_MESSAGE @"Becterial.BecterialTouched"
+#define BACTERIAL_BIOMASS 2.1f
+#define ENEMY_BIOMASS 1.8f
 
 #endif

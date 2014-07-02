@@ -12,12 +12,12 @@
 @interface MainScene : CCNode
 
 @property (nonatomic) int score;
-@property (nonatomic) int current;
+@property (nonatomic) int biomass;
 @property (nonatomic) int killerCount;
 
+-(void) updatePerSecond:(CCTime)delta;
 -(void)prepareStage;
--(void)onBecterialTouched;
--(void)generateEnemy;
+-(BOOL)generateBacterial:(int)type;
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y;
 -(BOOL)isEvolution:(Becterial *)becterial;
 -(BOOL)evolution;

@@ -18,32 +18,35 @@
 {
     CCLabelTTF *_lblKillerCount;
     PZLabelScore *_lblScore;
-    PZLabelScore *_lblRemain;
-    PZLabelScore *_lblCurrent;
+    PZLabelScore *_lblBiomass;
     CCNode *_container;
     NSMutableArray *_becterialContainer;
     NSMutableArray *_becterialList;
     int runningAction;
+
+    int bacterialCount;
+    int enemyCount;
+    CGFloat bacterialBiomass;   //细菌需要消耗的生物质
+    CGFloat enemyBiomass;       //入侵病毒产生的生物质
 }
 
 -(void)didLoadFromCCB
 {
-    _remain = 500;
-    _current = 0;
-    
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblScore.position = ccp(10.f, 415.f);
     [self addChild:_lblScore];
-    
-    _lblCurrent = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblCurrent.position = ccp(169.f, 368.f);
-    [self addChild:_lblCurrent];
-    
-    _lblRemain = [PZLabelScore initWithScore:500 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblRemain.position = ccp(169.f, 334.f);
-    [self addChild:_lblRemain];
+
+    _lblBiomass = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblBiomass.position = ccp(165.f, 415.f);
+    [self addChild:_lblBiomass];
 
     self.userInteractionEnabled = YES;
+}
+
+-(void) updatePerSecond:(CCTime)delta
+{
+    CGFloat biomassOffset = enemyBiomass - bacterialBiomass;
+    self.biomass = _biomass + biomassOffset;
 }
 
 -(void)prepareStage
@@ -71,6 +74,8 @@
             b.position = ccp(b.positionX * 60.5f, b.positionY * 60.5f);
             [_container addChild:b];
         }
+
+        [self checkResult];
     }
     else
     {
@@ -84,12 +89,13 @@
     [super onEnter];
 
     [self prepareStage];
+    [self schedule:@selector(updatePerSecond:) interval:1.f];
 }
 
--(void)generateEnemy
+-(BOOL)generateBacterial:(int)type
 {
-//    if ((arc4random() % 100) < 30)
-//    {
+    if(type == 0 || type == 1)
+    {
         NSMutableArray *list = [[NSMutableArray alloc] init];
         for (int i = 0; i < [_becterialContainer count]; i++)
         {
@@ -104,24 +110,28 @@
             }
         }
         
-        CGPoint position = [[list objectAtIndex:(arc4random() % [list count])] CGPointValue];
-        Becterial *enemy = [[Becterial alloc] init];
-        enemy.positionX = position.x;
-        enemy.positionY = position.y;
-        enemy.anchorPoint = ccp(0.f, 0.f);
-        enemy.type = 1;
-        enemy.level = 1;
-        enemy.position = ccp(position.x * 60.5f, position.y * 60.5f);
-        [_container addChild:enemy];
-        
-        NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
-        [_tmp replaceObjectAtIndex:position.y withObject:enemy];
-        [_becterialList addObject:enemy];
-//    }
-}
+    
+        int count = [list count];
+        if(count > 0)
+        {
+            CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
+            Becterial *b = [[Becterial alloc] init];
+            b.positionX = position.x;
+            b.positionY = position.y;
+            b.anchorPoint = ccp(0.f, 0.f);
+            b.type = type;
+            b.level = 1;
+            b.position = ccp(position.x * 60.5f, position.y * 60.5f);
+            [_container addChild:b];
+            
+            NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
+            [_tmp replaceObjectAtIndex:position.y withObject:b];
+            [_becterialList addObject:b];
 
--(void)onBecterialTouched
-{
+            return YES;
+        }
+    }
+    return NO;
 }
 
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y
@@ -134,7 +144,7 @@
         [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
         becterial.positionX = x;
         becterial.positionY = y;
-        [self generateEnemy];
+        [self generateBacterial:1];
         
         CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(x * 60.5f, y * 60.5f)];
         CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
@@ -145,6 +155,7 @@
                 if(![self evolution])
                 {
                     [self saveGame];
+                    [self checkResult];
                 }
             }
         }];
@@ -212,13 +223,13 @@
                         {
                             becterial.level++;
                         }
-                        self.current = [_becterialList count];
                         runningAction--;
                         if(runningAction == 0)
                         {
                             if(![self evolution])
                             {
                                 [self saveGame];
+                                [self checkResult];
                             }
                         }
                     }];
@@ -257,69 +268,46 @@
 
 -(void)putNewBacterial
 {
-    if(_remain > 0)
+    if(_biomass > 0 && [self generateBacterial:0])
     {
-        NSMutableArray *list = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [_becterialContainer count]; i++)
-        {
-            NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
-            for (int j = 0; j < [tmp count]; j++)
-            {
-                if([tmp objectAtIndex:j] == [NSNull null])
-                {
-                    CGPoint p = ccp(i, j);
-                    [list addObject:[NSValue valueWithCGPoint:p]];
-                }
-            }
-        }
+        self.score++;
         
-        int count = [list count];
-        if(count > 0)
+        if(![self evolution])
         {
-            CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
-            Becterial *b = [[Becterial alloc] init];
-            b.positionX = position.x;
-            b.positionY = position.y;
-            b.anchorPoint = ccp(0.f, 0.f);
-            b.type = 0;
-            b.level = 1;
-            b.position = ccp(position.x * 60.5f, position.y * 60.5f);
-            [_container addChild:b];
-            
-            NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
-            [_tmp replaceObjectAtIndex:position.y withObject:b];
-            [_becterialList addObject:b];
-            
-            self.score++;
-            self.remain--;
-            self.current = [_becterialList count];
-            
-            if(![self evolution])
-            {
-                [self saveGame];
-            }
+            [self saveGame];
         }
     }
     
     [self checkResult];
 }
 
--(void)reset
+-(void)putNewEnemy
 {
-    self.score = 0;
-    self.current = 0;
-    self.remain = 500;
-    [_becterialList removeAllObjects];
-    [_container removeAllChildren];
-    [self saveGame];
-    [self prepareStage];
+    if([self generateBacterial:1])
+    {
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+    }
+    
+    [self checkResult];
 }
 
--(void)back
-{
-    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
-    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
-}
+// -(void)reset
+// {
+//     self.score = 0;
+//     [_becterialList removeAllObjects];
+//     [_container removeAllChildren];
+//     [self saveGame];
+//     [self prepareStage];
+// }
+
+// -(void)back
+// {
+//     CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+//     [[[CCDirector sharedDirector] view] addSubview:storeView.view];
+// }
 
 -(void)setScore:(int)score
 {
@@ -330,21 +318,12 @@
     }
 }
 
--(void)setCurrent:(int)current
+-(void)setBiomass:(int)biomass
 {
-    if(_current != current)
+    if(_biomass != biomass)
     {
-        _current = current;
-        _lblCurrent.score = current;
-    }
-}
-
--(void)setRemain:(int)remain
-{
-    if(_remain != remain)
-    {
-        _remain = remain;
-        _lblRemain.score = remain;
+        _biomass = biomass;
+        _lblBiomass.score = biomass;
     }
 }
 
@@ -377,7 +356,6 @@
         [_becterialList removeObjectIdenticalTo:b];
         [_container removeChild:b];
         self.killerCount--;
-        self.current = [_becterialList count];
 
         [self saveGame];
     }
@@ -386,6 +364,8 @@
 -(void)checkResult
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];
+    int bCount, eCount;
+    CGFloat bBiomass, eBiomass;
     for (int i = 0; i < [_becterialContainer count]; i++)
     {
         NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
@@ -396,8 +376,27 @@
                 CGPoint p = ccp(i, j);
                 [list addObject:[NSValue valueWithCGPoint:p]];
             }
+            else
+            {
+                Becterial *b = (Becterial *)[tmp objectAtIndex:j];
+                if(b.type == 0)
+                {
+                    bCount++;
+                    bBiomass = bBiomass + BACTERIAL_BIOMASS * b.level;
+                }
+                else if(b.type == 1)
+                {
+                    eCount++;
+                    eBiomass = eBiomass + ENEMY_BIOMASS * b.level;
+                }
+            }
         }
     }
+
+    bacterialCount = bCount;
+    enemyCount = eCount;
+    bacterialBiomass = bBiomass;
+    enemyBiomass = eBiomass;
     
     int count = [list count];
     if(count == 0)
@@ -417,9 +416,12 @@
     NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithInt:_score], @"score",
-        [NSNumber numberWithInt:_current], @"current",
-        [NSNumber numberWithInt:_remain], @"remain",
+        [NSNumber numberWithInt:_biomass], @"biomass",
         [NSNumber numberWithInt:_killerCount], @"killerCount",
+        [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
+        [NSNumber numberWithInt:enemyCount], @"enemyCount",
+        [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
+        [NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
         becterials, @"bacterials", nil
     ];
     [data writeToFile:file atomically:NO];
@@ -437,9 +439,12 @@
     }
     
     self.score = [[data objectForKey:@"score"] intValue];
-    self.current = [[data objectForKey:@"current"] intValue];
-    self.remain = [[data objectForKey:@"remain"] intValue];
+    self.biomass = [[data objectForKey:@"biomass"] intValue];
     self.killerCount = [[data objectForKey:@"killerCount"] intValue];
+    bacterialCount = [[data objectForKey:@"bacterialCount"] intValue];
+    enemyCount = [[data objectForKey:@"enemyCount"] intValue];
+    bacterialBiomass = [[data objectForKey:@"bacterialBiomass"] floatValue];
+    enemyBiomass = [[data objectForKey:@"enemyBiomass"] floatValue];
     _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
     if(_becterialList == nil)
     {

@@ -53,6 +53,7 @@
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
+		BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5868BF196449A50007AF48 /* PZWebManager.m */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
 		BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */; };
@@ -156,6 +157,8 @@
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
+		BE5868BE196449A50007AF48 /* PZWebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZWebManager.h; path = Source/PZWebManager.h; sourceTree = "<group>"; };
+		BE5868BF196449A50007AF48 /* PZWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZWebManager.m; path = Source/PZWebManager.m; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
 		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BE5868BC1964496E0007AF48 /* Network */,
 				BE89CDFC1962F06A00994D13 /* CashStore */,
 				BE89CDF51962EE2200994D13 /* UmengGameAnalytics */,
 				BE058AC91961B955005271F1 /* Wechat */,
@@ -382,6 +386,15 @@
 				BE058ACE1961B955005271F1 /* WXApiObject.h */,
 			);
 			path = Wechat;
+			sourceTree = "<group>";
+		};
+		BE5868BC1964496E0007AF48 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BE5868BE196449A50007AF48 /* PZWebManager.h */,
+				BE5868BF196449A50007AF48 /* PZWebManager.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		BE89CDF51962EE2200994D13 /* UmengGameAnalytics */ = {
@@ -549,6 +562,7 @@
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
 				BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
+				BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */,
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
 				BE89CE1719630AF500994D13 /* CashStoreItemViewController.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,

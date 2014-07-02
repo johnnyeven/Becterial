@@ -15,6 +15,7 @@
 @property (nonatomic) int biomass;
 @property (nonatomic) int killerCount;
 
+-(void)didReceiveFromServer:(NSNotification *)notification;
 -(void) updatePerSecond:(CCTime)delta;
 -(void)prepareStage;
 -(BOOL)generateBacterial:(int)type;

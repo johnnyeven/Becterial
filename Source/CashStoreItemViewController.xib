@@ -63,7 +63,7 @@
         </view>
     </objects>
     <resources>
-        <image name="store_btn_buy.png" width="148" height="76"/>
-        <image name="store_img_icon_bg.png" width="150" height="150"/>
+        <image name="store_btn_buy.png" width="74" height="38"/>
+        <image name="store_img_icon_bg.png" width="75" height="75"/>
     </resources>
 </document>

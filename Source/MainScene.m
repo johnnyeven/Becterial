@@ -11,6 +11,7 @@
 #import "Becterial.h"
 #import "define.h"
 #import "PZLabelScore.h"
+#import "PZWebManager.h"
 
 #import "CashStoreViewController.h"
 
@@ -41,12 +42,22 @@
     [self addChild:_lblBiomass];
 
     self.userInteractionEnabled = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
+    [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
+}
+
+-(void)didReceiveFromServer:(NSNotification *)notification
+{
+    NSDictionary *data = [notification object];
+    NSArray *products = [data objectForKey:@"products"];
+    NSLog(@"%@", products);
 }
 
 -(void) updatePerSecond:(CCTime)delta
 {
     CGFloat biomassOffset = enemyBiomass - bacterialBiomass;
-    self.biomass = _biomass + biomassOffset;
+    self.biomass = fmax(_biomass + biomassOffset, 0);
 }
 
 -(void)prepareStage
@@ -294,6 +305,11 @@
     [self checkResult];
 }
 
+-(void)menu
+{
+    
+}
+
 // -(void)reset
 // {
 //     self.score = 0;
@@ -364,7 +380,8 @@
 -(void)checkResult
 {
     NSMutableArray *list = [[NSMutableArray alloc] init];
-    int bCount, eCount;
+    int bCount = 0;
+    int eCount = 0;
     CGFloat bBiomass, eBiomass;
     for (int i = 0; i < [_becterialContainer count]; i++)
     {
@@ -452,6 +469,16 @@
     }
 
     return YES;
+}
+
+-(void)reset
+{
+    self.score = 0;
+    self.biomass = 0;
+    [_becterialList removeAllObjects];
+    [_container removeAllChildren];
+    [self saveGame];
+    [self prepareStage];
 }
 
 @end

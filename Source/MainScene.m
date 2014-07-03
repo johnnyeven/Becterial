@@ -29,6 +29,7 @@
     int enemyCount;
     CGFloat bacterialBiomass;   //细菌需要消耗的生物质
     CGFloat enemyBiomass;       //入侵病毒产生的生物质
+    int scoreOffset             //分數增加量
 }
 
 -(void)didLoadFromCCB
@@ -51,13 +52,18 @@
 {
     NSDictionary *data = [notification object];
     NSArray *products = [data objectForKey:@"products"];
-    NSLog(@"%@", products);
+    
 }
 
--(void) updatePerSecond:(CCTime)delta
+-(void) update10PerSecond:(CCTime)delta
 {
     CGFloat biomassOffset = enemyBiomass - bacterialBiomass;
     self.biomass = fmax(_biomass + biomassOffset, 0);
+
+    if(_biomass > 0)
+    {
+        self.score = _score + scoreOffset;
+    }
 }
 
 -(void)prepareStage
@@ -100,7 +106,7 @@
     [super onEnter];
 
     [self prepareStage];
-    [self schedule:@selector(updatePerSecond:) interval:1.f];
+    [self schedule:@selector(updatePerSecond:) interval:.1f];
 }
 
 -(BOOL)generateBacterial:(int)type
@@ -254,8 +260,8 @@
                 }
                 [_becterialList removeObjectIdenticalTo:other];
             }
-            int score = [list count] * other.level * 10 + becterial.level * 10;
-            self.score = self.score + score;
+//            int score = [list count] * other.level * 10 + becterial.level * 10;
+//            self.score = self.score + score;
 
             return YES;
         }
@@ -279,9 +285,9 @@
 
 -(void)putNewBacterial
 {
-    if(_biomass > 0 && [self generateBacterial:0])
+    if(_score >= 1000 && _biomass > 0 && [self generateBacterial:0])
     {
-        self.score++;
+        self.score = _score - 1000;
         
         if(![self evolution])
         {
@@ -294,7 +300,7 @@
 
 -(void)putNewEnemy
 {
-    if([self generateBacterial:1])
+    if(_score >= 2000 && [self generateBacterial:1])
     {
         if(![self evolution])
         {
@@ -307,7 +313,8 @@
 
 -(void)menu
 {
-    
+    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
 }
 
 // -(void)reset
@@ -383,6 +390,7 @@
     int bCount = 0;
     int eCount = 0;
     CGFloat bBiomass, eBiomass;
+    int bScore = 0;
     for (int i = 0; i < [_becterialContainer count]; i++)
     {
         NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
@@ -400,6 +408,7 @@
                 {
                     bCount++;
                     bBiomass = bBiomass + BACTERIAL_BIOMASS * b.level;
+                    bScore = bScore + BACTERIAL_SCORE * b.level;
                 }
                 else if(b.type == 1)
                 {
@@ -414,6 +423,7 @@
     enemyCount = eCount;
     bacterialBiomass = bBiomass;
     enemyBiomass = eBiomass;
+    scoreOffset = bScore;
     
     int count = [list count];
     if(count == 0)

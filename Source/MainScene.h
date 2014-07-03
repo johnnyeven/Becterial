@@ -11,12 +11,12 @@
 
 @interface MainScene : CCNode
 
-@property (nonatomic) int score;
-@property (nonatomic) int biomass;
+@property (nonatomic) CGFloat score;
+@property (nonatomic) CGFloat biomass;
 @property (nonatomic) int killerCount;
 
 -(void)didReceiveFromServer:(NSNotification *)notification;
--(void)update10PerSecond:(CCTime)delta
+-(void)update10PerSecond:(CCTime)delta;
 -(void)updatePerSecond:(CCTime)delta;
 -(void)prepareStage;
 -(BOOL)generateBacterial:(int)type;

@@ -13,6 +13,4 @@
 + (CGImageRef) takeAsImage;
 #endif
 
-+ (CCTexture2D*) takeAsTexture;
-
 @end

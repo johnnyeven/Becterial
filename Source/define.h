@@ -10,11 +10,11 @@
 #define becterial_define_h
 
 #define BECTERIAL_MESSAGE @"Becterial.BecterialTouched"
-#define BACTERIAL_BIOMASS 0.1f
-#define BACTERIAL_SCORE 1.f
-#define ENEMY_BIOMASS 0.15f
+#define BACTERIAL_BIOMASS 0.2f
+#define BACTERIAL_SCORE 1.7f
+#define ENEMY_BIOMASS 0.25f
 
-#define NEW_BACTERIAL_COST 1000
-#define NEW_ENEMY_COST 2000
+#define NEW_BACTERIAL_COST 10
+#define NEW_ENEMY_COST 20
 
 #endif

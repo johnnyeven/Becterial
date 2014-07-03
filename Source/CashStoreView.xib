@@ -39,11 +39,12 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnClose" destination="egb-sD-dms" id="E93-jS-E80"/>
+                <outlet property="scroller" destination="gwE-b3-quQ" id="J1P-wD-6fu"/>
             </connections>
         </view>
     </objects>
     <resources>
-        <image name="btnClose.png" width="46" height="46"/>
-        <image name="store.png" width="640" height="960"/>
+        <image name="btnClose.png" width="23" height="23"/>
+        <image name="store.png" width="320" height="480"/>
     </resources>
 </document>

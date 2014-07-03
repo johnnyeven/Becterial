@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 Apportable. All rights reserved.
 //
 
+#import <StoreKit/StoreKit.h>
 #import "CashStoreManager.h"
 
-@implementation PZWebManager
+@implementation CashStoreManager
 
 static CashStoreManager *_instance = nil;
 
@@ -30,14 +31,30 @@ static CashStoreManager *_instance = nil;
 	[productsRequest start];
 }
 
+-(void)purchaseProduct:(NSString *)identifier
+{
+    SKProduct *product;
+    for (product in _products)
+    {
+        if([product.productIdentifier isEqualToString:identifier])
+        {
+            break;
+        }
+    }
+    
+    if(product)
+    {
+        SKPayment *payment = [SKPayment paymentWithProduct:product];
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }
+}
+
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
 	// self.products = response.products;
  
-	for(NSString *invalidIdentifier in response.invalidProductIdentifiers)
-    {
-		// Handle any invalid product identifiers.
-	}
+	_products = response.products;
+    _invalidProducts = response.invalidProductIdentifiers;
 }
 
 @end

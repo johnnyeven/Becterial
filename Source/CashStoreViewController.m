@@ -7,12 +7,21 @@
 //
 
 #import "CashStoreViewController.h"
+#import "CashStoreView.h"
+#import "CashStoreItemView.h"
+#import "CashStoreManager.h"
+#import <StoreKit/StoreKit.h>
+
+#define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]
 
 @interface CashStoreViewController ()
 
 @end
 
 @implementation CashStoreViewController
+{
+    CashStoreView *cashStoreView;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +36,31 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    cashStoreView = (CashStoreView *)self.view;
+    if(sharedCashStoreManager.products)
+    {
+        CGFloat offsetY = 0.f;
+        CGFloat contentSizeWidth = 0.f;
+        CGFloat contentSizeHeight = 0.f;
+        for (SKProduct *product in sharedCashStoreManager.products)
+        {
+            NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
+            CashStoreItemView *item = [xibArray objectAtIndex:0];
+            item.identifier = product.productIdentifier;
+            [item.itemName setText:product.localizedTitle];
+            [item.itemComment setText:product.localizedDescription];
+            [item.itemCash setText:product.price.stringValue];
+            [cashStoreView.scroller addSubview:item];
+            item.backgroundColor = nil;
+            item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);
+            offsetY = offsetY + item.frame.size.height;
+            contentSizeHeight = contentSizeHeight + item.frame.size.height;
+            contentSizeWidth = item.frame.size.width;
+        }
+        
+        cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
+    }
 }
 
 - (void)didReceiveMemoryWarning

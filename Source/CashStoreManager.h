@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <StoreKit/StoreKit.h>
 
 @interface CashStoreManager : NSObject
 <SKProductsRequestDelegate>
 
+@property(nonatomic, readonly) NSArray *products;
+@property(nonatomic, readonly) NSArray *invalidProducts;
+
 +(CashStoreManager *)sharedCashStoreManager;
 -(void)validateProductIdentifiers:(NSArray *)productIdentifiers;
+-(void)purchaseProduct:(NSString *)identifier;
 
 @end

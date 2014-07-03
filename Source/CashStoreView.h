@@ -11,6 +11,7 @@
 @interface CashStoreView : UIView
 
 @property (nonatomic, retain) IBOutlet UIButton *btnClose;
+@property (nonatomic, retain) IBOutlet UIScrollView *scroller;
 
 -(IBAction)closeView:(id)sender;
 

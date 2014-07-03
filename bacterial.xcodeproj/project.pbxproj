@@ -62,12 +62,14 @@
 		BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE071962FF6F00994D13 /* CashStoreView.m */; };
 		BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE0A1963007C00994D13 /* CashStoreViewController.m */; };
 		BE89CE1719630AF500994D13 /* CashStoreItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */; };
-		BE89CE1819630AF500994D13 /* CashStoreItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1619630AF500994D13 /* CashStoreItemViewController.xib */; };
+		BE89CE1819630AF500994D13 /* CashStoreItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1619630AF500994D13 /* CashStoreItemView.xib */; };
 		BE89CE1D19630B9E00994D13 /* store_btn_buy.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1A19630B9E00994D13 /* store_btn_buy.png */; };
 		BE89CE1E19630B9E00994D13 /* store_img_icon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1B19630B9E00994D13 /* store_img_icon_1.png */; };
 		BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */; };
 		BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE2119630DDE00994D13 /* CashStoreItemView.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
+		BEFB261F19658DC900993C74 /* CashStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB261D19658DC900993C74 /* CashStoreManager.m */; };
+		BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB26221965AB9F00993C74 /* CashStorePaymentObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,7 +175,7 @@
 		BE89CE0A1963007C00994D13 /* CashStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreViewController.m; path = Source/CashStoreViewController.m; sourceTree = "<group>"; };
 		BE89CE1419630AF500994D13 /* CashStoreItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreItemViewController.h; path = Source/CashStoreItemViewController.h; sourceTree = "<group>"; };
 		BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemViewController.m; path = Source/CashStoreItemViewController.m; sourceTree = "<group>"; };
-		BE89CE1619630AF500994D13 /* CashStoreItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashStoreItemViewController.xib; path = Source/CashStoreItemViewController.xib; sourceTree = "<group>"; };
+		BE89CE1619630AF500994D13 /* CashStoreItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashStoreItemView.xib; path = Source/CashStoreItemView.xib; sourceTree = "<group>"; };
 		BE89CE1A19630B9E00994D13 /* store_btn_buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_btn_buy.png; path = Source/store_btn_buy.png; sourceTree = "<group>"; };
 		BE89CE1B19630B9E00994D13 /* store_img_icon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_img_icon_1.png; path = Source/store_img_icon_1.png; sourceTree = "<group>"; };
 		BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_img_icon_bg.png; path = Source/store_img_icon_bg.png; sourceTree = "<group>"; };
@@ -181,6 +183,10 @@
 		BE89CE2119630DDE00994D13 /* CashStoreItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemView.m; path = Source/CashStoreItemView.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
+		BEFB261C19658DC900993C74 /* CashStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreManager.h; path = Source/CashStoreManager.h; sourceTree = "<group>"; };
+		BEFB261D19658DC900993C74 /* CashStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreManager.m; path = Source/CashStoreManager.m; sourceTree = "<group>"; };
+		BEFB26211965AB9F00993C74 /* CashStorePaymentObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStorePaymentObserver.h; path = Source/CashStorePaymentObserver.h; sourceTree = "<group>"; };
+		BEFB26221965AB9F00993C74 /* CashStorePaymentObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStorePaymentObserver.m; path = Source/CashStorePaymentObserver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +416,10 @@
 		BE89CDFC1962F06A00994D13 /* CashStore */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB261C19658DC900993C74 /* CashStoreManager.h */,
+				BEFB261D19658DC900993C74 /* CashStoreManager.m */,
+				BEFB26211965AB9F00993C74 /* CashStorePaymentObserver.h */,
+				BEFB26221965AB9F00993C74 /* CashStorePaymentObserver.m */,
 				BE89CE061962FF6F00994D13 /* CashStoreView.h */,
 				BE89CE071962FF6F00994D13 /* CashStoreView.m */,
 				BE89CE011962F17C00994D13 /* btnClose.png */,
@@ -422,7 +432,7 @@
 				BE89CE0A1963007C00994D13 /* CashStoreViewController.m */,
 				BE89CE1419630AF500994D13 /* CashStoreItemViewController.h */,
 				BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */,
-				BE89CE1619630AF500994D13 /* CashStoreItemViewController.xib */,
+				BE89CE1619630AF500994D13 /* CashStoreItemView.xib */,
 				BE89CE2019630DDE00994D13 /* CashStoreItemView.h */,
 				BE89CE2119630DDE00994D13 /* CashStoreItemView.m */,
 			);
@@ -538,7 +548,7 @@
 				BE058AC31961B18E005271F1 /* UMShareEditViewController.xib in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
-				BE89CE1819630AF500994D13 /* CashStoreItemViewController.xib in Resources */,
+				BE89CE1819630AF500994D13 /* CashStoreItemView.xib in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
@@ -556,6 +566,7 @@
 			files = (
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */,
+				BEFB261F19658DC900993C74 /* CashStoreManager.m in Sources */,
 				BE058AA01961976D005271F1 /* ScoreScene.m in Sources */,
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
 				BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */,
@@ -566,6 +577,7 @@
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
 				BE89CE1719630AF500994D13 /* CashStoreItemViewController.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

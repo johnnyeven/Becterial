@@ -10,10 +10,13 @@
 
 @interface CashStoreItemView : UIView
 
+@property (nonatomic, retain) NSString *identifier;
 @property (nonatomic, retain) IBOutlet UILabel *itemName;
 @property (nonatomic, retain) IBOutlet UILabel *itemComment;
 @property (nonatomic, retain) IBOutlet UILabel *itemCash;
 @property (nonatomic, retain) IBOutlet UIButton *btnBuy;
 @property (nonatomic, retain) IBOutlet UIImageView *imgIcon;
+
+-(IBAction)btnBuyTouched:(id)sender;
 
 @end

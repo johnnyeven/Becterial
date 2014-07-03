@@ -12,8 +12,7 @@
 #import "define.h"
 #import "PZLabelScore.h"
 #import "PZWebManager.h"
-
-#import "CashStoreViewController.h"
+#import "CashStoreManager.h"
 
 @implementation MainScene
 {
@@ -30,7 +29,7 @@
     int enemyCount;
     CGFloat bacterialBiomass;   //细菌需要消耗的生物质
     CGFloat enemyBiomass;       //入侵病毒产生的生物质
-    int scoreOffset             //分數增加量
+    CGFloat scoreOffset;            //分數增加量
 }
 
 -(void)didLoadFromCCB
@@ -45,15 +44,32 @@
 
     self.userInteractionEnabled = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
-    [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+    NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    
+    if(!products)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
+        [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
+    }
+    else
+    {
+        [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+    }
 }
 
 -(void)didReceiveFromServer:(NSNotification *)notification
 {
     NSDictionary *data = [notification object];
     NSArray *products = [data objectForKey:@"products"];
-
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+    NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
+    [becterials writeToFile:file atomically:NO];
+    
+    [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
 }
 
 -(void)update10PerSecond:(CCTime)delta
@@ -113,7 +129,7 @@
 
     [self prepareStage];
     [self schedule:@selector(update10PerSecond:) interval:.1f];
-    [self schedule:@selector(updatePerSecond:) interval:1f];
+    [self schedule:@selector(updatePerSecond:) interval:1.f];
 }
 
 -(void)onExit
@@ -175,7 +191,7 @@
         [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
         becterial.positionX = x;
         becterial.positionY = y;
-        [self generateBacterial:1];
+//        [self generateBacterial:1];
         
         CCActionMoveTo *aMoveTo = [CCActionMoveTo actionWithDuration:.2f position:ccp(x * 60.5f, y * 60.5f)];
         CCActionCallBlock *aCallBlock = [CCActionCallBlock actionWithBlock:^(void)
@@ -297,6 +313,23 @@
     return result;
 }
 
+-(void)btnGenerateScore
+{
+    if (_biomass > 0)
+    {
+        self.biomass = _biomass - 5;
+        self.score = _score + 10;
+        
+        [self saveGame];
+    }
+}
+
+-(void)btnGenerateBiomass
+{
+    self.biomass = _biomass + 5;
+    [self saveGame];
+}
+
 -(void)putNewBacterial
 {
     if(_score >= NEW_BACTERIAL_COST && _biomass > 0 && [self generateBacterial:0])
@@ -329,25 +362,15 @@
 
 -(void)menu
 {
-    // CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
-    // [[[CCDirector sharedDirector] view] addSubview:storeView.view];
     ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
     [scoreScene setScore:_score];
+    [scoreScene setTime:runningTime];
     CCScene *scene = [CCScene new];
     [scene addChild:scoreScene];
     [[CCDirector sharedDirector] replaceScene:scene];
 }
 
-// -(void)reset
-// {
-//     self.score = 0;
-//     [_becterialList removeAllObjects];
-//     [_container removeAllChildren];
-//     [self saveGame];
-//     [self prepareStage];
-// }
-
--(void)setScore:(int)score
+-(void)setScore:(CGFloat)score
 {
     if(_score != score)
     {
@@ -356,7 +379,7 @@
     }
 }
 
--(void)setBiomass:(int)biomass
+-(void)setBiomass:(CGFloat)biomass
 {
     if(_biomass != biomass)
     {
@@ -394,7 +417,7 @@
         [_becterialList removeObjectIdenticalTo:b];
         [_container removeChild:b];
         self.killerCount--;
-
+        [self checkResult];
         [self saveGame];
     }
 }
@@ -404,8 +427,9 @@
     NSMutableArray *list = [[NSMutableArray alloc] init];
     int bCount = 0;
     int eCount = 0;
-    CGFloat bBiomass, eBiomass;
-    int bScore = 0;
+    CGFloat bBiomass = 0.f;
+    CGFloat eBiomass = 0.f;
+    CGFloat bScore = 0.f;
     for (int i = 0; i < [_becterialContainer count]; i++)
     {
         NSMutableArray *tmp = [_becterialContainer objectAtIndex:i];
@@ -463,8 +487,10 @@
         [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
         [NSNumber numberWithInt:enemyCount], @"enemyCount",
         [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
-        [NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
+[NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
         [NSNumber numberWithFloat:scoreOffset], @"scoreOffset",
+        [NSNumber numberWithInt:runningTime], @"runningTime",
+                          
         becterials, @"bacterials", nil
     ];
     [data writeToFile:file atomically:NO];
@@ -490,6 +516,7 @@
     enemyBiomass = [[data objectForKey:@"enemyBiomass"] floatValue];
     scoreOffset = [[data objectForKey:@"scoreOffset"] floatValue];
     _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
+    runningTime = [[data objectForKey:@"runningTime"] intValue];
     if(_becterialList == nil)
     {
         _becterialList = [[NSMutableArray alloc] init];

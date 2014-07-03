@@ -7,6 +7,7 @@
 //
 
 #import "CashStoreItemView.h"
+#import "CashStoreManager.h"
 
 @implementation CashStoreItemView
 
@@ -17,6 +18,11 @@
         // Initialization code
     }
     return self;
+}
+
+-(IBAction)btnBuyTouched:(id)sender
+{
+    [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
 }
 
 /*

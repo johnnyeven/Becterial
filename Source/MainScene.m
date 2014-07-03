@@ -24,6 +24,7 @@
     NSMutableArray *_becterialContainer;
     NSMutableArray *_becterialList;
     int runningAction;
+    int runningTime;
 
     int bacterialCount;
     int enemyCount;
@@ -52,10 +53,10 @@
 {
     NSDictionary *data = [notification object];
     NSArray *products = [data objectForKey:@"products"];
-    
+
 }
 
--(void) update10PerSecond:(CCTime)delta
+-(void)update10PerSecond:(CCTime)delta
 {
     CGFloat biomassOffset = enemyBiomass - bacterialBiomass;
     self.biomass = fmax(_biomass + biomassOffset, 0);
@@ -64,6 +65,11 @@
     {
         self.score = _score + scoreOffset;
     }
+}
+
+-(void)updatePerSecond:(CCTime)delta
+{
+    runningTime++;
 }
 
 -(void)prepareStage
@@ -106,7 +112,15 @@
     [super onEnter];
 
     [self prepareStage];
-    [self schedule:@selector(updatePerSecond:) interval:.1f];
+    [self schedule:@selector(update10PerSecond:) interval:.1f];
+    [self schedule:@selector(updatePerSecond:) interval:1f];
+}
+
+-(void)onExit
+{
+    [super onExit];
+
+    [self saveGame];
 }
 
 -(BOOL)generateBacterial:(int)type
@@ -285,9 +299,9 @@
 
 -(void)putNewBacterial
 {
-    if(_score >= 1000 && _biomass > 0 && [self generateBacterial:0])
+    if(_score >= NEW_BACTERIAL_COST && _biomass > 0 && [self generateBacterial:0])
     {
-        self.score = _score - 1000;
+        self.score = _score - NEW_BACTERIAL_COST;
         
         if(![self evolution])
         {
@@ -300,8 +314,10 @@
 
 -(void)putNewEnemy
 {
-    if(_score >= 2000 && [self generateBacterial:1])
+    if(_score >= NEW_ENEMY_COST && [self generateBacterial:1])
     {
+        self.score = _score - NEW_ENEMY_COST;
+
         if(![self evolution])
         {
             [self saveGame];
@@ -313,8 +329,13 @@
 
 -(void)menu
 {
-    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
-    [[[CCDirector sharedDirector] view] addSubview:storeView.view];
+    // CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+    // [[[CCDirector sharedDirector] view] addSubview:storeView.view];
+    ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
+    [scoreScene setScore:_score];
+    CCScene *scene = [CCScene new];
+    [scene addChild:scoreScene];
+    [[CCDirector sharedDirector] replaceScene:scene];
 }
 
 // -(void)reset
@@ -324,12 +345,6 @@
 //     [_container removeAllChildren];
 //     [self saveGame];
 //     [self prepareStage];
-// }
-
-// -(void)back
-// {
-//     CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
-//     [[[CCDirector sharedDirector] view] addSubview:storeView.view];
 // }
 
 -(void)setScore:(int)score
@@ -449,6 +464,7 @@
         [NSNumber numberWithInt:enemyCount], @"enemyCount",
         [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
         [NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
+        [NSNumber numberWithFloat:scoreOffset], @"scoreOffset",
         becterials, @"bacterials", nil
     ];
     [data writeToFile:file atomically:NO];
@@ -472,6 +488,7 @@
     enemyCount = [[data objectForKey:@"enemyCount"] intValue];
     bacterialBiomass = [[data objectForKey:@"bacterialBiomass"] floatValue];
     enemyBiomass = [[data objectForKey:@"enemyBiomass"] floatValue];
+    scoreOffset = [[data objectForKey:@"scoreOffset"] floatValue];
     _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
     if(_becterialList == nil)
     {
@@ -483,6 +500,7 @@
 
 -(void)reset
 {
+    runningTime = 0;
     self.score = 0;
     self.biomass = 0;
     [_becterialList removeAllObjects];

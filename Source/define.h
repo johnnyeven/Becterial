@@ -14,4 +14,7 @@
 #define BACTERIAL_SCORE 1.f
 #define ENEMY_BIOMASS 0.15f
 
+#define NEW_BACTERIAL_COST 1000
+#define NEW_ENEMY_COST 2000
+
 #endif

@@ -10,6 +10,8 @@
 
 @interface ScoreScene : CCNode
 
+-(void)setOver:(BOOL)over;
 -(void)setScore:(int)score;
+-(void)setTime:(int)Time;
 
 @end

@@ -13,24 +13,43 @@
 
 @implementation ScoreScene
 {
+    BOOL _over = NO;
     int _score;
+    int _time;
     PZLabelScore *_lblScore;
+    PZLabelScore *_lblTime;
+    CCButton *btnContinue;
 }
 
 -(void)didLoadFromCCB
 {
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblScore.anchorPoint = ccp(.5f, .5f);
-    _lblScore.positionType = CCPositionTypeNormalized;
-    _lblScore.position = ccp(.5f, .6f);
+    _lblScore.anchorPoint = ccp(0.f, 0.f);
+    _lblScore.position = ccp(24.f, 385.f);
     [self addChild:_lblScore];
+
+    _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblScore.anchorPoint = ccp(0.f, 0.f);
+    _lblScore.position = ccp(24.f, 305.f);
+    [self addChild:_lblScore];
+}
+
+-(void)setOver:(BOOL)over
+{
+    _over = over;
+    btnContinue.visible = !over;
 }
 
 -(void)setScore:(int)score
 {
     _score = score;
     [_lblScore setScore:score];
-    _lblScore.position = ccp(.5f, .6f);
+}
+
+-(void)setTime:(int)time
+{
+    _time = time;
+    [_lblTime setScore:time];
 }
 
 -(void)back

@@ -17,6 +17,7 @@
 @implementation MainScene
 {
     CCLabelTTF *_lblKillerCount;
+    PZLabelScore *_lblExp;
     PZLabelScore *_lblScore;
     PZLabelScore *_lblBiomass;
     CCNode *_container;
@@ -29,47 +30,57 @@
     int enemyCount;
     CGFloat bacterialBiomass;   //细菌需要消耗的生物质
     CGFloat enemyBiomass;       //入侵病毒产生的生物质
-    CGFloat scoreOffset;            //分數增加量
+    CGFloat scoreOffset;        //分數增加量
 }
 
 -(void)didLoadFromCCB
 {
+    _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblExp.position = ccp(67.f, 455.5f);
+    [self addChild:_lblExp];
+
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblScore.position = ccp(10.f, 415.f);
+    _lblScore.position = ccp(10.f, 390.f);
     [self addChild:_lblScore];
 
     _lblBiomass = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblBiomass.position = ccp(165.f, 415.f);
+    _lblBiomass.position = ccp(165.f, 390.f);
     [self addChild:_lblBiomass];
 
     self.userInteractionEnabled = YES;
     
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-    NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+    // NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
     
-    if(!products)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
-        [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
-    }
-    else
-    {
-        [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
-    }
+    // if(!products)
+    // {
+    //     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
+    //     [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
+    // }
+    // else
+    // {
+    //     [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+    // }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deliverProduct" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deliverExp:) name:@"deliverProduct" object:nil];
 }
 
--(void)didReceiveFromServer:(NSNotification *)notification
+-(void)deliverProduct:(NSNotification *)notification
 {
-    NSDictionary *data = [notification object];
-    NSArray *products = [data objectForKey:@"products"];
-    
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-    NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
-    [becterials writeToFile:file atomically:NO];
-    
-    [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+    NSArray *items = [[notification object] objectForKey:@"items"];
+
+    for(NSDictionary *item in items)
+    {
+        NSString *name = [item objectForKey:@"name"];
+        int count = [[item objectForKey:@"count"] intValue];
+        if([name isEqualToString:@"exp"])
+        {
+            self.exp = _exp + count;
+        }
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"deliverComplete"　object:[notification object]];
 }
 
 -(void)update10PerSecond:(CCTime)delta
@@ -119,6 +130,7 @@
     else
     {
         _becterialList = [[NSMutableArray alloc] init];
+        self.exp = 0;
         self.killerCount = 10;
     }
 }
@@ -388,6 +400,15 @@
     }
 }
 
+-(void)setExp:(int)exp
+{
+    if(_exp != exp)
+    {
+        _exp = exp;
+
+    }
+}
+
 -(void)setKillerCount:(int)killerCount
 {
     if(_killerCount != killerCount)
@@ -481,8 +502,9 @@
     NSString *file = [path stringByAppendingPathComponent:@"savegame"];
     NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithInt:_score], @"score",
-        [NSNumber numberWithInt:_biomass], @"biomass",
+        [NSNumber numberWithInt:_exp], @"exp",
+        [NSNumber numberWithFloat:_score], @"score",
+        [NSNumber numberWithFloat:_biomass], @"biomass",
         [NSNumber numberWithInt:_killerCount], @"killerCount",
         [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
         [NSNumber numberWithInt:enemyCount], @"enemyCount",
@@ -507,8 +529,9 @@
         return NO;
     }
     
-    self.score = [[data objectForKey:@"score"] intValue];
-    self.biomass = [[data objectForKey:@"biomass"] intValue];
+    self.exp = [[data objectForKey:@"exp"] intValue];
+    self.score = [[data objectForKey:@"score"] floatValue];
+    self.biomass = [[data objectForKey:@"biomass"] floatValue];
     self.killerCount = [[data objectForKey:@"killerCount"] intValue];
     bacterialCount = [[data objectForKey:@"bacterialCount"] intValue];
     enemyCount = [[data objectForKey:@"enemyCount"] intValue];

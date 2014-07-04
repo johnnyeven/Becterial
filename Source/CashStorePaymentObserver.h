@@ -13,5 +13,8 @@
 <SKPaymentTransactionObserver>
 
 +(CashStorePaymentObserver *)sharedCashStorePaymentObserver;
+-(void)didReceiveFromServer:(NSNotification *)notification;
+-(void)deliverProduct:(NSArray *)items withIdentifier:(NSString *)identifier;
+-(void)deliverComplete:(NSNotification *)notification;
 
 @end

@@ -18,8 +18,10 @@
     BOOL _over;
     int _score;
     int _time;
+    int _exp;
     PZLabelScore *_lblScore;
     PZLabelScore *_lblTime;
+    PZLabelScore *_lblExp;
     CCButton *btnContinue;
 }
 
@@ -27,13 +29,18 @@
 {
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblScore.anchorPoint = ccp(0.f, 0.f);
-    _lblScore.position = ccp(24.f, 385.f);
+    _lblScore.position = ccp(24.f, 410.f);
     [self addChild:_lblScore];
 
     _lblTime = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblTime.anchorPoint = ccp(0.f, 0.f);
-    _lblTime.position = ccp(24.f, 305.f);
+    _lblTime.position = ccp(24.f, 340.f);
     [self addChild:_lblTime];
+
+    _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblExp.anchorPoint = ccp(0.f, 0.f);
+    _lblExp.position = ccp(24.f, 205.f);
+    [self addChild:_lblExp];
     
     _over = NO;
 }

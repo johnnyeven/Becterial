@@ -67,8 +67,24 @@
     [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
     
 //    [MobClick setLogEnabled:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
+    [[PZWebManager sharedPZWebManager] asyncGetRequest:@"https://b.profzone.net/configuration/product_id" withData:nil];
     
     return YES;
+}
+
+-(void)didReceiveFromServer:(NSNotification *)notification
+{
+    NSDictionary *data = [notification object];
+    NSArray *products = [data objectForKey:@"products"];
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+    NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
+    [becterials writeToFile:file atomically:NO];
+    
+    [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
 }
 
 - (CCScene*) startScene

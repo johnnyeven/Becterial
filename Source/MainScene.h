@@ -13,9 +13,10 @@
 
 @property (nonatomic) CGFloat score;
 @property (nonatomic) CGFloat biomass;
+@property (nonatomic) int exp;
 @property (nonatomic) int killerCount;
 
--(void)didReceiveFromServer:(NSNotification *)notification;
+-(void)deliverProduct:(NSNotification *)notification;
 -(void)update10PerSecond:(CCTime)delta;
 -(void)updatePerSecond:(CCTime)delta;
 -(void)prepareStage;

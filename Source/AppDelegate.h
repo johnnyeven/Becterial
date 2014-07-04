@@ -30,4 +30,6 @@
 {
 }
 
+-(void)didReceiveFromServer:(NSNotification *)notification;
+
 @end

@@ -7,7 +7,9 @@
 //
 
 #import "CashStorePaymentObserver.h"
-#import "MobClick.h"
+#import "PZWebManager.h"
+#import "MobClickGameAnalytics.h"
+#import "DataStorageManager.h"
 
 @implementation CashStorePaymentObserver
 
@@ -20,17 +22,6 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
         _sharedCashStorePaymentObserver = [[CashStorePaymentObserver alloc] init];
     }
     return _sharedCashStorePaymentObserver;
-}
-
--(id)init
-{
-    self = [super init];
-    if(self)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deliverComplete:) name:@"deliverComplete" object:nil];
-    }
-
-    return self;
 }
 
 -(void)didReceiveFromServer:(NSNotification *)notification
@@ -47,17 +38,24 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 
 -(void)deliverProduct:(NSArray *)items withIdentifier:(NSString *)identifier
 {
-    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-        identifier, @"identifier",
-        items, @"items", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"deliverProduct"　object:data];
+    int exp = [DataStorageManager sharedDataStorageManager].exp;
+    for(NSDictionary *item in items)
+    {
+        NSString *name = [item objectForKey:@"name"];
+        int count = [[item objectForKey:@"count"] intValue];
+        if([name isEqualToString:@"exp"])
+        {
+            exp = exp + count;
+        }
+    }
+    [DataStorageManager sharedDataStorageManager].exp = exp;
+    [[DataStorageManager sharedDataStorageManager] saveData];
+    [self deliverComplete:identifier];
 }
 
--(void)deliverComplete:(NSNotification *)notification
+-(void)deliverComplete:(NSString *)identifier;
 {
-    NSDictionary *data = [notification object];
-    NSString *identifier = [data objectForKey:@"identifier"];
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
     //find transaction with identifier
     
 
@@ -83,13 +81,14 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
         {
             case SKPaymentTransactionStatePurchased:
             {
-                NSString *receipt = [[NSString alloc] initWithData:transaction.transactionReceipt encoding:NSUTF8StringEncoding];
-                NSLog(@"%@", receipt);
-                
+                NSString *receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes
+                                          length:transaction.transactionReceipt.length];
+                [[NSNotificationCenter defaultCenter] removeObserver:self name:@"checkReceipt" object:nil];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"checkReceipt" object:nil];
                 NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-                    receipt, @"receipt", nil];
-                [[PZWebManager sharedPZWebManager] asyncPostRequest:@"https://b.profzone.net/configuration/product_id" withData:data];
+                                      transaction.payment.productIdentifier, @"identifier",
+                                      receipt, @"receipt", nil];
+                [[PZWebManager sharedPZWebManager] asyncPostRequest:@"https://b.profzone.net/order/check_receipt" withData:data];
 
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
@@ -109,6 +108,33 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 -(void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
 {
     NSLog(@"transaction removed!");
+}
+
+-(NSString *)encode:(const uint8_t *)input length:(NSInteger)length
+{
+    static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    
+    NSMutableData *data = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
+    uint8_t *output = (uint8_t *)data.mutableBytes;
+    
+    for (NSInteger i = 0; i < length; i += 3) {
+        NSInteger value = 0;
+        for (NSInteger j = i; j < (i + 3); j++) {
+            value <<= 8;
+            
+            if (j < length) {
+                value |= (0xFF & input[j]);
+            }
+        }
+        
+        NSInteger index = (i / 3) * 4;
+        output[index + 0] =                    table[(value >> 18) & 0x3F];
+        output[index + 1] =                    table[(value >> 12) & 0x3F];
+        output[index + 2] = (i + 1) < length ? table[(value >> 6)  & 0x3F] : '=';
+        output[index + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
+    }
+    
+    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 }
 
 @end

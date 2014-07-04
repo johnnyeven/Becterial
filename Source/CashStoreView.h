@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *btnClose;
 @property (nonatomic, retain) IBOutlet UIScrollView *scroller;
+@property (nonatomic, retain) IBOutlet UIView *loadingView;
 
 -(IBAction)closeView:(id)sender;
 

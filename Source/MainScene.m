@@ -13,6 +13,10 @@
 #import "PZLabelScore.h"
 #import "PZWebManager.h"
 #import "CashStoreManager.h"
+#import "DataStorageManager.h"
+
+#define dataExp [DataStorageManager sharedDataStorageManager].exp
+#define dataKillerCount [DataStorageManager sharedDataStorageManager].killerCount
 
 @implementation MainScene
 {
@@ -62,26 +66,24 @@
     // {
     //     [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
     // }
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deliverProduct" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deliverExp:) name:@"deliverProduct" object:nil];
 }
 
--(void)deliverProduct:(NSNotification *)notification
-{
-    NSArray *items = [[notification object] objectForKey:@"items"];
-
-    for(NSDictionary *item in items)
-    {
-        NSString *name = [item objectForKey:@"name"];
-        int count = [[item objectForKey:@"count"] intValue];
-        if([name isEqualToString:@"exp"])
-        {
-            self.exp = _exp + count;
-        }
-    }
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"deliverComplete"　object:[notification object]];
-}
+//-(void)deliverProduct:(NSNotification *)notification
+//{
+//    NSArray *items = [[notification object] objectForKey:@"items"];
+//
+//    for(NSDictionary *item in items)
+//    {
+//        NSString *name = [item objectForKey:@"name"];
+//        int count = [[item objectForKey:@"count"] intValue];
+//        if([name isEqualToString:@"exp"])
+//        {
+//            self.exp = _exp + count;
+//        }
+//    }
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"deliverComplete" object:[notification object]];
+//}
 
 -(void)update10PerSecond:(CCTime)delta
 {
@@ -281,6 +283,7 @@
                         else
                         {
                             becterial.level++;
+                            self.exp = _exp + becterial.level;
                         }
                         runningAction--;
                         if(runningAction == 0)
@@ -302,8 +305,6 @@
                 }
                 [_becterialList removeObjectIdenticalTo:other];
             }
-//            int score = [list count] * other.level * 10 + becterial.level * 10;
-//            self.score = self.score + score;
 
             return YES;
         }
@@ -405,7 +406,8 @@
     if(_exp != exp)
     {
         _exp = exp;
-
+        _lblExp.score = exp;
+        dataExp = exp;
     }
 }
 
@@ -502,10 +504,8 @@
     NSString *file = [path stringByAppendingPathComponent:@"savegame"];
     NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithInt:_exp], @"exp",
         [NSNumber numberWithFloat:_score], @"score",
         [NSNumber numberWithFloat:_biomass], @"biomass",
-        [NSNumber numberWithInt:_killerCount], @"killerCount",
         [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
         [NSNumber numberWithInt:enemyCount], @"enemyCount",
         [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
@@ -516,6 +516,8 @@
         becterials, @"bacterials", nil
     ];
     [data writeToFile:file atomically:NO];
+    
+    [[DataStorageManager sharedDataStorageManager] saveData];
 }
 
 -(BOOL)loadGame
@@ -529,10 +531,10 @@
         return NO;
     }
     
-    self.exp = [[data objectForKey:@"exp"] intValue];
+    self.exp = dataExp;
     self.score = [[data objectForKey:@"score"] floatValue];
     self.biomass = [[data objectForKey:@"biomass"] floatValue];
-    self.killerCount = [[data objectForKey:@"killerCount"] intValue];
+    self.killerCount = dataKillerCount;
     bacterialCount = [[data objectForKey:@"bacterialCount"] intValue];
     enemyCount = [[data objectForKey:@"enemyCount"] intValue];
     bacterialBiomass = [[data objectForKey:@"bacterialBiomass"] floatValue];

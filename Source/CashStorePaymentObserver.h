@@ -13,8 +13,9 @@
 <SKPaymentTransactionObserver>
 
 +(CashStorePaymentObserver *)sharedCashStorePaymentObserver;
+-(NSString *)encode:(const uint8_t *)input length:(NSInteger)length;
 -(void)didReceiveFromServer:(NSNotification *)notification;
 -(void)deliverProduct:(NSArray *)items withIdentifier:(NSString *)identifier;
--(void)deliverComplete:(NSNotification *)notification;
+-(void)deliverComplete:(NSString *)identifier;
 
 @end

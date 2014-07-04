@@ -10,6 +10,7 @@
 #import "CashStoreView.h"
 #import "CashStoreItemView.h"
 #import "CashStoreManager.h"
+#import "CashStorePaymentObserver.h"
 #import <StoreKit/StoreKit.h>
 
 #define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]
@@ -38,6 +39,7 @@
     // Do any additional setup after loading the view.
     
     cashStoreView = (CashStoreView *)self.view;
+    cashStoreView.loadingView.hidden = YES;
     if(sharedCashStoreManager.products)
     {
         CGFloat offsetY = 0.f;
@@ -61,6 +63,14 @@
         
         cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideLoadingIcon" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideLoadingIcon:) name:@"hideLoadingIcon" object:nil];
+}
+
+-(void)hideLoadingIcon:(NSNotification *)notification
+{
+    cashStoreView.loadingView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning

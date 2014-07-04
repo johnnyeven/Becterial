@@ -54,6 +54,7 @@
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5868BF196449A50007AF48 /* PZWebManager.m */; };
+		BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE58F2D11966F321009274E4 /* DataStorageManager.m */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
 		BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */; };
@@ -61,7 +62,6 @@
 		BE89CE021962F17C00994D13 /* btnClose.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE011962F17C00994D13 /* btnClose.png */; };
 		BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE071962FF6F00994D13 /* CashStoreView.m */; };
 		BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE0A1963007C00994D13 /* CashStoreViewController.m */; };
-		BE89CE1719630AF500994D13 /* CashStoreItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */; };
 		BE89CE1819630AF500994D13 /* CashStoreItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1619630AF500994D13 /* CashStoreItemView.xib */; };
 		BE89CE1D19630B9E00994D13 /* store_btn_buy.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1A19630B9E00994D13 /* store_btn_buy.png */; };
 		BE89CE1E19630B9E00994D13 /* store_img_icon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1B19630B9E00994D13 /* store_img_icon_1.png */; };
@@ -161,6 +161,8 @@
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
 		BE5868BE196449A50007AF48 /* PZWebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZWebManager.h; path = Source/PZWebManager.h; sourceTree = "<group>"; };
 		BE5868BF196449A50007AF48 /* PZWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZWebManager.m; path = Source/PZWebManager.m; sourceTree = "<group>"; };
+		BE58F2D01966F321009274E4 /* DataStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorageManager.h; path = Source/DataStorageManager.h; sourceTree = "<group>"; };
+		BE58F2D11966F321009274E4 /* DataStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataStorageManager.m; path = Source/DataStorageManager.m; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
 		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
@@ -173,8 +175,6 @@
 		BE89CE071962FF6F00994D13 /* CashStoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreView.m; path = Source/CashStoreView.m; sourceTree = "<group>"; };
 		BE89CE091963007C00994D13 /* CashStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreViewController.h; path = Source/CashStoreViewController.h; sourceTree = "<group>"; };
 		BE89CE0A1963007C00994D13 /* CashStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreViewController.m; path = Source/CashStoreViewController.m; sourceTree = "<group>"; };
-		BE89CE1419630AF500994D13 /* CashStoreItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreItemViewController.h; path = Source/CashStoreItemViewController.h; sourceTree = "<group>"; };
-		BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemViewController.m; path = Source/CashStoreItemViewController.m; sourceTree = "<group>"; };
 		BE89CE1619630AF500994D13 /* CashStoreItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashStoreItemView.xib; path = Source/CashStoreItemView.xib; sourceTree = "<group>"; };
 		BE89CE1A19630B9E00994D13 /* store_btn_buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_btn_buy.png; path = Source/store_btn_buy.png; sourceTree = "<group>"; };
 		BE89CE1B19630B9E00994D13 /* store_img_icon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_img_icon_1.png; path = Source/store_img_icon_1.png; sourceTree = "<group>"; };
@@ -245,6 +245,8 @@
 				BE1835A5195FE9DF00860689 /* Killer.m */,
 				BE058A9E1961976D005271F1 /* ScoreScene.h */,
 				BE058A9F1961976D005271F1 /* ScoreScene.m */,
+				BE58F2D01966F321009274E4 /* DataStorageManager.h */,
+				BE58F2D11966F321009274E4 /* DataStorageManager.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -430,8 +432,6 @@
 				BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */,
 				BE89CE091963007C00994D13 /* CashStoreViewController.h */,
 				BE89CE0A1963007C00994D13 /* CashStoreViewController.m */,
-				BE89CE1419630AF500994D13 /* CashStoreItemViewController.h */,
-				BE89CE1519630AF500994D13 /* CashStoreItemViewController.m */,
 				BE89CE1619630AF500994D13 /* CashStoreItemView.xib */,
 				BE89CE2019630DDE00994D13 /* CashStoreItemView.h */,
 				BE89CE2119630DDE00994D13 /* CashStoreItemView.m */,
@@ -574,8 +574,8 @@
 				BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */,
+				BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */,
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
-				BE89CE1719630AF500994D13 /* CashStoreItemViewController.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */,
 			);

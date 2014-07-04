@@ -8,6 +8,7 @@
 
 #import "CashStoreItemView.h"
 #import "CashStoreManager.h"
+#import "CashStoreView.h"
 
 @implementation CashStoreItemView
 
@@ -23,6 +24,8 @@
 -(IBAction)btnBuyTouched:(id)sender
 {
     [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
+    CashStoreView *v = (CashStoreView *)self.superview.superview;
+    v.loadingView.hidden = NO;
 }
 
 /*

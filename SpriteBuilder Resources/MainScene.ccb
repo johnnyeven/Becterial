@@ -163,7 +163,7 @@
 						<key>value</key>
 						<array>
 							<real>178.00003051757812</real>
-							<real>344.00006103515625</real>
+							<real>332.90823364257812</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -566,8 +566,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>178.54444885253906</real>
-							<real>339.91262817382812</real>
+							<real>177.76922607421875</real>
+							<real>326.34616088867188</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -774,7 +774,7 @@
 						<key>value</key>
 						<array>
 							<real>37.000030517578125</real>
-							<real>362.58148193359375</real>
+							<real>350</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1100,7 +1100,7 @@
 						<key>value</key>
 						<array>
 							<real>118.71917724609375</real>
-							<real>362.87347412109375</real>
+							<real>350</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1426,7 +1426,7 @@
 						<key>value</key>
 						<array>
 							<real>282.67965698242188</real>
-							<real>363.0672607421875</real>
+							<real>350</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1718,6 +1718,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1752,7 +1754,7 @@
 						<key>value</key>
 						<array>
 							<real>239.00003051757812</real>
-							<real>457.00006103515625</real>
+							<real>430</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -2078,7 +2080,7 @@
 						<key>value</key>
 						<array>
 							<real>81.000030517578125</real>
-							<real>457.00006103515625</real>
+							<real>430</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -2370,8 +2372,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

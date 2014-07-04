@@ -30,7 +30,10 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
-#import "CashStorePaymentObserver.h";
+#import "CashStorePaymentObserver.h"
+#import "PZWebManager.h"
+#import "CashStoreManager.h"
+#import "DataStorageManager.h"
 
 #import <StoreKit/StoreKit.h>
 
@@ -89,6 +92,7 @@
 
 - (CCScene*) startScene
 {
+    [[DataStorageManager sharedDataStorageManager] loadData];
     [[CCDirector sharedDirector] setDisplayStats:YES];
     return [CCBReader loadAsScene:@"MainScene"];
 }

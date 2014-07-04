@@ -16,7 +16,7 @@
 @property (nonatomic) int exp;
 @property (nonatomic) int killerCount;
 
--(void)deliverProduct:(NSNotification *)notification;
+//-(void)deliverProduct:(NSNotification *)notification;
 -(void)update10PerSecond:(CCTime)delta;
 -(void)updatePerSecond:(CCTime)delta;
 -(void)prepareStage;

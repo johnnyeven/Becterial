@@ -10,4 +10,6 @@
 
 @interface CashStoreViewController : UIViewController
 
+-(void)hideLoadingIcon:(NSNotification *)notification;
+
 @end

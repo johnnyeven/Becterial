@@ -7,6 +7,7 @@
 //
 
 #import "CashStorePaymentObserver.h"
+#import "MobClick.h"
 
 @implementation CashStorePaymentObserver
 
@@ -56,6 +57,22 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 {
     NSDictionary *data = [notification object];
     NSString *identifier = [data objectForKey:@"identifier"];
+
+    //find transaction with identifier
+    
+
+    //report to umeng
+    NSArray *tmp = [identifier componentsSeparatedByString:@"."];
+    NSString *itemId;
+    if([tmp count] > 1)
+    {
+        itemId = [tmp objectAtIndex: [tmp count] - 1];
+    }
+    else
+    {
+        itemId = identifier;
+    }
+    [MobClickGameAnalytics buy:itemId amount:1 price:1.f];
 }
 
 -(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions

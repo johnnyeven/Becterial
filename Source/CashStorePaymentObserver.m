@@ -79,25 +79,12 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                 {
                     itemId = identifier;
                 }
-                int cash = [[itemId substringFromIndex:7] intValue];
-                [MobClickGameAnalytics pay:cash source:2 item:itemId amount:1 price:30000];
+                int cash = [[itemId substringFromIndex:6] intValue];
+                [MobClickGameAnalytics pay:cash source:1 item:itemId amount:1 price:0];
                 break;
             }
         }
     }
-
-    //report to umeng
-    NSArray *tmp = [identifier componentsSeparatedByString:@"."];
-    NSString *itemId;
-    if([tmp count] > 1)
-    {
-        itemId = [tmp objectAtIndex: [tmp count] - 1];
-    }
-    else
-    {
-        itemId = identifier;
-    }
-    [MobClickGameAnalytics buy:itemId amount:1 price:1.f];
 }
 
 -(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions

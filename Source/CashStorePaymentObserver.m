@@ -10,8 +10,12 @@
 #import "PZWebManager.h"
 #import "MobClickGameAnalytics.h"
 #import "DataStorageManager.h"
+#import "CashStoreViewController.h"
 
 @implementation CashStorePaymentObserver
+{
+    NSArray *_transactions;
+}
 
 static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 
@@ -48,6 +52,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
             exp = exp + count;
         }
     }
+    
     [DataStorageManager sharedDataStorageManager].exp = exp;
     [[DataStorageManager sharedDataStorageManager] saveData];
     [self deliverComplete:identifier];
@@ -56,8 +61,30 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 -(void)deliverComplete:(NSString *)identifier;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:nil];
     //find transaction with identifier
-    
+    if(_transactions)
+    {
+        for (SKPaymentTransaction *transaction in _transactions)
+        {
+            if ([identifier isEqualToString:transaction.payment.productIdentifier])
+            {
+                NSArray *tmp = [identifier componentsSeparatedByString:@"."];
+                NSString *itemId;
+                if([tmp count] > 1)
+                {
+                    itemId = [tmp objectAtIndex: [tmp count] - 1];
+                }
+                else
+                {
+                    itemId = identifier;
+                }
+                int cash = [[itemId substringFromIndex:7] intValue];
+                [MobClickGameAnalytics pay:cash source:2 item:itemId amount:1 price:30000];
+                break;
+            }
+        }
+    }
 
     //report to umeng
     NSArray *tmp = [identifier componentsSeparatedByString:@"."];
@@ -75,6 +102,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 
 -(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
+    _transactions = transactions;
     for (SKPaymentTransaction *transaction in transactions)
     {
         switch (transaction.transactionState)

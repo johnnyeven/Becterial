@@ -10,6 +10,19 @@
 
 @implementation CashStoreView
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self)
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideLoadingIcon" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideLoadingIcon:) name:@"hideLoadingIcon" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showSuccessView" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuccessView:) name:@"showSuccessView" object:nil];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,7 +34,24 @@
 
 -(IBAction)closeView:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideLoadingIcon" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showSuccessView" object:nil];
     [self removeFromSuperview];
+}
+
+-(IBAction)closeSuccessView:(id)sender
+{
+    self.successView.hidden = YES;
+}
+
+-(void)hideLoadingIcon:(NSNotification *)notification
+{
+    self.loadingView.hidden = YES;
+}
+
+-(void)showSuccessView:(NSNotification *)notification
+{
+    self.successView.hidden = NO;
 }
 
 /*

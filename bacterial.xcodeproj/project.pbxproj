@@ -55,6 +55,7 @@
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5868BF196449A50007AF48 /* PZWebManager.m */; };
 		BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE58F2D11966F321009274E4 /* DataStorageManager.m */; };
+		BE63466819683636007E375F /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = BE63466719683636007E375F /* success.png */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
 		BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */; };
@@ -163,6 +164,7 @@
 		BE5868BF196449A50007AF48 /* PZWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZWebManager.m; path = Source/PZWebManager.m; sourceTree = "<group>"; };
 		BE58F2D01966F321009274E4 /* DataStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorageManager.h; path = Source/DataStorageManager.h; sourceTree = "<group>"; };
 		BE58F2D11966F321009274E4 /* DataStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataStorageManager.m; path = Source/DataStorageManager.m; sourceTree = "<group>"; };
+		BE63466719683636007E375F /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = success.png; path = Source/success.png; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
 		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		BE89CDFC1962F06A00994D13 /* CashStore */ = {
 			isa = PBXGroup;
 			children = (
+				BE63466719683636007E375F /* success.png */,
 				BEFB261C19658DC900993C74 /* CashStoreManager.h */,
 				BEFB261D19658DC900993C74 /* CashStoreManager.m */,
 				BEFB26211965AB9F00993C74 /* CashStorePaymentObserver.h */,
@@ -526,6 +529,7 @@
 				BE058AC61961B18E005271F1 /* UMSnsAccountViewController.xib in Resources */,
 				BE058AC51961B18E005271F1 /* UMSLoginViewController.xib in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				BE63466819683636007E375F /* success.png in Resources */,
 				BE058AC11961B18E005271F1 /* UMSCommentInputController.xib in Resources */,
 				BE89CE021962F17C00994D13 /* btnClose.png in Resources */,
 				BE12CB4A19586256006F775D /* Images.xcassets in Resources */,
@@ -675,7 +679,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TencentOpenAPI",
+					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -705,6 +709,7 @@
 				);
 				PRODUCT_NAME = bacterial;
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -721,7 +726,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TencentOpenAPI",
+					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -742,6 +747,7 @@
 					"$(PROJECT_DIR)/TencentOpenAPI",
 					"$(PROJECT_DIR)/UmengGameAnalytics",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -750,6 +756,7 @@
 				PRODUCT_NAME = bacterial;
 				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

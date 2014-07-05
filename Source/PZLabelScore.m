@@ -71,8 +71,8 @@
             score = score / 10;
         }
         
-        int count = [arr count];
-        for(int i = count - 1; i >= 0; i--)
+        long count = [arr count];
+        for(long i = count - 1; i >= 0; i--)
         {
             NSString *fileName = [NSString stringWithFormat:@"number/number_%i.png", [[arr objectAtIndex:i] intValue]];
             CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];

@@ -172,7 +172,7 @@
         }
         
     
-        int count = [list count];
+        long count = [list count];
         if(count > 0)
         {
             CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
@@ -487,7 +487,7 @@
     enemyBiomass = eBiomass;
     scoreOffset = bScore;
     
-    int count = [list count];
+    long count = [list count];
     if(count == 0)
     {
         ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];

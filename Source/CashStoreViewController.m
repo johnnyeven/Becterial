@@ -63,14 +63,6 @@
         
         cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
     }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideLoadingIcon" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideLoadingIcon:) name:@"hideLoadingIcon" object:nil];
-}
-
--(void)hideLoadingIcon:(NSNotification *)notification
-{
-    cashStoreView.loadingView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning

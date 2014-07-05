@@ -13,7 +13,11 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnClose;
 @property (nonatomic, retain) IBOutlet UIScrollView *scroller;
 @property (nonatomic, retain) IBOutlet UIView *loadingView;
+@property (nonatomic, retain) IBOutlet UIView *successView;
 
 -(IBAction)closeView:(id)sender;
+-(IBAction)closeSuccessView:(id)sender;
+-(void)hideLoadingIcon:(NSNotification *)notification;
+-(void)showSuccessView:(NSNotification *)notification;
 
 @end

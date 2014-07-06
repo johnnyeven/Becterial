@@ -12,6 +12,8 @@
 
 @property (nonatomic) int killerCount;
 @property (nonatomic) int exp;
+@property (nonatomic, retain) NSDictionary *upgradeConst;
+@property (nonatomic, retain) NSMutableDictionary *upgradeData;
 
 +(DataStorageManager *)sharedDataStorageManager;
 -(void)saveData;

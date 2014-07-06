@@ -34,6 +34,11 @@ static DataStorageManager *_sharedDataStorageManager;
 
 -(BOOL)loadData
 {
+    //load upgrade const data
+    NSString *upgradeConstFilePath = [[NSBundle mainBundle] pathForResource:@"upgrade_const" ofType:@"plist"];
+    self.upgradeConst = [[NSDictionary alloc] initWithContentsOfFile:upgradeConstFilePath];
+    
+    //load game data
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *file = [path stringByAppendingPathComponent:@"savedata"];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:file];
@@ -45,6 +50,16 @@ static DataStorageManager *_sharedDataStorageManager;
     
     self.exp = [[data objectForKey:@"exp"] intValue];
     self.killerCount = [[data objectForKey:@"killerCount"] intValue];
+    
+    //load upgrade data
+    path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    file = [path stringByAppendingPathComponent:@"saveupgradedata"];
+    self.upgradeData = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
+    
+    if(self.upgradeData == nil)
+    {
+        self.upgradeData = [NSMutableDictionary new];
+    }
     
     return YES;
 }

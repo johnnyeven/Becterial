@@ -69,6 +69,25 @@
 		BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */; };
 		BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE2119630DDE00994D13 /* CashStoreItemView.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
+		BEBB31E119690FF200ECE458 /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */; };
+		BEBB31E219690FF200ECE458 /* UpgradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E019690FF200ECE458 /* UpgradeView.xib */; };
+		BEBB31F01969114D00ECE458 /* upgrade_level0.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E31969114D00ECE458 /* upgrade_level0.png */; };
+		BEBB31F11969114D00ECE458 /* upgrade_level1.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E41969114D00ECE458 /* upgrade_level1.png */; };
+		BEBB31F21969114D00ECE458 /* upgrade_level2.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E51969114D00ECE458 /* upgrade_level2.png */; };
+		BEBB31F31969114D00ECE458 /* upgrade_level3.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E61969114D00ECE458 /* upgrade_level3.png */; };
+		BEBB31F41969114D00ECE458 /* upgrade_level4.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E71969114D00ECE458 /* upgrade_level4.png */; };
+		BEBB31F51969114D00ECE458 /* upgrade_level5.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E81969114D00ECE458 /* upgrade_level5.png */; };
+		BEBB31F61969114D00ECE458 /* upgrade_status0.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E91969114D00ECE458 /* upgrade_status0.png */; };
+		BEBB31F71969114D00ECE458 /* upgrade_status1.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31EA1969114D00ECE458 /* upgrade_status1.png */; };
+		BEBB31F81969114D00ECE458 /* upgrade_status2.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31EB1969114D00ECE458 /* upgrade_status2.png */; };
+		BEBB31F91969114D00ECE458 /* upgrade_status3.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31EC1969114D00ECE458 /* upgrade_status3.png */; };
+		BEBB31FA1969114D00ECE458 /* upgrade_status4.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31ED1969114D00ECE458 /* upgrade_status4.png */; };
+		BEBB31FB1969114D00ECE458 /* upgrade_status5.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31EE1969114D00ECE458 /* upgrade_status5.png */; };
+		BEBB31FC1969114D00ECE458 /* upgrade.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31EF1969114D00ECE458 /* upgrade.png */; };
+		BEBB31FF1969151100ECE458 /* UpgradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBB31FE1969151100ECE458 /* UpgradeView.m */; };
+		BEBB32011969157700ECE458 /* UpgradeItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBB32001969157700ECE458 /* UpgradeItemView.xib */; };
+		BEBB320419691A8700ECE458 /* UpgradeItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBB320319691A8700ECE458 /* UpgradeItemView.m */; };
+		BEBB320619691CAC00ECE458 /* upgrade_const.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEBB320519691CAC00ECE458 /* upgrade_const.plist */; };
 		BEFB261F19658DC900993C74 /* CashStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB261D19658DC900993C74 /* CashStoreManager.m */; };
 		BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB26221965AB9F00993C74 /* CashStorePaymentObserver.m */; };
 /* End PBXBuildFile section */
@@ -185,6 +204,28 @@
 		BE89CE2119630DDE00994D13 /* CashStoreItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemView.m; path = Source/CashStoreItemView.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
+		BEBB31DE19690FF200ECE458 /* UpgradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeViewController.h; path = Source/UpgradeViewController.h; sourceTree = "<group>"; };
+		BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeViewController.m; path = Source/UpgradeViewController.m; sourceTree = "<group>"; };
+		BEBB31E019690FF200ECE458 /* UpgradeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeView.xib; path = Source/UpgradeView.xib; sourceTree = "<group>"; };
+		BEBB31E31969114D00ECE458 /* upgrade_level0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level0.png; path = Source/upgrade_level0.png; sourceTree = "<group>"; };
+		BEBB31E41969114D00ECE458 /* upgrade_level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level1.png; path = Source/upgrade_level1.png; sourceTree = "<group>"; };
+		BEBB31E51969114D00ECE458 /* upgrade_level2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level2.png; path = Source/upgrade_level2.png; sourceTree = "<group>"; };
+		BEBB31E61969114D00ECE458 /* upgrade_level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level3.png; path = Source/upgrade_level3.png; sourceTree = "<group>"; };
+		BEBB31E71969114D00ECE458 /* upgrade_level4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level4.png; path = Source/upgrade_level4.png; sourceTree = "<group>"; };
+		BEBB31E81969114D00ECE458 /* upgrade_level5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level5.png; path = Source/upgrade_level5.png; sourceTree = "<group>"; };
+		BEBB31E91969114D00ECE458 /* upgrade_status0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status0.png; path = Source/upgrade_status0.png; sourceTree = "<group>"; };
+		BEBB31EA1969114D00ECE458 /* upgrade_status1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status1.png; path = Source/upgrade_status1.png; sourceTree = "<group>"; };
+		BEBB31EB1969114D00ECE458 /* upgrade_status2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status2.png; path = Source/upgrade_status2.png; sourceTree = "<group>"; };
+		BEBB31EC1969114D00ECE458 /* upgrade_status3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status3.png; path = Source/upgrade_status3.png; sourceTree = "<group>"; };
+		BEBB31ED1969114D00ECE458 /* upgrade_status4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status4.png; path = Source/upgrade_status4.png; sourceTree = "<group>"; };
+		BEBB31EE1969114D00ECE458 /* upgrade_status5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_status5.png; path = Source/upgrade_status5.png; sourceTree = "<group>"; };
+		BEBB31EF1969114D00ECE458 /* upgrade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade.png; path = Source/upgrade.png; sourceTree = "<group>"; };
+		BEBB31FD1969151100ECE458 /* UpgradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeView.h; path = Source/UpgradeView.h; sourceTree = "<group>"; };
+		BEBB31FE1969151100ECE458 /* UpgradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeView.m; path = Source/UpgradeView.m; sourceTree = "<group>"; };
+		BEBB32001969157700ECE458 /* UpgradeItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeItemView.xib; path = Source/UpgradeItemView.xib; sourceTree = "<group>"; };
+		BEBB320219691A8700ECE458 /* UpgradeItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeItemView.h; path = Source/UpgradeItemView.h; sourceTree = "<group>"; };
+		BEBB320319691A8700ECE458 /* UpgradeItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeItemView.m; path = Source/UpgradeItemView.m; sourceTree = "<group>"; };
+		BEBB320519691CAC00ECE458 /* upgrade_const.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = upgrade_const.plist; path = Source/upgrade_const.plist; sourceTree = "<group>"; };
 		BEFB261C19658DC900993C74 /* CashStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStoreManager.h; path = Source/CashStoreManager.h; sourceTree = "<group>"; };
 		BEFB261D19658DC900993C74 /* CashStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreManager.m; path = Source/CashStoreManager.m; sourceTree = "<group>"; };
 		BEFB26211965AB9F00993C74 /* CashStorePaymentObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CashStorePaymentObserver.h; path = Source/CashStorePaymentObserver.h; sourceTree = "<group>"; };
@@ -229,6 +270,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BEBB31DC19690FBC00ECE458 /* Upgrade */,
 				BE5868BC1964496E0007AF48 /* Network */,
 				BE89CDFC1962F06A00994D13 /* CashStore */,
 				BE89CDF51962EE2200994D13 /* UmengGameAnalytics */,
@@ -442,6 +484,35 @@
 			name = CashStore;
 			sourceTree = "<group>";
 		};
+		BEBB31DC19690FBC00ECE458 /* Upgrade */ = {
+			isa = PBXGroup;
+			children = (
+				BEBB31E31969114D00ECE458 /* upgrade_level0.png */,
+				BEBB31E41969114D00ECE458 /* upgrade_level1.png */,
+				BEBB31E51969114D00ECE458 /* upgrade_level2.png */,
+				BEBB31E61969114D00ECE458 /* upgrade_level3.png */,
+				BEBB31E71969114D00ECE458 /* upgrade_level4.png */,
+				BEBB31E81969114D00ECE458 /* upgrade_level5.png */,
+				BEBB31E91969114D00ECE458 /* upgrade_status0.png */,
+				BEBB31EA1969114D00ECE458 /* upgrade_status1.png */,
+				BEBB31EB1969114D00ECE458 /* upgrade_status2.png */,
+				BEBB31EC1969114D00ECE458 /* upgrade_status3.png */,
+				BEBB31ED1969114D00ECE458 /* upgrade_status4.png */,
+				BEBB31EE1969114D00ECE458 /* upgrade_status5.png */,
+				BEBB31EF1969114D00ECE458 /* upgrade.png */,
+				BEBB31DE19690FF200ECE458 /* UpgradeViewController.h */,
+				BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */,
+				BEBB31E019690FF200ECE458 /* UpgradeView.xib */,
+				BEBB31FD1969151100ECE458 /* UpgradeView.h */,
+				BEBB31FE1969151100ECE458 /* UpgradeView.m */,
+				BEBB32001969157700ECE458 /* UpgradeItemView.xib */,
+				BEBB320219691A8700ECE458 /* UpgradeItemView.h */,
+				BEBB320319691A8700ECE458 /* UpgradeItemView.m */,
+				BEBB320519691CAC00ECE458 /* upgrade_const.plist */,
+			);
+			name = Upgrade;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -524,13 +595,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEBB31F71969114D00ECE458 /* upgrade_status1.png in Resources */,
+				BEBB31F41969114D00ECE458 /* upgrade_level4.png in Resources */,
 				BE058AC71961B18E005271F1 /* UMSShareListController.xib in Resources */,
 				BE058AC01961B18E005271F1 /* UMSCommentDetailController.xib in Resources */,
+				BEBB31F61969114D00ECE458 /* upgrade_status0.png in Resources */,
 				BE058AC61961B18E005271F1 /* UMSnsAccountViewController.xib in Resources */,
+				BEBB32011969157700ECE458 /* UpgradeItemView.xib in Resources */,
 				BE058AC51961B18E005271F1 /* UMSLoginViewController.xib in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				BE63466819683636007E375F /* success.png in Resources */,
+				BEBB31FA1969114D00ECE458 /* upgrade_status4.png in Resources */,
+				BEBB31F91969114D00ECE458 /* upgrade_status3.png in Resources */,
 				BE058AC11961B18E005271F1 /* UMSCommentInputController.xib in Resources */,
+				BEBB31E219690FF200ECE458 /* UpgradeView.xib in Resources */,
+				BEBB31F81969114D00ECE458 /* upgrade_status2.png in Resources */,
 				BE89CE021962F17C00994D13 /* btnClose.png in Resources */,
 				BE12CB4A19586256006F775D /* Images.xcassets in Resources */,
 				BE89CE1E19630B9E00994D13 /* store_img_icon_1.png in Resources */,
@@ -539,14 +618,21 @@
 				BE89CE001962F0A800994D13 /* store.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
+				BEBB31FC1969114D00ECE458 /* upgrade.png in Resources */,
 				BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */,
 				BE058AC21961B18E005271F1 /* UMSCommentInputControlleriPad.xib in Resources */,
 				BE89CE1D19630B9E00994D13 /* store_btn_buy.png in Resources */,
+				BEBB320619691CAC00ECE458 /* upgrade_const.plist in Resources */,
 				BE058AC81961B18E005271F1 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
+				BEBB31F11969114D00ECE458 /* upgrade_level1.png in Resources */,
 				BE058ABE1961B18E005271F1 /* UMSocialLocalizable.strings in Resources */,
+				BEBB31F01969114D00ECE458 /* upgrade_level0.png in Resources */,
+				BEBB31F21969114D00ECE458 /* upgrade_level2.png in Resources */,
+				BEBB31F31969114D00ECE458 /* upgrade_level3.png in Resources */,
+				BEBB31FB1969114D00ECE458 /* upgrade_status5.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				BE058AC41961B18E005271F1 /* UMShareEditViewControlleriPad.xib in Resources */,
 				BE058AC31961B18E005271F1 /* UMShareEditViewController.xib in Resources */,
@@ -555,6 +641,7 @@
 				BE89CE1819630AF500994D13 /* CashStoreItemView.xib in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				BEBB31F51969114D00ECE458 /* upgrade_level5.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 				BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */,
@@ -575,11 +662,14 @@
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
 				BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */,
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
+				BEBB320419691A8700ECE458 /* UpgradeItemView.m in Sources */,
 				BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */,
 				BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */,
+				BEBB31FF1969151100ECE458 /* UpgradeView.m in Sources */,
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
+				BEBB31E119690FF200ECE458 /* UpgradeViewController.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */,
 			);

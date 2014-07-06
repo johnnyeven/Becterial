@@ -80,7 +80,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                     itemId = identifier;
                 }
                 int cash = [[itemId substringFromIndex:6] intValue];
-                [MobClickGameAnalytics pay:cash source:1 item:itemId amount:1 price:0];
+                [MobClickGameAnalytics pay:cash source:1 item:itemId amount:1 price:10];
                 break;
             }
         }

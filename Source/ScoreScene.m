@@ -12,6 +12,7 @@
 #import "UMSocial.h"
 
 #import "CashStoreViewController.h"
+#import "UpgradeViewController.h"
 
 @implementation ScoreScene
 {
@@ -90,7 +91,8 @@
 
 -(void)upgrade
 {
-
+    UpgradeViewController *upgradeView = [[UpgradeViewController alloc] initWithNibName:@"UpgradeView" bundle:nil];
+    [[[CCDirector sharedDirector] view] addSubview:upgradeView.view];
 }
 
 -(void)continueGame

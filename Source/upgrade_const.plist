@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>upgrade1</key>
+	<dict>
+		<key>name</key>
+		<string>生物酶基因改造</string>
+		<key>levels</key>
+		<array>
+			<dict>
+				<key>level</key>
+				<integer>1</integer>
+				<key>comment</key>
+				<string>生物酶产量+5%</string>
+				<key>cost</key>
+				<string>300</string>
+				<key>rate</key>
+				<integer>100</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>2</integer>
+				<key>comment</key>
+				<string>生物酶产量+10%</string>
+				<key>cost</key>
+				<string>1000</string>
+				<key>rate</key>
+				<integer>90</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>3</integer>
+				<key>comment</key>
+				<string>生物酶产量+15%</string>
+				<key>cost</key>
+				<string>3000</string>
+				<key>rate</key>
+				<integer>80</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>4</integer>
+				<key>comment</key>
+				<string>生物酶产量+20%</string>
+				<key>cost</key>
+				<string>6000</string>
+				<key>rate</key>
+				<integer>70</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>5</integer>
+				<key>comment</key>
+				<string>生物酶产量+30%</string>
+				<key>cost</key>
+				<string>10000</string>
+				<key>rate</key>
+				<integer>60</integer>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

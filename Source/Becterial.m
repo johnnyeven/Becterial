@@ -16,6 +16,18 @@
     MainScene *mainScene;
 }
 
+static CGFloat upgradeScoreInc = 0.f;
+
++(CGFloat)getUpgradeScoreInc
+{
+    return upgradeScoreInc;
+}
+
++(void)setUpgradeScoreInc:(CGFloat)value
+{
+    upgradeScoreInc = value;
+}
+
 -(id)init
 {
     self = [super init];

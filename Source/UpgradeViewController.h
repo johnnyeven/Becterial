@@ -10,4 +10,8 @@
 
 @interface UpgradeViewController : UIViewController
 
+-(void)updateItemViewByUpgradeId:(NSString *)upgradeId level:(int)level;
+
+-(IBAction)btnUpgradeTouch:(id)sender;
+
 @end

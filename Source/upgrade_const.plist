@@ -13,6 +13,11 @@
 				<integer>1</integer>
 				<key>comment</key>
 				<string>生物酶产量+5%</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeScoreInc</key>
+					<real>0.05</real>
+				</dict>
 				<key>cost</key>
 				<string>300</string>
 				<key>rate</key>
@@ -23,6 +28,11 @@
 				<integer>2</integer>
 				<key>comment</key>
 				<string>生物酶产量+10%</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeScoreInc</key>
+					<real>0.1</real>
+				</dict>
 				<key>cost</key>
 				<string>1000</string>
 				<key>rate</key>
@@ -33,6 +43,11 @@
 				<integer>3</integer>
 				<key>comment</key>
 				<string>生物酶产量+15%</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeScoreInc</key>
+					<real>0.15</real>
+				</dict>
 				<key>cost</key>
 				<string>3000</string>
 				<key>rate</key>
@@ -42,7 +57,12 @@
 				<key>level</key>
 				<integer>4</integer>
 				<key>comment</key>
-				<string>生物酶产量+20%</string>
+				<string>生物酶产量+30%</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeScoreInc</key>
+					<real>0.3</real>
+				</dict>
 				<key>cost</key>
 				<string>6000</string>
 				<key>rate</key>
@@ -52,7 +72,12 @@
 				<key>level</key>
 				<integer>5</integer>
 				<key>comment</key>
-				<string>生物酶产量+30%</string>
+				<string>生物酶产量+50%</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeScoreInc</key>
+					<real>0.5</real>
+				</dict>
 				<key>cost</key>
 				<string>10000</string>
 				<key>rate</key>

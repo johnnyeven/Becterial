@@ -30,6 +30,9 @@ static DataStorageManager *_sharedDataStorageManager;
                           [NSNumber numberWithInt:_killerCount], @"killerCount", nil
                           ];
     [data writeToFile:file atomically:NO];
+
+    file = [path stringByAppendingPathComponent:@"saveupgradedata"];
+    [self.upgradeData writeToFile:file atomically:NO];
 }
 
 -(BOOL)loadData

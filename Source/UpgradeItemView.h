@@ -10,6 +10,7 @@
 
 @interface UpgradeItemView : UIView
 
+@property (nonatomic, retain) NSString *upgradeId;
 @property (nonatomic, retain) IBOutlet UILabel *lblName;
 @property (nonatomic, retain) IBOutlet UILabel *lblComment;
 @property (nonatomic, retain) IBOutlet UILabel *lblNextComment;

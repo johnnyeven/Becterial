@@ -16,6 +16,8 @@
 @property (nonatomic) int positionX;
 @property (nonatomic) int positionY;
 
++(CGFloat)getUpgradeScoreInc;
++(void)setUpgradeScoreInc:(CGFloat)value;
 -(Becterial *)clone;
 
 @end

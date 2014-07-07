@@ -485,7 +485,7 @@
     enemyCount = eCount;
     bacterialBiomass = bBiomass;
     enemyBiomass = eBiomass;
-    scoreOffset = bScore;
+    scoreOffset = bScore * (1 + [Becterial getUpgradeScoreInc]);
     
     long count = [list count];
     if(count == 0)

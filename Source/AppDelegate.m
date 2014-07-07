@@ -29,6 +29,7 @@
 #import "UMSocialWechatHandler.h"
 
 #import "AppDelegate.h"
+#import "Becterial.h"
 #import "CCBuilderReader.h"
 #import "CashStorePaymentObserver.h"
 #import "PZWebManager.h"
@@ -93,6 +94,25 @@
 - (CCScene*) startScene
 {
     [[DataStorageManager sharedDataStorageManager] loadData];
+    NSDictionary *upgradeConst = [DataStorageManager sharedDataStorageManager].upgradeConst;
+    NSMutableDictionary *upgradeData = [DataStorageManager sharedDataStorageManager].upgradeData;
+    NSArray *keys = [upgradeData allKeys];
+    for(NSString *key in keys)
+    {
+        int index = [[upgradeData objectForKey:key] intValue];
+        NSArray *levels = [upgradeConst objectForKey:key];
+        NSDictionary *level = [levels objectAtIndex:index];
+        NSDictionary *additional = [level objectForKey:@"additional"];
+        NSArray *adds = [additional allKeys];
+        for(NSString *add in adds)
+        {
+            if([add isEqualToString:@"upgradeScoreInc"])
+            {
+                [Becterial setUpgradeScoreInc:[[additional objectForKey:add] floatValue]];
+            }
+        }
+    }
+
     [[CCDirector sharedDirector] setDisplayStats:YES];
     return [CCBReader loadAsScene:@"MainScene"];
 }

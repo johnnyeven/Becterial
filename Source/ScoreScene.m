@@ -10,6 +10,7 @@
 #import "ScoreScene.h"
 #import "PZLabelScore.h"
 #import "UMSocial.h"
+#import "UMSocialScreenShoter.h"
 
 #import "CashStoreViewController.h"
 #import "UpgradeViewController.h"
@@ -19,9 +20,11 @@
     BOOL _over;
     int _score;
     int _time;
+    CGFloat _rate;
     int _exp;
     PZLabelScore *_lblScore;
     PZLabelScore *_lblTime;
+    PZLabelScore *_lblRate;
     PZLabelScore *_lblExp;
     CCButton *btnContinue;
 }
@@ -37,6 +40,11 @@
     _lblTime.anchorPoint = ccp(0.f, 0.f);
     _lblTime.position = ccp(24.f, 340.f);
     [self addChild:_lblTime];
+    
+    _lblRate = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblRate.anchorPoint = ccp(0.f, 0.f);
+    _lblRate.position = ccp(24.f, 270.f);
+    [self addChild:_lblRate];
 
     _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblExp.anchorPoint = ccp(0.f, 0.f);
@@ -58,6 +66,18 @@
     [_lblScore setScore:score];
 }
 
+-(void)setRate:(CGFloat)rate
+{
+    _rate = rate;
+    [_lblRate setScore:rate];
+}
+
+-(void)setExp:(int)exp
+{
+    _exp = exp;
+    [_lblExp setScore:exp];
+}
+
 -(void)setTime:(int)time
 {
     _time = time;
@@ -75,10 +95,11 @@
 
 -(void)share
 {
+    UIImage *screenshot = [[UMSocialScreenShoterCocos2d screenShoter] getScreenShot];
     [UMSocialSnsService presentSnsIconSheetView:(UIViewController *)[CCDirector sharedDirector].view.nextResponder
                                          appKey:@"53b031e856240b128d1615f7"
                                       shareText:@"从IOS发来的测试"
-                                     shareImage:nil
+                                     shareImage:screenshot
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,nil]
                                        delegate:nil];
 }

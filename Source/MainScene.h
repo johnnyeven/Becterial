@@ -18,7 +18,6 @@
 
 //-(void)deliverProduct:(NSNotification *)notification;
 -(void)update10PerSecond:(CCTime)delta;
--(void)updatePerSecond:(CCTime)delta;
 -(void)prepareStage;
 -(BOOL)generateBacterial:(int)type;
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y;

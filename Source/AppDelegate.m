@@ -71,9 +71,27 @@
     [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
     
 //    [MobClick setLogEnabled:YES];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
-    [[PZWebManager sharedPZWebManager] asyncGetRequest:@"https://b.profzone.net/configuration/product_id" withData:nil];
+    
+    [[DataStorageManager sharedDataStorageManager] loadConfig];
+    if(![DataStorageManager sharedDataStorageManager].config)
+    {
+        [DataStorageManager sharedDataStorageManager].config = [NSMutableDictionary new];
+        [[DataStorageManager sharedDataStorageManager] saveConfig];
+    }
+    else
+    {
+        NSDictionary *products = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
+        if (!products)
+        {
+            //没有就去苹果请求
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
+            [[PZWebManager sharedPZWebManager] asyncGetRequest:@"https://b.profzone.net/configuration/product_id" withData:nil];
+        }
+        else
+        {
+            //有就直接使用
+        }
+    }
     
     return YES;
 }
@@ -100,15 +118,19 @@
     for(NSString *key in keys)
     {
         int index = [[upgradeData objectForKey:key] intValue];
-        NSArray *levels = [upgradeConst objectForKey:key];
-        NSDictionary *level = [levels objectAtIndex:index];
-        NSDictionary *additional = [level objectForKey:@"additional"];
-        NSArray *adds = [additional allKeys];
-        for(NSString *add in adds)
+        NSDictionary *item = [upgradeConst objectForKey:key];
+        if(item)
         {
-            if([add isEqualToString:@"upgradeScoreInc"])
+            NSArray *levels = [item objectForKey:@"levels"];
+            NSDictionary *level = [levels objectAtIndex:index-1];
+            NSDictionary *additional = [level objectForKey:@"additional"];
+            NSArray *adds = [additional allKeys];
+            for(NSString *add in adds)
             {
-                [Becterial setUpgradeScoreInc:[[additional objectForKey:add] floatValue]];
+                if([add isEqualToString:@"upgradeScoreInc"])
+                {
+                    [Becterial setUpgradeScoreInc:[[additional objectForKey:add] floatValue]];
+                }
             }
         }
     }

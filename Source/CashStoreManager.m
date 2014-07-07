@@ -8,6 +8,7 @@
 
 #import <StoreKit/StoreKit.h>
 #import "CashStoreManager.h"
+#import "DataStorageManager.h"
 
 @implementation CashStoreManager
 
@@ -51,10 +52,21 @@ static CashStoreManager *_instance = nil;
 
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-	// self.products = response.products;
- 
 	_products = response.products;
     _invalidProducts = response.invalidProductIdentifiers;
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (SKProduct *product in _products)
+    {
+        NSMutableDictionary *p = [NSMutableDictionary new];
+        [p setObject:product.productIdentifier forKey:@"productIdentifier"];
+        [p setObject:product.localizedTitle forKey:@"localizedTitle"];
+        [p setObject:product.localizedDescription forKey:@"localizedDescription"];
+        [p setObject:product.price.stringValue forKey:@"price"];
+        [array addObject:p];
+    }
+    [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"products"];
+    [[DataStorageManager sharedDataStorageManager] saveConfig];
 }
 
 @end

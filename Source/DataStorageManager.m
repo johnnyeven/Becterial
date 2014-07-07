@@ -67,4 +67,18 @@ static DataStorageManager *_sharedDataStorageManager;
     return YES;
 }
 
+-(void)saveConfig
+{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"configdata"];
+    [self.config writeToFile:file atomically:NO];
+}
+
+-(void)loadConfig
+{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *file = [path stringByAppendingPathComponent:@"configdata"];
+    self.config = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
+}
+
 @end

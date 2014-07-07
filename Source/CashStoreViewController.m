@@ -11,6 +11,7 @@
 #import "CashStoreItemView.h"
 #import "CashStoreManager.h"
 #import "CashStorePaymentObserver.h"
+#import "DataStorageManager.h"
 #import <StoreKit/StoreKit.h>
 
 #define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]
@@ -40,11 +41,11 @@
     
     cashStoreView = (CashStoreView *)self.view;
     cashStoreView.loadingView.hidden = YES;
+    CGFloat offsetY = 0.f;
+    CGFloat contentSizeWidth = 0.f;
+    CGFloat contentSizeHeight = 0.f;
     if(sharedCashStoreManager.products)
     {
-        CGFloat offsetY = 0.f;
-        CGFloat contentSizeWidth = 0.f;
-        CGFloat contentSizeHeight = 0.f;
         for (SKProduct *product in sharedCashStoreManager.products)
         {
             NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
@@ -60,9 +61,34 @@
             contentSizeHeight = contentSizeHeight + item.frame.size.height;
             contentSizeWidth = item.frame.size.width;
         }
-        
-        cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
     }
+    else
+    {
+        NSDictionary *config = [DataStorageManager sharedDataStorageManager].config;
+        NSArray *products = [config objectForKey:@"products"];
+        if (!products)
+        {
+            //取默认plist
+            NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
+            products = [[NSArray alloc] initWithContentsOfFile:file];
+        }
+        for (NSDictionary *product in products)
+        {
+            NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
+            CashStoreItemView *item = [xibArray objectAtIndex:0];
+            item.identifier = [product objectForKey:@"productIdentifier"];
+            [item.itemName setText:[product objectForKey:@"localizedTitle"]];
+            [item.itemComment setText:[product objectForKey:@"localizedDescription"]];
+            [item.itemCash setText:[product objectForKey:@"price"]];
+            [cashStoreView.scroller addSubview:item];
+            item.backgroundColor = nil;
+            item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);
+            offsetY = offsetY + item.frame.size.height;
+            contentSizeHeight = contentSizeHeight + item.frame.size.height;
+            contentSizeWidth = item.frame.size.width;
+        }
+    }
+    cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
 }
 
 - (void)didReceiveMemoryWarning

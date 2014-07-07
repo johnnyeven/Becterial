@@ -12,11 +12,11 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>comment</key>
-				<string>生物酶产量+5%</string>
+				<string>生物酶产量+10%</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeScoreInc</key>
-					<real>0.05</real>
+					<real>0.1</real>
 				</dict>
 				<key>cost</key>
 				<string>300</string>
@@ -27,11 +27,11 @@
 				<key>level</key>
 				<integer>2</integer>
 				<key>comment</key>
-				<string>生物酶产量+10%</string>
+				<string>生物酶产量+20%</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeScoreInc</key>
-					<real>0.1</real>
+					<real>0.2</real>
 				</dict>
 				<key>cost</key>
 				<string>1000</string>
@@ -42,11 +42,11 @@
 				<key>level</key>
 				<integer>3</integer>
 				<key>comment</key>
-				<string>生物酶产量+15%</string>
+				<string>生物酶产量+40%</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeScoreInc</key>
-					<real>0.15</real>
+					<real>0.4</real>
 				</dict>
 				<key>cost</key>
 				<string>3000</string>
@@ -57,11 +57,11 @@
 				<key>level</key>
 				<integer>4</integer>
 				<key>comment</key>
-				<string>生物酶产量+30%</string>
+				<string>生物酶产量+70%</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeScoreInc</key>
-					<real>0.3</real>
+					<real>0.7</real>
 				</dict>
 				<key>cost</key>
 				<string>6000</string>

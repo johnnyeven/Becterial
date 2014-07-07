@@ -7,6 +7,7 @@
 //
 
 #import "UpgradeItemView.h"
+#import "DataStorageManager.h"
 
 #define dataStorageManager [DataStorageManager sharedDataStorageManager]
 
@@ -21,11 +22,40 @@
     return self;
 }
 
+-(void)updateItemViewByUpgradeId:(NSString *)upgradeId level:(int)level
+{
+    if(dataStorageManager.upgradeConst)
+    {
+        NSDictionary *item = [dataStorageManager.upgradeConst objectForKey:upgradeId];
+        NSArray *levels = [item objectForKey:@"levels"];
+        level = fmin(5, fmax(0, level));
+        int nextLevel = fmin(5, fmax(0, level + 1));
+        
+        NSDictionary *current = [levels objectAtIndex:level - 1];
+        NSDictionary *next = [levels objectAtIndex:nextLevel - 1];
+        
+        NSString *comment = nextLevel == 0 ? @"无" : [current objectForKey:@"comment"];
+        NSString *nextComment = [next objectForKey:@"comment"];
+        int cost = [[next objectForKey:@"cost"] intValue];
+        int rate = [[next objectForKey:@"rate"] intValue];
+        
+        [self.lblComment setText:[NSString stringWithFormat:@"当前等级:%@", comment]];
+        [self.lblNextComment setText:[NSString stringWithFormat:@"下一等级:%@", nextComment]];
+        [self.lblNextCost setText:[NSString stringWithFormat:@"Exp消耗:%i", cost]];
+        [self.lblNextRate setText:[NSString stringWithFormat:@"成功率:%i%%", rate]];
+        NSString *imgPath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"upgrade_status%i", level] ofType:@"png"];
+        [self.imgStatus setImage:[UIImage imageWithContentsOfFile:imgPath]];
+        imgPath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"upgrade_level%i", level] ofType:@"png"];
+        [self.imgLevel setImage:[UIImage imageWithContentsOfFile:imgPath]];
+    }
+}
+
 -(IBAction)btnUpgradeTouch:(id)sender
 {
 	if(self.upgradeId)
 	{
 		NSDictionary *constItem = [dataStorageManager.upgradeConst objectForKey:self.upgradeId];
+        NSArray *levels = [constItem objectForKey:@"levels"];
         NSNumber *number = [dataStorageManager.upgradeData objectForKey:self.upgradeId];
 		int index = 0;
         if(number)
@@ -54,6 +84,9 @@
         		NSNumber *newNumber = [NSNumber numberWithInt:index];
         		[dataStorageManager.upgradeData setObject:newNumber forKey:self.upgradeId];
         		[dataStorageManager saveData];
+                [dataStorageManager loadData];
+                
+                [self updateItemViewByUpgradeId:self.upgradeId level:index];
         	}
         }
 	}

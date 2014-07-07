@@ -14,9 +14,12 @@
 @property (nonatomic) int exp;
 @property (nonatomic, retain) NSDictionary *upgradeConst;
 @property (nonatomic, retain) NSMutableDictionary *upgradeData;
+@property (nonatomic, retain) NSMutableDictionary *config;
 
 +(DataStorageManager *)sharedDataStorageManager;
 -(void)saveData;
 -(BOOL)loadData;
+-(void)saveConfig;
+-(void)loadConfig;
 
 @end

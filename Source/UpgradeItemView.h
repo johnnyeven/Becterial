@@ -21,5 +21,6 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imgLevel;
 
 -(IBAction)btnUpgradeTouch:(id)sender;
+-(void)updateItemViewByUpgradeId:(NSString *)upgradeId level:(int)level;
 
 @end

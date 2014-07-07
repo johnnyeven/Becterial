@@ -28,7 +28,7 @@
     NSMutableArray *_becterialContainer;
     NSMutableArray *_becterialList;
     int runningAction;
-    int runningTime;
+    CGFloat runningTime;
 
     int bacterialCount;
     int enemyCount;
@@ -92,13 +92,10 @@
 
     if(_biomass > 0)
     {
-        self.score = _score + scoreOffset;
+        self.score = _score + scoreOffset * delta;
     }
-}
-
--(void)updatePerSecond:(CCTime)delta
-{
-    runningTime++;
+    
+    runningTime = runningTime + delta;
 }
 
 -(void)prepareStage
@@ -143,7 +140,6 @@
 
     [self prepareStage];
     [self schedule:@selector(update10PerSecond:) interval:.1f];
-    [self schedule:@selector(updatePerSecond:) interval:1.f];
 }
 
 -(void)onExit
@@ -378,6 +374,10 @@
     ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
     [scoreScene setScore:_score];
     [scoreScene setTime:runningTime];
+    [scoreScene setExp:[DataStorageManager sharedDataStorageManager].exp];
+    CGFloat rate = _score / runningTime;
+    NSLog(@"%f", rate);
+    [scoreScene setRate:rate];
     CCScene *scene = [CCScene new];
     [scene addChild:scoreScene];
     [[CCDirector sharedDirector] replaceScene:scene];
@@ -511,7 +511,7 @@
         [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
 [NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
         [NSNumber numberWithFloat:scoreOffset], @"scoreOffset",
-        [NSNumber numberWithInt:runningTime], @"runningTime",
+        [NSNumber numberWithFloat:runningTime], @"runningTime",
                           
         becterials, @"bacterials", nil
     ];
@@ -541,7 +541,7 @@
     enemyBiomass = [[data objectForKey:@"enemyBiomass"] floatValue];
     scoreOffset = [[data objectForKey:@"scoreOffset"] floatValue];
     _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
-    runningTime = [[data objectForKey:@"runningTime"] intValue];
+    runningTime = [[data objectForKey:@"runningTime"] floatValue];
     if(_becterialList == nil)
     {
         _becterialList = [[NSMutableArray alloc] init];

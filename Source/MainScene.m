@@ -470,7 +470,7 @@
                 {
                     bCount++;
                     bBiomass = bBiomass + BACTERIAL_BIOMASS * b.level;
-                    bScore = bScore + BACTERIAL_SCORE * b.level;
+                    bScore = bScore + BACTERIAL_SCORE * (b.level * b.level);
                 }
                 else if(b.type == 1)
                 {

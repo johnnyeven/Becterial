@@ -11,7 +11,10 @@
 @interface UpgradeView : UIView
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scroller;
+@property (nonatomic, retain) IBOutlet UILabel *lblMessage;
+@property (nonatomic, retain) IBOutlet UIView *messageView;
 
 -(IBAction)closeView:(id)sender;
+-(IBAction)closeMessage:(id)sender;
 
 @end

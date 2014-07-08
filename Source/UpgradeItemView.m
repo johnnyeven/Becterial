@@ -7,7 +7,9 @@
 //
 
 #import "UpgradeItemView.h"
+#import "UpgradeView.h"
 #import "DataStorageManager.h"
+#import "MobClickGameAnalytics.h"
 
 #define dataStorageManager [DataStorageManager sharedDataStorageManager]
 
@@ -52,6 +54,7 @@
 
 -(IBAction)btnUpgradeTouch:(id)sender
 {
+    UpgradeView *parentView = (UpgradeView *)self.superview.superview;
 	if(self.upgradeId)
 	{
 		NSDictionary *constItem = [dataStorageManager.upgradeConst objectForKey:self.upgradeId];
@@ -87,9 +90,25 @@
                 [dataStorageManager loadData];
                 
                 [self updateItemViewByUpgradeId:self.upgradeId level:index];
+                [MobClickGameAnalytics use:@"exp" amount:cost price:cost / 167.f];
         	}
+            else
+            {
+                [parentView.lblMessage setText:@"很不幸，由于意外改造失败了"];
+                parentView.messageView.hidden = NO;
+            }
+        }
+        else
+        {
+            [parentView.lblMessage setText:@"培育经验不足"];
+            parentView.messageView.hidden = NO;
         }
 	}
+    else
+    {
+        [parentView.lblMessage setText:@"改造项目获取失败"];
+        parentView.messageView.hidden = NO;
+    }
 }
 
 /*

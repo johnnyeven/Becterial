@@ -109,7 +109,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                 break;
             }
             case SKPaymentTransactionStateFailed:
-                NSLog(@"failed");
+                NSLog(@"%@", transaction.error.localizedDescription);
                 break;
             case SKPaymentTransactionStateRestored:
                 NSLog(@"restored");

@@ -72,11 +72,11 @@
 				<key>level</key>
 				<integer>5</integer>
 				<key>comment</key>
-				<string>生物酶产量+50%</string>
+				<string>生物酶产量+120%</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeScoreInc</key>
-					<real>0.5</real>
+					<real>1.2</real>
 				</dict>
 				<key>cost</key>
 				<string>10000</string>

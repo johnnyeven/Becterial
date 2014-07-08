@@ -75,7 +75,7 @@ static PZWebManager *_sharedPZWebManager = nil;
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"connectionError1009" object:error];
 }
 
 -(BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace

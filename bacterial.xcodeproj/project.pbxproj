@@ -52,6 +52,7 @@
 		BE058AD01961B955005271F1 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE058ACB1961B955005271F1 /* libWeChatSDK.a */; };
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
+		BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE3610B1196ADF6E0085BAF2 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */; };
 		BE3610B8196AE0400085BAF2 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */; };
@@ -181,6 +182,7 @@
 		BE12CB45195861F2006F775D /* Becterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Becterial.h; path = Source/Becterial.h; sourceTree = "<group>"; };
 		BE12CB46195861F2006F775D /* Becterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Becterial.m; path = Source/Becterial.m; sourceTree = "<group>"; };
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_message.png; path = Source/upgrade_message.png; sourceTree = "<group>"; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
 		BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -511,6 +513,7 @@
 		BEBB31DC19690FBC00ECE458 /* Upgrade */ = {
 			isa = PBXGroup;
 			children = (
+				BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */,
 				BEBB31E31969114D00ECE458 /* upgrade_level0.png */,
 				BEBB31E41969114D00ECE458 /* upgrade_level1.png */,
 				BEBB31E51969114D00ECE458 /* upgrade_level2.png */,
@@ -644,6 +647,7 @@
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				BEBB31FC1969114D00ECE458 /* upgrade.png in Resources */,
 				BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */,
+				BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */,
 				BE058AC21961B18E005271F1 /* UMSCommentInputControlleriPad.xib in Resources */,
 				BE89CE1D19630B9E00994D13 /* store_btn_buy.png in Resources */,
 				BEBB320619691CAC00ECE458 /* upgrade_const.plist in Resources */,

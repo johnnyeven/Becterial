@@ -23,6 +23,7 @@
 {
     CCLabelTTF *_lblKillerCount;
     PZLabelScore *_lblExp;
+    PZLabelScore *_lblStepCount;
     PZLabelScore *_lblScore;
     PZLabelScore *_lblBiomass;
     CCNode *_container;
@@ -43,6 +44,10 @@
     _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblExp.position = ccp(67.f, 455.5f);
     [self addChild:_lblExp];
+    
+    _lblStepCount = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
+    _lblStepCount.position = ccp(250.f, 455.5f);
+    [self addChild:_lblStepCount];
 
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblScore.position = ccp(10.f, 390.f);
@@ -390,7 +395,7 @@
     if(_stepCount != stepCount)
     {
         _stepCount = stepCount;
-        // _lblScore.score = score;
+        _lblStepCount.score = stepCount;
     }
 }
 

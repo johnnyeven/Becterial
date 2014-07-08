@@ -73,9 +73,40 @@
 //    [MobClick setLogEnabled:YES];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoadVersionConfig:) name:@"requestVersionConfig" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnectFailed:) name:@"connectionError1009" object:nil];
     [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://b.profzone.net/configuration/version_config" withData:nil];
     
     return YES;
+}
+
+-(void)didConnectFailed:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"connectionError1009" object:nil];
+    //如果未连接互联网 就读取存档配置
+    [[DataStorageManager sharedDataStorageManager] loadConfig];
+    if(![DataStorageManager sharedDataStorageManager].config)
+    {
+        [DataStorageManager sharedDataStorageManager].config = [NSMutableDictionary new];
+        
+        //如果没有存档就读取内置配置
+        //IAP配置
+        NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
+        NSArray *result = [[NSArray alloc] initWithContentsOfFile:file];
+        NSDictionary *productsResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        result, @"result",
+                                        @"", @"version", nil];
+        [[DataStorageManager sharedDataStorageManager].config setObject:productsResult forKey:@"products"];
+        
+        //Upgrade配置
+        NSString *upgradeConstFilePath = [[NSBundle mainBundle] pathForResource:@"upgrade_const" ofType:@"plist"];
+        NSDictionary *result1 = [[NSDictionary alloc] initWithContentsOfFile:upgradeConstFilePath];
+        NSDictionary *upgradeResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        result1, @"result",
+                                        @"", @"version", nil];
+        [[DataStorageManager sharedDataStorageManager].config setObject:upgradeResult forKey:@"upgrade_const"];
+        
+        [[DataStorageManager sharedDataStorageManager] saveConfig];
+    }
 }
 
 -(void)didLoadVersionConfig:(NSNotification *)notification
@@ -129,6 +160,7 @@
         if([command isEqualToString:@"requestGlobalConfig"])
         {
             NSDictionary *products = [data objectForKey:@"products"];
+            NSArray *productArray = [products objectForKey:@"result"];
             NSString *version = [products objectForKey:@"version"];
             NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
             if(config)
@@ -146,7 +178,7 @@
             // NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
             // [becterials writeToFile:file atomically:NO];
             
-            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products]; 
+            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:productArray];
         }
         else if([command isEqualToString:@"requestProductIds"])
         {
@@ -205,7 +237,7 @@
         }
     }
 
-    [[CCDirector sharedDirector] setDisplayStats:YES];
+//    [[CCDirector sharedDirector] setDisplayStats:YES];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

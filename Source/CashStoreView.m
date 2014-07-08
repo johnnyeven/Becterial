@@ -7,6 +7,11 @@
 //
 
 #import "CashStoreView.h"
+#import "CashStoreItemView.h"
+#import "CashStoreManager.h"
+#import <StoreKit/StoreKit.h>
+
+#define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]
 
 @implementation CashStoreView
 
@@ -19,6 +24,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideLoadingIcon:) name:@"hideLoadingIcon" object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showSuccessView" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSuccessView:) name:@"showSuccessView" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadCashStoreView" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCashStoreView:) name:@"reloadCashStoreView" object:nil];
     }
     return self;
 }
@@ -36,12 +43,40 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"hideLoadingIcon" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showSuccessView" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadCashStoreView" object:nil];
     [self removeFromSuperview];
 }
 
 -(IBAction)closeSuccessView:(id)sender
 {
     self.successView.hidden = YES;
+}
+
+-(void)reloadCashStoreView:(NSNotification *)notification
+{
+    
+    CGFloat offsetY = 0.f;
+    CGFloat contentSizeWidth = 0.f;
+    CGFloat contentSizeHeight = 0.f;
+    if(sharedCashStoreManager.products)
+    {
+        for (SKProduct *product in sharedCashStoreManager.products)
+        {
+            NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
+            CashStoreItemView *item = [xibArray objectAtIndex:0];
+            item.identifier = product.productIdentifier;
+            [item.itemName setText:product.localizedTitle];
+            [item.itemComment setText:product.localizedDescription];
+            [item.itemCash setText:product.price.stringValue];
+            [_scroller addSubview:item];
+            item.backgroundColor = nil;
+            item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);
+            offsetY = offsetY + item.frame.size.height;
+            contentSizeHeight = contentSizeHeight + item.frame.size.height;
+            contentSizeWidth = item.frame.size.width;
+        }
+    }
+    _scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
 }
 
 -(void)hideLoadingIcon:(NSNotification *)notification

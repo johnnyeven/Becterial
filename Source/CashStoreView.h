@@ -17,6 +17,7 @@
 
 -(IBAction)closeView:(id)sender;
 -(IBAction)closeSuccessView:(id)sender;
+-(void)reloadCashStoreView:(NSNotification *)notification;
 -(void)hideLoadingIcon:(NSNotification *)notification;
 -(void)showSuccessView:(NSNotification *)notification;
 

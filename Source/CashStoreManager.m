@@ -77,6 +77,9 @@ static CashStoreManager *_instance = nil;
         [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"result"];
     }
     [[DataStorageManager sharedDataStorageManager] saveConfig];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCashStoreView" object:nil];
 }
 
 @end

@@ -67,6 +67,7 @@
         NSDictionary *config = [DataStorageManager sharedDataStorageManager].config;
         NSDictionary *productsResult = [config objectForKey:@"products"];
         NSArray *products = [productsResult objectForKey:@"result"];
+        NSMutableArray *idArray = [NSMutableArray new];
         if (!products)
         {
             //取默认plist
@@ -75,19 +76,11 @@
         }
         for (NSDictionary *product in products)
         {
-            NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
-            CashStoreItemView *item = [xibArray objectAtIndex:0];
-            item.identifier = [product objectForKey:@"productIdentifier"];
-            [item.itemName setText:[product objectForKey:@"localizedTitle"]];
-            [item.itemComment setText:[product objectForKey:@"localizedDescription"]];
-            [item.itemCash setText:[product objectForKey:@"price"]];
-            [cashStoreView.scroller addSubview:item];
-            item.backgroundColor = nil;
-            item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);
-            offsetY = offsetY + item.frame.size.height;
-            contentSizeHeight = contentSizeHeight + item.frame.size.height;
-            contentSizeWidth = item.frame.size.width;
+            NSString *_id = [product objectForKey:@"productIdentifier"];
+            [idArray addObject:_id];
         }
+        [sharedCashStoreManager validateProductIdentifiers:idArray];
+        cashStoreView.loadingView.hidden = NO;
     }
     cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
 }

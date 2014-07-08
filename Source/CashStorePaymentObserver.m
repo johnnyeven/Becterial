@@ -103,7 +103,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                 NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                                       transaction.payment.productIdentifier, @"identifier",
                                       receipt, @"receipt", nil];
-                [[PZWebManager sharedPZWebManager] asyncPostRequest:@"https://b.profzone.net/order/check_receipt" withData:data];
+                [[PZWebManager sharedPZWebManager] asyncPostRequest:@"http://b.profzone.net/order/check_receipt" withData:data];
 
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;

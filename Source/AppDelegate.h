@@ -30,6 +30,7 @@
 {
 }
 
+-(void)didLoadVersionConfig:(NSNotification *)notification;
 -(void)didReceiveFromServer:(NSNotification *)notification;
 
 @end

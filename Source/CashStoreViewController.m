@@ -65,7 +65,8 @@
     else
     {
         NSDictionary *config = [DataStorageManager sharedDataStorageManager].config;
-        NSArray *products = [config objectForKey:@"products"];
+        NSDictionary *productsResult = [config objectForKey:@"products"];
+        NSArray *products = [productsResult objectForKey:@"result"];
         if (!products)
         {
             //取默认plist

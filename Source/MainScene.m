@@ -15,6 +15,7 @@
 #import "CashStoreManager.h"
 #import "DataStorageManager.h"
 
+#define defaultStepCount 500
 #define dataExp [DataStorageManager sharedDataStorageManager].exp
 #define dataKillerCount [DataStorageManager sharedDataStorageManager].killerCount
 
@@ -129,6 +130,7 @@
     else
     {
         _becterialList = [[NSMutableArray alloc] init];
+        self.stepCount = defaultStepCount;
         self.exp = 0;
         self.killerCount = 10;
     }
@@ -194,7 +196,7 @@
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y
 {
     NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
-    if([tmp objectAtIndex:y] == [NSNull null])
+    if([tmp objectAtIndex:y] == [NSNull null] && self.stepCount > 0)
     {
         [tmp replaceObjectAtIndex:y withObject:becterial];
         tmp = [_becterialContainer objectAtIndex:becterial.positionX];
@@ -216,6 +218,7 @@
                 }
             }
         }];
+        self.stepCount--;
         [becterial runAction:[CCActionSequence actionWithArray:@[aMoveTo, aCallBlock]]];
         runningAction++;
     }
@@ -376,11 +379,19 @@
     [scoreScene setTime:runningTime];
     [scoreScene setExp:[DataStorageManager sharedDataStorageManager].exp];
     CGFloat rate = _score / runningTime;
-    NSLog(@"%f", rate);
     [scoreScene setRate:rate];
     CCScene *scene = [CCScene new];
     [scene addChild:scoreScene];
     [[CCDirector sharedDirector] replaceScene:scene];
+}
+
+-(void)setStepCount:(int)stepCount
+{
+    if(_stepCount != stepCount)
+    {
+        _stepCount = stepCount;
+        // _lblScore.score = score;
+    }
 }
 
 -(void)setScore:(CGFloat)score
@@ -417,6 +428,7 @@
     {
         _killerCount = killerCount;
         [_lblKillerCount setString:[NSString stringWithFormat:@"%i", killerCount]];
+        dataKillerCount = killerCount;
     }
 }
 
@@ -447,6 +459,13 @@
 
 -(void)checkResult
 {
+    if(self.stepCount == 0)
+    {
+        ScoreScene *score = [self showScoreScene];
+        [score setOver:YES];
+        return;
+    }
+
     NSMutableArray *list = [[NSMutableArray alloc] init];
     int bCount = 0;
     int eCount = 0;
@@ -490,11 +509,8 @@
     long count = [list count];
     if(count == 0)
     {
-        ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
-        [scoreScene setScore:_score];
-        CCScene *scene = [CCScene new];
-        [scene addChild:scoreScene];
-        [[CCDirector sharedDirector] replaceScene:scene];
+        ScoreScene *score = [self showScoreScene];
+        [score setOver:YES];
     }
 }
 
@@ -504,6 +520,7 @@
     NSString *file = [path stringByAppendingPathComponent:@"savegame"];
     NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:_becterialList];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithInt:_stepCount], @"stepCount",
         [NSNumber numberWithFloat:_score], @"score",
         [NSNumber numberWithFloat:_biomass], @"biomass",
         [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
@@ -532,6 +549,7 @@
     }
     
     self.exp = dataExp;
+    self.stepCount = [[data objectForKey:@"stepCount"] intValue];
     self.score = [[data objectForKey:@"score"] floatValue];
     self.biomass = [[data objectForKey:@"biomass"] floatValue];
     self.killerCount = dataKillerCount;
@@ -553,12 +571,28 @@
 -(void)reset
 {
     runningTime = 0;
+    self.stepCount = defaultStepCount;
     self.score = 0;
     self.biomass = 0;
     [_becterialList removeAllObjects];
     [_container removeAllChildren];
     [self saveGame];
     [self prepareStage];
+}
+
+-(ScoreScene *)showScoreScene
+{
+    ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
+    [scoreScene setScore:_score];
+    [scoreScene setTime:runningTime];
+    [scoreScene setExp:[DataStorageManager sharedDataStorageManager].exp];
+    CGFloat rate = _score / runningTime;
+    [scoreScene setRate:rate];
+    CCScene *scene = [CCScene new];
+    [scene addChild:scoreScene];
+    [[CCDirector sharedDirector] replaceScene:scene];
+
+    return scoreScene;
 }
 
 @end

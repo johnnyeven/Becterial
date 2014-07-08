@@ -13,6 +13,7 @@
 
 @property (nonatomic) CGFloat score;
 @property (nonatomic) CGFloat biomass;
+@property (nonatomic) int stepCount;
 @property (nonatomic) int exp;
 @property (nonatomic) int killerCount;
 
@@ -29,5 +30,6 @@
 -(BOOL)loadGame;
 -(void)checkResult;
 -(void)reset;
+-(ScoreScene *)showScoreScene;
 
 @end

@@ -65,7 +65,17 @@ static CashStoreManager *_instance = nil;
         [p setObject:product.price.stringValue forKey:@"price"];
         [array addObject:p];
     }
-    [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"products"];
+
+    NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
+    if(!config)
+    {
+        config = [NSMutableDictionary new];
+        [config setObject:@"" forKey:@"version"];
+    }
+    else
+    {
+        [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"result"];
+    }
     [[DataStorageManager sharedDataStorageManager] saveConfig];
 }
 

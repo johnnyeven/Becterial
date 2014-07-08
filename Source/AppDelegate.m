@@ -71,42 +71,112 @@
     [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
     
 //    [MobClick setLogEnabled:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoadVersionConfig:) name:@"requestVersionConfig" object:nil];
+    [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://b.profzone.net/configuration/version_config" withData:nil];
     
+    return YES;
+}
+
+-(void)didLoadVersionConfig:(NSNotification *)notification
+{
+    NSDictionary *data = [notification object];
+    NSDictionary *result = [data objectForKey:@"result"];
+
     [[DataStorageManager sharedDataStorageManager] loadConfig];
     if(![DataStorageManager sharedDataStorageManager].config)
     {
         [DataStorageManager sharedDataStorageManager].config = [NSMutableDictionary new];
         [[DataStorageManager sharedDataStorageManager] saveConfig];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestGlobalConfig" object:nil];
+        [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://b.profzone.net/configuration/global_config" withData:nil];
     }
     else
     {
-        NSDictionary *products = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
-        if (!products)
+        //循环检查各个配置的version与获得的是否相同
+        NSArray *keys = [[DataStorageManager sharedDataStorageManager].config allKeys];
+        for(NSString *key in keys)
         {
-            //没有就去苹果请求
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
-            [[PZWebManager sharedPZWebManager] asyncGetRequest:@"https://b.profzone.net/configuration/product_id" withData:nil];
-        }
-        else
-        {
-            //有就直接使用
+            NSDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:key];
+            if(config)
+            {
+                NSString *version = [config objectForKey:@"version"];
+                NSDictionary *target = [result objectForKey:key];
+                if(target)
+                {
+                    NSString *targetVersion = [target objectForKey:@"version"];
+                    if(![version isEqualToString:targetVersion])
+                    {
+                        NSString *url = [target objectForKey:@"url"];
+                        NSString *command = [target objectForKey:@"command"];
+
+                        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:command object:nil];
+                        [[PZWebManager sharedPZWebManager] asyncGetRequest:url withData:nil];
+                    }
+                }
+            }
         }
     }
-    
-    return YES;
 }
 
 -(void)didReceiveFromServer:(NSNotification *)notification
 {
     NSDictionary *data = [notification object];
-    NSArray *products = [data objectForKey:@"products"];
-    
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-    NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
-    [becterials writeToFile:file atomically:NO];
-    
-    [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+    NSString *command = [data objectForKey:@"command"];
+    if(command)
+    {
+        if([command isEqualToString:@"requestGlobalConfig"])
+        {
+            NSDictionary *products = [data objectForKey:@"products"];
+            NSString *version = [products objectForKey:@"version"];
+            NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+            }
+            
+            // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+            // NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
+            // [becterials writeToFile:file atomically:NO];
+            
+            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products]; 
+        }
+        else if([command isEqualToString:@"requestProductIds"])
+        {
+            NSArray *products = [data objectForKey:@"products"];
+            NSString *version = [data objectForKey:@"version"];
+            NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+            }
+            
+            // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
+            // NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
+            // [becterials writeToFile:file atomically:NO];
+            
+            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+        }
+        else if([command isEqualToString:@"requestUpgradeConst"])
+        {
+
+        }
+
+        [[DataStorageManager sharedDataStorageManager] saveData];
+    }
 }
 
 - (CCScene*) startScene

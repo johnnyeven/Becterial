@@ -16,6 +16,9 @@
 #import "DataStorageManager.h"
 
 #define defaultStepCount 500
+#define defualtAccelerateTime 600.f;
+#define defaultAccelerateCostPerSecond 10.f;
+#define accelerateIncreaseBiomassRate 1.f;
 #define dataExp [DataStorageManager sharedDataStorageManager].exp
 #define dataKillerCount [DataStorageManager sharedDataStorageManager].killerCount
 
@@ -32,6 +35,8 @@
     int runningAction;
     CGFloat runningTime;
 
+    BOOL inAccelerated;
+    CGFloat accelerationTime;
     int bacterialCount;
     int enemyCount;
     CGFloat bacterialBiomass;   //细菌需要消耗的生物质
@@ -58,38 +63,7 @@
     [self addChild:_lblBiomass];
 
     self.userInteractionEnabled = YES;
-    
-    // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-    // NSArray *products = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
-    
-    // if(!products)
-    // {
-    //     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"requestProductIds" object:nil];
-    //     [[PZWebManager sharedPZWebManager] asyncGetRequest:@"http://www.profzone.net/products/bacterial_product_id.txt" withData:nil];
-    // }
-    // else
-    // {
-    //     [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
-    // }
 }
-
-//-(void)deliverProduct:(NSNotification *)notification
-//{
-//    NSArray *items = [[notification object] objectForKey:@"items"];
-//
-//    for(NSDictionary *item in items)
-//    {
-//        NSString *name = [item objectForKey:@"name"];
-//        int count = [[item objectForKey:@"count"] intValue];
-//        if([name isEqualToString:@"exp"])
-//        {
-//            self.exp = _exp + count;
-//        }
-//    }
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"deliverComplete" object:[notification object]];
-//}
 
 -(void)update10PerSecond:(CCTime)delta
 {
@@ -99,6 +73,18 @@
     if(_biomass > 0)
     {
         self.score = _score + scoreOffset * delta;
+    }
+    if(inAccelerated)
+    {
+        if(accelerationTime > 0)
+        {
+            accelerationTime = accelerationTime - defaultAccelerateCostPerSecond * delta;
+        }
+        else
+        {
+            inAccelerated = NO;
+            [self checkResult];
+        }
     }
     
     runningTime = runningTime + delta;
@@ -134,6 +120,8 @@
     }
     else
     {
+        inAccelerated = NO;
+        accelerationTime = defualtAccelerateTime;
         _becterialList = [[NSMutableArray alloc] init];
         self.stepCount = defaultStepCount;
         self.exp = 0;
@@ -444,22 +432,27 @@
 
 -(void)useKiller:(int)x andY:(int)y
 {
-    if([[_becterialContainer objectAtIndex:x] objectAtIndex:y] == [NSNull null])
-    {
-        return;
-    }
+    // if([[_becterialContainer objectAtIndex:x] objectAtIndex:y] == [NSNull null])
+    // {
+    //     return;
+    // }
     
-    Becterial *b = [[_becterialContainer objectAtIndex:x] objectAtIndex:y];
-    if(b.type == 1)
-    {
-        NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
-        [tmp replaceObjectAtIndex:y withObject:[NSNull null]];
-        [_becterialList removeObjectIdenticalTo:b];
-        [_container removeChild:b];
-        self.killerCount--;
-        [self checkResult];
-        [self saveGame];
-    }
+    // Becterial *b = [[_becterialContainer objectAtIndex:x] objectAtIndex:y];
+    // if(b.type == 1)
+    // {
+    //     NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
+    //     [tmp replaceObjectAtIndex:y withObject:[NSNull null]];
+    //     [_becterialList removeObjectIdenticalTo:b];
+    //     [_container removeChild:b];
+    //     self.killerCount--;
+    //     [self checkResult];
+    //     [self saveGame];
+    // }
+    inAccelerated = YES;
+    accelerationTime = 0.f;
+    self.killerCount--;
+    [self checkResult];
+    [self saveGame];
 }
 
 -(void)checkResult
@@ -509,7 +502,13 @@
     enemyCount = eCount;
     bacterialBiomass = bBiomass;
     enemyBiomass = eBiomass;
-    scoreOffset = bScore * (1 + [Becterial getUpgradeScoreInc]);
+
+    CGFloat scoreIncreaseRate = 1 + [Becterial getUpgradeScoreInc];
+    if(inAccelerated)
+    {
+        scoreIncreaseRate = scoreIncreaseRate + accelerateIncreaseBiomassRate;
+    }
+    scoreOffset = bScore * scoreIncreaseRate;
     
     long count = [list count];
     if(count == 0)
@@ -534,6 +533,8 @@
 [NSNumber numberWithFloat:enemyBiomass], @"enemyBiomass",
         [NSNumber numberWithFloat:scoreOffset], @"scoreOffset",
         [NSNumber numberWithFloat:runningTime], @"runningTime",
+        [NSNumber numberWithBool:inAccelerated], @"inAccelerated",
+        [NSNumber numberWithInt:accelerationTime], @"accelerationTime",
                           
         becterials, @"bacterials", nil
     ];
@@ -565,6 +566,8 @@
     scoreOffset = [[data objectForKey:@"scoreOffset"] floatValue];
     _becterialList = [NSKeyedUnarchiver unarchiveObjectWithData:[data objectForKey:@"bacterials"]];
     runningTime = [[data objectForKey:@"runningTime"] floatValue];
+    inAccelerated = [[data objectForKey:@"inAccelerated"] boolValue];
+    accelerationTime = [[data objectForKey:@"accelerationTime"] intValue];
     if(_becterialList == nil)
     {
         _becterialList = [[NSMutableArray alloc] init];
@@ -575,6 +578,8 @@
 
 -(void)reset
 {
+    inAccelerated = NO;
+    accelerationTime = defualtAccelerateTime;
     runningTime = 0;
     self.stepCount = defaultStepCount;
     self.score = 0;

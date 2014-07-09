@@ -23,9 +23,18 @@
 
 -(IBAction)btnBuyTouched:(id)sender
 {
-    [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
-    CashStoreView *v = (CashStoreView *)self.superview.superview;
-    v.loadingView.hidden = NO;
+	Reachability *reach = [Reachability reachabilityForInternetConnection];     
+    NetworkStatus netStatus = [reach currentReachabilityStatus];
+	v.loadingView.hidden = NO;
+    if(netStatus != NotReachable)
+    {
+	    [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
+	    CashStoreView *v = (CashStoreView *)self.superview.superview;
+	}
+	else
+	{
+		v.loadingView.hidden = YES;
+	}
 }
 
 /*

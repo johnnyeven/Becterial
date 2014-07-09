@@ -78,7 +78,7 @@
     {
         if(accelerationTime > 0)
         {
-            accelerationTime = accelerationTime - defaultAccelerateCostPerSecond * delta;
+            accelerationTime = accelerationTime - 10.f * delta;
         }
         else
         {

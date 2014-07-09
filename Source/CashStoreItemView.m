@@ -9,6 +9,7 @@
 #import "CashStoreItemView.h"
 #import "CashStoreManager.h"
 #import "CashStoreView.h"
+#import "PZWebManager.h"
 
 @implementation CashStoreItemView
 
@@ -23,16 +24,13 @@
 
 -(IBAction)btnBuyTouched:(id)sender
 {
-	Reachability *reach = [Reachability reachabilityForInternetConnection];     
-    NetworkStatus netStatus = [reach currentReachabilityStatus];
-	v.loadingView.hidden = NO;
-    if(netStatus != NotReachable)
+    if([PZWebManager sharedPZWebManager].networkInfo != nil)
     {
 	    [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
-	    CashStoreView *v = (CashStoreView *)self.superview.superview;
 	}
 	else
 	{
+	    CashStoreView *v = (CashStoreView *)self.superview.superview;
 		v.loadingView.hidden = YES;
 	}
 }

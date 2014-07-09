@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 @interface PZWebManager : NSObject
 <NSURLConnectionDelegate>
 
+@property (nonatomic, retain) CTTelephonyNetworkInfo *networkInfo;
+
 +(PZWebManager *)sharedPZWebManager;
 -(NSURLConnection *)asyncGetRequest:(NSString *)url withData:(NSDictionary *)data;
 -(NSURLConnection *)asyncPostRequest:(NSString *)url withData:(NSDictionary *)data;
+-(void)networkAccessChanged;
 
 @end

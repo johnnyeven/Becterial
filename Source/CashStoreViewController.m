@@ -12,6 +12,7 @@
 #import "CashStoreManager.h"
 #import "CashStorePaymentObserver.h"
 #import "DataStorageManager.h"
+#import "PZWebManager.h"
 #import <StoreKit/StoreKit.h>
 
 #define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]
@@ -75,10 +76,9 @@
             products = [[NSArray alloc] initWithContentsOfFile:file];
         }
 
-        Reachability *reach = [Reachability reachabilityForInternetConnection];     
-        NetworkStatus netStatus = [reach currentReachabilityStatus];
-        if(netStatus != NotReachable)
+        if([PZWebManager sharedPZWebManager].networkInfo.currentRadioAccessTechnology != nil)
         {
+            NSLog(@"network: %@", [PZWebManager sharedPZWebManager].networkInfo.currentRadioAccessTechnology);
             for (NSDictionary *product in products)
             {
                 NSString *_id = [product objectForKey:@"productIdentifier"];

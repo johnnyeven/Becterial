@@ -54,6 +54,7 @@
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
+		BE3594CD196D81D300E36362 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594CC196D81D300E36362 /* CoreTelephony.framework */; };
 		BE3610B1196ADF6E0085BAF2 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */; };
 		BE3610B8196AE0400085BAF2 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */; };
 		BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */; };
@@ -185,6 +186,7 @@
 		BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_message.png; path = Source/upgrade_message.png; sourceTree = "<group>"; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
+		BE3594CC196D81D300E36362 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-shake.html"; sourceTree = "<group>"; };
 		BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_ScreenShot_1.0.a; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		BE5868BF196449A50007AF48 /* PZWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZWebManager.m; path = Source/PZWebManager.m; sourceTree = "<group>"; };
 		BE58F2D01966F321009274E4 /* DataStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorageManager.h; path = Source/DataStorageManager.h; sourceTree = "<group>"; };
 		BE58F2D11966F321009274E4 /* DataStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataStorageManager.m; path = Source/DataStorageManager.m; sourceTree = "<group>"; };
+		BE5F236D196D7B2600E8F919 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE63466719683636007E375F /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = success.png; path = Source/success.png; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
@@ -248,6 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3594CD196D81D300E36362 /* CoreTelephony.framework in Frameworks */,
 				BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */,
@@ -360,6 +364,8 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE3594CC196D81D300E36362 /* CoreTelephony.framework */,
+				BE5F236D196D7B2600E8F919 /* SystemConfiguration.framework */,
 				BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */,
 				BE058A9C19619405005271F1 /* StoreKit.framework */,
 				BE92BE69195F29A4006C17AB /* GLKit.framework */,

@@ -7,6 +7,7 @@
 //
 
 #import "PZWebManager.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 @implementation PZWebManager
 {
@@ -22,6 +23,23 @@ static PZWebManager *_sharedPZWebManager = nil;
         _sharedPZWebManager = [[PZWebManager alloc] init];
     }
     return _sharedPZWebManager;
+}
+
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CTRadioAccessTechnologyDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkAccessChanged) name:CTRadioAccessTechnologyDidChangeNotification object:nil];
+        _networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    }
+    return self;
+}
+
+-(void)networkAccessChanged
+{
+    NSLog(@"network change to %@", _networkInfo.currentRadioAccessTechnology);
 }
 
 -(NSURLConnection *)asyncGetRequest:(NSString *)url withData:(NSDictionary *)data

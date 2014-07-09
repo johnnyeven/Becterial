@@ -74,13 +74,37 @@
             NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
             products = [[NSArray alloc] initWithContentsOfFile:file];
         }
-        for (NSDictionary *product in products)
+
+        Reachability *reach = [Reachability reachabilityForInternetConnection];     
+        NetworkStatus netStatus = [reach currentReachabilityStatus];
+        if(netStatus != NotReachable)
         {
-            NSString *_id = [product objectForKey:@"productIdentifier"];
-            [idArray addObject:_id];
+            for (NSDictionary *product in products)
+            {
+                NSString *_id = [product objectForKey:@"productIdentifier"];
+                [idArray addObject:_id];
+            }
+            [sharedCashStoreManager validateProductIdentifiers:idArray];
+            cashStoreView.loadingView.hidden = NO;
         }
-        [sharedCashStoreManager validateProductIdentifiers:idArray];
-        cashStoreView.loadingView.hidden = NO;
+        else
+        {
+            for (NSDictionary *product in products)
+            {
+                NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];
+                CashStoreItemView *item = [xibArray objectAtIndex:0];
+                item.identifier = [product objectForKey:@"productIdentifier"];
+                [item.itemName setText:[product objectForKey:@"localizedTitle"]];
+                [item.itemComment setText:[product objectForKey:@"localizedDescription"]];
+                [item.itemCash setText:[product objectForKey:@"price"]];
+                [cashStoreView.scroller addSubview:item];
+                item.backgroundColor = nil;
+                item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);
+                offsetY = offsetY + item.frame.size.height;
+                contentSizeHeight = contentSizeHeight + item.frame.size.height;
+                contentSizeWidth = item.frame.size.width;
+            }
+        }
     }
     cashStoreView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
 }

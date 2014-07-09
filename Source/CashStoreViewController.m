@@ -12,6 +12,7 @@
 #import "CashStoreManager.h"
 #import "CashStorePaymentObserver.h"
 #import "DataStorageManager.h"
+#import "Reachability.h"
 #import <StoreKit/StoreKit.h>
 
 #define sharedCashStoreManager [CashStoreManager sharedCashStoreManager]

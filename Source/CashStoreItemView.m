@@ -9,6 +9,7 @@
 #import "CashStoreItemView.h"
 #import "CashStoreManager.h"
 #import "CashStoreView.h"
+#import "Reachability.h"
 
 @implementation CashStoreItemView
 
@@ -25,11 +26,11 @@
 {
 	Reachability *reach = [Reachability reachabilityForInternetConnection];     
     NetworkStatus netStatus = [reach currentReachabilityStatus];
+    CashStoreView *v = (CashStoreView *)self.superview.superview;
 	v.loadingView.hidden = NO;
     if(netStatus != NotReachable)
     {
 	    [[CashStoreManager sharedCashStoreManager] purchaseProduct:_identifier];
-	    CashStoreView *v = (CashStoreView *)self.superview.superview;
 	}
 	else
 	{

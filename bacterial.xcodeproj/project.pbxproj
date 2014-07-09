@@ -54,6 +54,10 @@
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
+		BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594D0196D859E00E36362 /* SystemConfiguration.framework */; };
+		BE3594D4196D873900E36362 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594D3196D873900E36362 /* CFNetwork.framework */; };
+		BE3594DA196D87F100E36362 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3594D9196D87F100E36362 /* Reachability.m */; };
+		BE3594DC196D8B4700E36362 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594DB196D8B4700E36362 /* GameKit.framework */; };
 		BE3610B1196ADF6E0085BAF2 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */; };
 		BE3610B8196AE0400085BAF2 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */; };
 		BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */; };
@@ -185,6 +189,11 @@
 		BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_message.png; path = Source/upgrade_message.png; sourceTree = "<group>"; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
+		BE3594D0196D859E00E36362 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BE3594D3196D873900E36362 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		BE3594D8196D87F100E36362 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Source/Reachability.h; sourceTree = "<group>"; };
+		BE3594D9196D87F100E36362 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Source/Reachability.m; sourceTree = "<group>"; };
+		BE3594DB196D8B4700E36362 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-shake.html"; sourceTree = "<group>"; };
 		BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_ScreenShot_1.0.a; sourceTree = "<group>"; };
@@ -248,6 +257,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3594D4196D873900E36362 /* CFNetwork.framework in Frameworks */,
+				BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */,
 				BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */,
@@ -255,6 +266,7 @@
 				BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				BE058A9D19619405005271F1 /* StoreKit.framework in Frameworks */,
+				BE3594DC196D8B4700E36362 /* GameKit.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				BE058ACF1961B955005271F1 /* libSocialWechat.a in Frameworks */,
@@ -360,6 +372,9 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE3594DB196D8B4700E36362 /* GameKit.framework */,
+				BE3594D3196D873900E36362 /* CFNetwork.framework */,
+				BE3594D0196D859E00E36362 /* SystemConfiguration.framework */,
 				BE3610B0196ADF6E0085BAF2 /* MediaPlayer.framework */,
 				BE058A9C19619405005271F1 /* StoreKit.framework */,
 				BE92BE69195F29A4006C17AB /* GLKit.framework */,
@@ -470,6 +485,8 @@
 			children = (
 				BE5868BE196449A50007AF48 /* PZWebManager.h */,
 				BE5868BF196449A50007AF48 /* PZWebManager.m */,
+				BE3594D8196D87F100E36362 /* Reachability.h */,
+				BE3594D9196D87F100E36362 /* Reachability.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -574,7 +591,7 @@
 						DevelopmentTeam = PARQ38GC9Z;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -701,6 +718,7 @@
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,
 				BEBB31E119690FF200ECE458 /* UpgradeViewController.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				BE3594DA196D87F100E36362 /* Reachability.m in Sources */,
 				BEFB26231965AB9F00993C74 /* CashStorePaymentObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

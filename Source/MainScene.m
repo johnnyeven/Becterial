@@ -42,6 +42,8 @@
     CGFloat bacterialBiomass;   //细菌需要消耗的生物质
     CGFloat enemyBiomass;       //入侵病毒产生的生物质
     CGFloat scoreOffset;        //分數增加量
+    
+    CCSprite *imgAccelerationBg;
 }
 
 -(void)didLoadFromCCB
@@ -61,7 +63,8 @@
     _lblBiomass = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblBiomass.position = ccp(165.f, 390.f);
     [self addChild:_lblBiomass];
-
+    
+    imgAccelerationBg.visible = NO;
     self.userInteractionEnabled = YES;
 }
 
@@ -78,10 +81,11 @@
     {
         if(accelerationTime > 0)
         {
-            accelerationTime = accelerationTime - defaultAccelerateCostPerSecond * delta;
+            accelerationTime = accelerationTime - 10.f * delta;
         }
         else
         {
+            imgAccelerationBg.visible = NO;
             inAccelerated = NO;
             [self checkResult];
         }
@@ -115,7 +119,10 @@
             b.position = ccp(b.positionX * 60.5f, b.positionY * 60.5f);
             [_container addChild:b];
         }
-
+        if(inAccelerated)
+        {
+            imgAccelerationBg.visible = YES;
+        }
         [self checkResult];
     }
     else
@@ -448,8 +455,9 @@
     //     [self checkResult];
     //     [self saveGame];
     // }
+    imgAccelerationBg.visible = YES;
     inAccelerated = YES;
-    accelerationTime = 0.f;
+    accelerationTime = defualtAccelerateTime;
     self.killerCount--;
     [self checkResult];
     [self saveGame];

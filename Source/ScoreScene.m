@@ -14,6 +14,9 @@
 
 #import "CashStoreViewController.h"
 #import "UpgradeViewController.h"
+#import "DataStorageManager.h"
+
+#define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
 
 @implementation ScoreScene
 {
@@ -52,6 +55,16 @@
     [self addChild:_lblExp];
     
     _over = NO;
+
+    if(dataStorageManagerConfig)
+    {
+        NSDictionary *scoreboardResult = [dataStorageManagerConfig objectForKey:@"score_board"];
+        int scoreboard = [[scoreboardResult objectForKey:@"result"] intValue];
+        if(scoreboard == 1)
+        {
+            
+        }
+    }
 }
 
 -(void)setOver:(BOOL)over

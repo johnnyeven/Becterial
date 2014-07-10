@@ -24,9 +24,13 @@
  */
 
 #import "cocos2d.h"
+
 #import "MobClick.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
+
+#import "YouMiWall.h"
+#import "YouMiPointsManager.h"
 
 #import "AppDelegate.h"
 #import "Becterial.h"
@@ -69,6 +73,11 @@
     [MobClick startWithAppkey:@"53b031e856240b128d1615f7"];
     [UMSocialData setAppKey:@"53b031e856240b128d1615f7"];
     [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
+
+    [YouMiConfig setShouldGetLocation:NO];
+    [YouMiConfig launchWithAppID:@"5993d19fa9e134c3" appSecret:@"e620f97ee3da012d"];
+    [YouMiPointsManager enable];
+    [YouMiWall enable];
     
 //    [MobClick setLogEnabled:YES];
 
@@ -104,6 +113,12 @@
                                         result1, @"result",
                                         [NSDictionary new], @"version", nil];
         [[DataStorageManager sharedDataStorageManager].config setObject:upgradeResult forKey:@"upgrade_const"];
+
+        //score board
+        NSDictionary *scoreboardResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithInt:0], @"result",
+                                        [NSDictionary new], @"version", nil];
+        [[DataStorageManager sharedDataStorageManager].config setObject:scoreboardResult forKey:@"score_board"];
         
         [[DataStorageManager sharedDataStorageManager] saveConfig];
     }
@@ -160,6 +175,7 @@
     {
         if([command isEqualToString:@"requestGlobalConfig"])
         {
+            //products
             NSDictionary *products = [data objectForKey:@"products"];
             NSArray *productArray = [products objectForKey:@"result"];
             NSString *version = [products objectForKey:@"version"];
@@ -173,13 +189,27 @@
                 config = [NSMutableDictionary new];
                 [config setObject:version forKey:@"version"];
             }
-            
-            // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-            // NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
-            // [becterials writeToFile:file atomically:NO];
+            [config setObject:productArray forKey:@"result"];
             
             [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:productArray];
+
+            //upgrade
+
+            //score board
+            NSDictionary *scoreboardResult = [data objectForKey:@"score_board"];
+            int scoreboard = [[scoreboardResult objectForKey:@"result"] intValue];
+            version = [scoreboardResult objectForKey:@"version"];
+            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"score_board"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+            }
+            [config setObject:[NSNumber numberWithInt:scoreboard] forKey:@"result"];
         }
         else if([command isEqualToString:@"requestProductIds"])
         {
@@ -196,16 +226,27 @@
                 [config setObject:version forKey:@"version"];
             }
             
-            // NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            // NSString *file = [path stringByAppendingPathComponent:@"product_ids"];
-            // NSData *becterials = [NSKeyedArchiver archivedDataWithRootObject:products];
-            // [becterials writeToFile:file atomically:NO];
-            
             [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
         }
         else if([command isEqualToString:@"requestUpgradeConst"])
         {
 
+        }
+        else if([command isEqualToString:@"requestScoreBoard"])
+        {
+            NSDictionary *scoreboardResult = [data objectForKey:@"score_board"];
+            int scoreboard = [[scoreboardResult objectForKey:@"result"] intValue];
+            version = [scoreboardResult objectForKey:@"version"];
+            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"score_board"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+            }
         }
 
         [[DataStorageManager sharedDataStorageManager] saveData];

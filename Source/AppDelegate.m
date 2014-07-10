@@ -132,15 +132,16 @@
             NSDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:key];
             if(config)
             {
-                NSString *version = [config objectForKey:@"version"];
+                NSDictionary *versionResult = [config objectForKey:@"version"];
+                NSString *version = [versionResult objectForKey:@"version"];
                 NSDictionary *target = [result objectForKey:key];
                 if(target)
                 {
                     NSString *targetVersion = [target objectForKey:@"version"];
                     if(![version isEqualToString:targetVersion])
                     {
-                        NSString *url = [target objectForKey:@"url"];
-                        NSString *command = [target objectForKey:@"command"];
+                        NSString *url = [versionResult objectForKey:@"url"];
+                        NSString *command = [versionResult objectForKey:@"command"];
 
                         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:command object:nil];
                         [[PZWebManager sharedPZWebManager] asyncGetRequest:url withData:nil];

@@ -70,7 +70,7 @@ static CashStoreManager *_instance = nil;
     if(!config)
     {
         config = [NSMutableDictionary new];
-        [config setObject:@"" forKey:@"version"];
+        [config setObject:[NSDictionary new] forKey:@"version"];
     }
     else
     {

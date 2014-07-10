@@ -102,7 +102,7 @@
         NSDictionary *result1 = [[NSDictionary alloc] initWithContentsOfFile:upgradeConstFilePath];
         NSDictionary *upgradeResult = [NSDictionary dictionaryWithObjectsAndKeys:
                                         result1, @"result",
-                                        @"", @"version", nil];
+                                        [NSDictionary new], @"version", nil];
         [[DataStorageManager sharedDataStorageManager].config setObject:upgradeResult forKey:@"upgrade_const"];
         
         [[DataStorageManager sharedDataStorageManager] saveConfig];

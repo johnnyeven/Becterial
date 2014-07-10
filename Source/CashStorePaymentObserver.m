@@ -104,15 +104,18 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                                       transaction.payment.productIdentifier, @"identifier",
                                       receipt, @"receipt", nil];
                 [[PZWebManager sharedPZWebManager] asyncPostRequest:@"http://b.profzone.net/order/check_receipt" withData:data];
-
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             }
             case SKPaymentTransactionStateFailed:
                 NSLog(@"%@", transaction.error.localizedDescription);
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;
             case SKPaymentTransactionStateRestored:
                 NSLog(@"restored");
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;
             default:
                 break;

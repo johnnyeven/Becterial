@@ -113,15 +113,14 @@
                                         result1, @"result",
                                         [NSDictionary new], @"version", nil];
         [[DataStorageManager sharedDataStorageManager].config setObject:upgradeResult forKey:@"upgrade_const"];
-
-        //score board
-        NSDictionary *scoreboardResult = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithInt:0], @"result",
-                                        [NSDictionary new], @"version", nil];
-        [[DataStorageManager sharedDataStorageManager].config setObject:scoreboardResult forKey:@"score_board"];
-        
-        [[DataStorageManager sharedDataStorageManager] saveConfig];
     }
+    //score board
+    NSDictionary *scoreboardResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [NSNumber numberWithInt:0], @"result",
+                                      [NSDictionary new], @"version", nil];
+    [[DataStorageManager sharedDataStorageManager].config setObject:scoreboardResult forKey:@"score_board"];
+    
+    [[DataStorageManager sharedDataStorageManager] saveConfig];
 }
 
 -(void)didLoadVersionConfig:(NSNotification *)notification
@@ -155,8 +154,8 @@
                     NSString *targetVersion = [target objectForKey:@"version"];
                     if(![version isEqualToString:targetVersion])
                     {
-                        NSString *url = [versionResult objectForKey:@"url"];
-                        NSString *command = [versionResult objectForKey:@"command"];
+                        NSString *url = [target objectForKey:@"url"];
+                        NSString *command = [target objectForKey:@"command"];
 
                         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:command object:nil];
                         [[PZWebManager sharedPZWebManager] asyncGetRequest:url withData:nil];
@@ -188,6 +187,7 @@
             {
                 config = [NSMutableDictionary new];
                 [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"products"];
             }
             [config setObject:productArray forKey:@"result"];
             
@@ -208,13 +208,15 @@
             {
                 config = [NSMutableDictionary new];
                 [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"score_board"];
             }
             [config setObject:[NSNumber numberWithInt:scoreboard] forKey:@"result"];
         }
         else if([command isEqualToString:@"requestProductIds"])
         {
-            NSArray *products = [data objectForKey:@"products"];
-            NSString *version = [data objectForKey:@"version"];
+            NSDictionary *products = [data objectForKey:@"products"];
+            NSArray *productArray = [products objectForKey:@"result"];
+            NSString *version = [products objectForKey:@"version"];
             NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
             if(config)
             {
@@ -224,9 +226,11 @@
             {
                 config = [NSMutableDictionary new];
                 [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"products"];
             }
+            [config setObject:productArray forKey:@"result"];
             
-            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:products];
+            [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:productArray];
         }
         else if([command isEqualToString:@"requestUpgradeConst"])
         {
@@ -236,8 +240,8 @@
         {
             NSDictionary *scoreboardResult = [data objectForKey:@"score_board"];
             int scoreboard = [[scoreboardResult objectForKey:@"result"] intValue];
-            version = [scoreboardResult objectForKey:@"version"];
-            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"score_board"];
+            NSDictionary *version = [scoreboardResult objectForKey:@"version"];
+            NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"score_board"];
             if(config)
             {
                 [config setObject:version forKey:@"version"];
@@ -246,10 +250,12 @@
             {
                 config = [NSMutableDictionary new];
                 [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"score_board"];
             }
+            [config setObject:[NSNumber numberWithInt:scoreboard] forKey:@"result"];
         }
 
-        [[DataStorageManager sharedDataStorageManager] saveData];
+        [[DataStorageManager sharedDataStorageManager] saveConfig];
     }
 }
 

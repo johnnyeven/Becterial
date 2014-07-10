@@ -53,6 +53,9 @@
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */; };
+		BE1497F8196EC153001035D8 /* libOpenIDFA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1497F6196EC153001035D8 /* libOpenIDFA.a */; };
+		BE1497F9196EC153001035D8 /* libYouMi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1497F7196EC153001035D8 /* libYouMi.a */; };
+		BE1497FC196EE642001035D8 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1497FB196EE642001035D8 /* GameCenterManager.m */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594D0196D859E00E36362 /* SystemConfiguration.framework */; };
 		BE3594D4196D873900E36362 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594D3196D873900E36362 /* CFNetwork.framework */; };
@@ -187,6 +190,19 @@
 		BE12CB46195861F2006F775D /* Becterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Becterial.m; path = Source/Becterial.m; sourceTree = "<group>"; };
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_message.png; path = Source/upgrade_message.png; sourceTree = "<group>"; };
+		BE1497ED196EC153001035D8 /* YouMiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiConfig.h; sourceTree = "<group>"; };
+		BE1497EE196EC153001035D8 /* YouMiDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiDelegateProtocol.h; sourceTree = "<group>"; };
+		BE1497EF196EC153001035D8 /* YouMiPointsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiPointsManager.h; sourceTree = "<group>"; };
+		BE1497F0196EC153001035D8 /* YouMiSpots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiSpots.h; sourceTree = "<group>"; };
+		BE1497F1196EC153001035D8 /* YouMiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiView.h; sourceTree = "<group>"; };
+		BE1497F2196EC153001035D8 /* YouMiWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWall.h; sourceTree = "<group>"; };
+		BE1497F3196EC153001035D8 /* YouMiWallAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallAppModel.h; sourceTree = "<group>"; };
+		BE1497F4196EC153001035D8 /* YouMiWallSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpot.h; sourceTree = "<group>"; };
+		BE1497F5196EC153001035D8 /* YouMiWallSpotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpotView.h; sourceTree = "<group>"; };
+		BE1497F6196EC153001035D8 /* libOpenIDFA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOpenIDFA.a; sourceTree = "<group>"; };
+		BE1497F7196EC153001035D8 /* libYouMi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYouMi.a; sourceTree = "<group>"; };
+		BE1497FA196EE642001035D8 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenterManager.h; path = Source/GameCenterManager.h; sourceTree = "<group>"; };
+		BE1497FB196EE642001035D8 /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameCenterManager.m; path = Source/GameCenterManager.m; sourceTree = "<group>"; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
 		BE1835A5195FE9DF00860689 /* Killer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Killer.m; path = Source/Killer.m; sourceTree = "<group>"; };
 		BE3594D0196D859E00E36362 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -266,6 +282,7 @@
 				BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				BE058A9D19619405005271F1 /* StoreKit.framework in Frameworks */,
+				BE1497F8196EC153001035D8 /* libOpenIDFA.a in Frameworks */,
 				BE3594DC196D8B4700E36362 /* GameKit.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
@@ -276,6 +293,7 @@
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
 				BE058ABF1961B18E005271F1 /* libUMSocial_Sdk_3.3.8.a in Frameworks */,
 				B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */,
+				BE1497F9196EC153001035D8 /* libYouMi.a in Frameworks */,
 				B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */,
 				BE058AD01961B955005271F1 /* libWeChatSDK.a in Frameworks */,
 			);
@@ -295,6 +313,9 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BE1497FA196EE642001035D8 /* GameCenterManager.h */,
+				BE1497FB196EE642001035D8 /* GameCenterManager.m */,
+				BE1497EB196EC153001035D8 /* youmi */,
 				BEBB31DC19690FBC00ECE458 /* Upgrade */,
 				BE5868BC1964496E0007AF48 /* Network */,
 				BE89CDFC1962F06A00994D13 /* CashStore */,
@@ -468,6 +489,33 @@
 				BE058ACE1961B955005271F1 /* WXApiObject.h */,
 			);
 			path = Wechat;
+			sourceTree = "<group>";
+		};
+		BE1497EB196EC153001035D8 /* youmi */ = {
+			isa = PBXGroup;
+			children = (
+				BE1497EC196EC153001035D8 /* include */,
+				BE1497F6196EC153001035D8 /* libOpenIDFA.a */,
+				BE1497F7196EC153001035D8 /* libYouMi.a */,
+			);
+			name = youmi;
+			path = lib;
+			sourceTree = "<group>";
+		};
+		BE1497EC196EC153001035D8 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BE1497ED196EC153001035D8 /* YouMiConfig.h */,
+				BE1497EE196EC153001035D8 /* YouMiDelegateProtocol.h */,
+				BE1497EF196EC153001035D8 /* YouMiPointsManager.h */,
+				BE1497F0196EC153001035D8 /* YouMiSpots.h */,
+				BE1497F1196EC153001035D8 /* YouMiView.h */,
+				BE1497F2196EC153001035D8 /* YouMiWall.h */,
+				BE1497F3196EC153001035D8 /* YouMiWallAppModel.h */,
+				BE1497F4196EC153001035D8 /* YouMiWallSpot.h */,
+				BE1497F5196EC153001035D8 /* YouMiWallSpotView.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		BE3610B4196AE0400085BAF2 /* UMSocial_ScreenShot_Sdk */ = {
@@ -706,6 +754,7 @@
 				BE89CE081962FF6F00994D13 /* CashStoreView.m in Sources */,
 				BEFB261F19658DC900993C74 /* CashStoreManager.m in Sources */,
 				BE058AA01961976D005271F1 /* ScoreScene.m in Sources */,
+				BE1497FC196EE642001035D8 /* GameCenterManager.m in Sources */,
 				BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */,
 				BE89CE0B1963007C00994D13 /* CashStoreViewController.m in Sources */,
 				BE12CB47195861F2006F775D /* Becterial.m in Sources */,
@@ -839,6 +888,7 @@
 					"$(PROJECT_DIR)/TencentOpenAPI",
 					"$(PROJECT_DIR)/UmengGameAnalytics",
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8/UMSocial_ScreenShot_Sdk",
+					"$(PROJECT_DIR)/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -886,6 +936,7 @@
 					"$(PROJECT_DIR)/TencentOpenAPI",
 					"$(PROJECT_DIR)/UmengGameAnalytics",
 					"$(PROJECT_DIR)/UMSocial_Sdk_3.3.8/UMSocial_ScreenShot_Sdk",
+					"$(PROJECT_DIR)/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (

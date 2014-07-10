@@ -11,6 +11,8 @@
 #import "PZLabelScore.h"
 #import "UMSocial.h"
 #import "UMSocialScreenShoter.h"
+#import "YouMiWall.h"
+#import "YouMiPointsManager.h"
 
 #import "CashStoreViewController.h"
 #import "UpgradeViewController.h"
@@ -30,6 +32,7 @@
     PZLabelScore *_lblRate;
     PZLabelScore *_lblExp;
     CCButton *btnContinue;
+    CCButton *btnScoreboard;
 }
 
 -(void)didLoadFromCCB
@@ -62,7 +65,21 @@
         int scoreboard = [[scoreboardResult objectForKey:@"result"] intValue];
         if(scoreboard == 1)
         {
-            
+            btnScoreboard.visible = YES;
+            int *points = [YouMiPointsManager pointsRemained];
+            if(*points > 0)
+            {
+                [YouMiPointsManager spendPoints:*points];
+                [DataStorageManager sharedDataStorageManager].exp = [DataStorageManager sharedDataStorageManager].exp + *points;
+                [[DataStorageManager sharedDataStorageManager] saveData];
+                
+                [self setExp:[DataStorageManager sharedDataStorageManager].exp];
+            }
+            free(points);
+        }
+        else
+        {
+            btnScoreboard.visible = NO;
         }
     }
 }
@@ -95,6 +112,15 @@
 {
     _time = time;
     [_lblTime setScore:time];
+}
+
+-(void)showScoreboard
+{
+    [YouMiWall showOffers:YES didShowBlock:^{
+        NSLog(@"有米积分墙已显示");
+    } didDismissBlock:^{
+        NSLog(@"有米积分墙已退出");
+    }];
 }
 
 -(void)back

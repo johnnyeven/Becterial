@@ -90,6 +90,9 @@
         }
         else
         {
+            //取默认plist
+            NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
+            products = [[NSArray alloc] initWithContentsOfFile:file];
             for (NSDictionary *product in products)
             {
                 NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];

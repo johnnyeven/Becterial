@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/AppDelegate.m"
-            timestampString = "426647534.007905"
+            timestampString = "426694930.943009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-didLoadVersionConfig:"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-didReceiveFromServer:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

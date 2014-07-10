@@ -66,17 +66,17 @@ static CashStoreManager *_instance = nil;
         [array addObject:p];
     }
 
-    NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
-    if(!config)
-    {
-        config = [NSMutableDictionary new];
-        [config setObject:[NSDictionary new] forKey:@"version"];
-    }
-    else
-    {
-        [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"result"];
-    }
-    [[DataStorageManager sharedDataStorageManager] saveConfig];
+//    NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
+//    if(!config)
+//    {
+//        config = [NSMutableDictionary new];
+//        [config setObject:[NSDictionary new] forKey:@"version"];
+//    }
+//    else
+//    {
+//        [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"result"];
+//    }
+//    [[DataStorageManager sharedDataStorageManager] saveConfig];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCashStoreView" object:nil];

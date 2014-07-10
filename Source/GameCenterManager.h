@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class GKLocalPlayer
+@class GKLocalPlayer;
 
 @interface GameCenterManager : NSObject
+<GKGameCenterControllerDelegate>
 
 @property (nonatomic) BOOL authenticated;
 @property (nonatomic, retain) GKLocalPlayer *localPlayer;

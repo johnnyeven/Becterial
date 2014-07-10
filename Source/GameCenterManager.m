@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CashStoreManager.h"
+#import <GameKit/GameKit.h>
+#import "GameCenterManager.h"
 #import "DataStorageManager.h"
 
 @implementation GameCenterManager
@@ -128,7 +129,7 @@ static GameCenterManager *_instance = nil;
     ^(NSString *leaderboardIdentifier, NSError *error)
     {
         _leaderboardIdentifier = leaderboardIdentifier;
-    }]
+    }];
 }
 
 - (void) reportScore: (int64_t) score forLeaderboardID: (NSString*) identifier
@@ -139,7 +140,7 @@ static GameCenterManager *_instance = nil;
     scoreReporter.context = 0;
  
     NSArray *scores = @[scoreReporter];
-    [GKLeaderboard reportScores:scores withCompletionHandler:^(NSError *error)
+    [GKScore reportScores:scores withCompletionHandler:^(NSError *error)
     {
     }];
 }

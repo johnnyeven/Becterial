@@ -160,26 +160,31 @@ static GameCenterManager *_instance = nil;
     }
 }
 
-- (void) showLeaderboard: (NSString*) leaderboardID
+- (void) showLeaderboard
 {
     if (_enabled && _localPlayer.authenticated)
     {
         GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
         if (gameCenterController != nil)
         {
-           gameCenterController.gameCenterDelegate = self;
-           gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
-           gameCenterController.leaderboardTimeScope = GKLeaderboardTimeScopeToday;
-           gameCenterController.leaderboardCategory = leaderboardID;
-           // [self presentViewController: gameCenterController animated: YES completion:nil];
+            gameCenterController.gameCenterDelegate = self;
+            gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+            gameCenterController.leaderboardTimeScope = GKLeaderboardTimeScopeToday;
+            gameCenterController.leaderboardCategory = _leaderboardIdentifier;
+            // [self presentViewController: gameCenterController animated: YES completion:nil];
+            UIViewController *controller = (UIViewController *)[CCDirector sharedDirector].view.nextResponder;
+            [controller presentViewController:gameCenterController animated:YES completion:^{
+                
+            }];
         }
     }
 }
 
 - (void) gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-    NSLog(@"removed");
-    [gameCenterViewController removeFromParentViewController];
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

@@ -36,6 +36,7 @@
     PZLabelScore *_lblExp;
     CCButton *btnContinue;
     CCButton *btnScoreboard;
+    CCButton *btnTop10;
 }
 
 -(void)didLoadFromCCB
@@ -97,6 +98,8 @@
     [self addChild:_lblExp];
     
     _over = NO;
+    
+    btnTop10.enabled = [GameCenterManager sharedGameCenterManager].enabled;
 
     if(dataStorageManagerConfig)
     {
@@ -126,7 +129,7 @@
 -(void)setOver:(BOOL)over
 {
     _over = over;
-    btnContinue.visible = !over;
+    btnContinue.enabled = !over;
     if (over)
     {
         [[GameCenterManager sharedGameCenterManager] reportScore:_score];
@@ -236,6 +239,11 @@
     CCScene *scene = [CCScene new];
     [scene addChild:main];
     [[CCDirector sharedDirector] replaceScene:scene];
+}
+
+-(void)top10
+{
+    [[GameCenterManager sharedGameCenterManager] showLeaderboard];
 }
 
 @end

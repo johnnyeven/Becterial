@@ -25,6 +25,6 @@
 - (void) loadPlayerData: (NSArray *) identifiers;
 - (void) loadDefaultLeaderboard;
 - (void) reportScore: (int64_t) score;
-- (void) showLeaderboard: (NSString*) leaderboardID;
+- (void) showLeaderboard;
 
 @end

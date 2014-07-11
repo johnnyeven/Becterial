@@ -17,6 +17,7 @@
 #import "CashStoreViewController.h"
 #import "UpgradeViewController.h"
 #import "DataStorageManager.h"
+#import "GameCenterManager.h"
 
 #define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
 
@@ -88,6 +89,10 @@
 {
     _over = over;
     btnContinue.visible = !over;
+    if (over)
+    {
+        [[GameCenterManager sharedGameCenterManager] reportScore:_score];
+    }
 }
 
 -(void)setScore:(int)score

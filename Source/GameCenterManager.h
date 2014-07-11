@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GameKit/GameKit.h>
 
 @class GKLocalPlayer;
 
 @interface GameCenterManager : NSObject
 <GKGameCenterControllerDelegate>
 
-@property (nonatomic) BOOL authenticated;
-@property (nonatomic, retain) GKLocalPlayer *localPlayer;
-@property (nonatomic, retain) NSString *leaderboardIdentifier;
+@property (nonatomic) BOOL enabled;
+@property (nonatomic, strong) GKLocalPlayer *localPlayer;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 
 + (GameCenterManager *) sharedGameCenterManager;
 - (BOOL) isGameCenterAvailable;
@@ -23,7 +24,7 @@
 - (void) retrieveFriends;
 - (void) loadPlayerData: (NSArray *) identifiers;
 - (void) loadDefaultLeaderboard;
-- (void) reportScore: (int64_t) score forLeaderboardID: (NSString*) identifier;
+- (void) reportScore: (int64_t) score;
 - (void) showLeaderboard: (NSString*) leaderboardID;
 
 @end

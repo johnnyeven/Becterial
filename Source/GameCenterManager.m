@@ -61,27 +61,36 @@ static GameCenterManager *_instance = nil;
     {
         if (viewController != nil)
         {
-            _authenticated = NO;
+            _instance.enabled = NO;
             // showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
             // [self showAuthenticationDialogWhenReasonable: viewController];
+            NSLog(@"GameCenter auth failed");
+            UIViewController *controller = (UIViewController *)[CCDirector sharedDirector].view.nextResponder;
+            [controller presentViewController:viewController animated:YES completion:^{
+                
+            }];
+//            [[CCDirector sharedDirector].view addSubview:viewController.view];
         }
-        else if (_localPlayer.isAuthenticated)
+        else if (_instance.localPlayer.isAuthenticated)
         {
-            _authenticated = YES;
+            _instance.enabled = YES;
             //authenticatedPlayer: is an example method name. Create your own method that is called after the loacal player is authenticated.
             // [self authenticatedPlayer: localPlayer];
+            NSLog(@"GameCenter auth");
+            [_instance loadDefaultLeaderboard];
         }
         else
         {
-            _authenticated = NO;
+            _instance.enabled = NO;
             // [self disableGameCenter];
+            NSLog(@"GameCenter disabled");
         }
     };
 }
 
 - (void) retrieveFriends
 {
-   if (_authenticated && _localPlayer.isAuthenticated)
+   if (_enabled && _localPlayer.isAuthenticated)
    {
       [_localPlayer loadFriendsWithCompletionHandler:^(NSArray *friendIDs, NSError *error)
       {
@@ -125,37 +134,52 @@ static GameCenterManager *_instance = nil;
 
 - (void) loadDefaultLeaderboard
 {
-    [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:
-    ^(NSString *leaderboardIdentifier, NSError *error)
+    if (_enabled && _localPlayer.authenticated)
     {
-        _leaderboardIdentifier = leaderboardIdentifier;
-    }];
+        [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:
+         ^(NSString *leaderboardIdentifier, NSError *error)
+         {
+             _leaderboardIdentifier = leaderboardIdentifier;
+         }];
+    }
 }
 
-- (void) reportScore: (int64_t) score forLeaderboardID: (NSString*) identifier
+- (void) reportScore: (int64_t) score
 {
-    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: identifier];
-    scoreReporter.shouldSetDefaultLeaderboard = YES;
-    scoreReporter.value = score;
-    scoreReporter.context = 0;
- 
-    NSArray *scores = @[scoreReporter];
-    [GKScore reportScores:scores withCompletionHandler:^(NSError *error)
+    if (_enabled && _localPlayer.authenticated)
     {
-    }];
+        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier: _leaderboardIdentifier];
+        scoreReporter.shouldSetDefaultLeaderboard = YES;
+        scoreReporter.value = score;
+        scoreReporter.context = 0;
+     
+        NSArray *scores = @[scoreReporter];
+        [GKScore reportScores:scores withCompletionHandler:^(NSError *error)
+        {
+        }];
+    }
 }
 
 - (void) showLeaderboard: (NSString*) leaderboardID
 {
-    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-    if (gameCenterController != nil)
+    if (_enabled && _localPlayer.authenticated)
     {
-       gameCenterController.gameCenterDelegate = self;
-       gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
-       gameCenterController.leaderboardTimeScope = GKLeaderboardTimeScopeToday;
-       gameCenterController.leaderboardCategory = leaderboardID;
-       // [self presentViewController: gameCenterController animated: YES completion:nil];
+        GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+        if (gameCenterController != nil)
+        {
+           gameCenterController.gameCenterDelegate = self;
+           gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+           gameCenterController.leaderboardTimeScope = GKLeaderboardTimeScopeToday;
+           gameCenterController.leaderboardCategory = leaderboardID;
+           // [self presentViewController: gameCenterController animated: YES completion:nil];
+        }
     }
+}
+
+- (void) gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    NSLog(@"removed");
+    [gameCenterViewController removeFromParentViewController];
 }
 
 @end

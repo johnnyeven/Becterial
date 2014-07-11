@@ -166,6 +166,12 @@
 		</dict>
 		<key>resources</key>
 		<dict/>
+		<key>resources/number_9.png</key>
+		<dict/>
+		<key>resources/scene_bg-hd.png</key>
+		<dict/>
+		<key>resources/scene_bg.png</key>
+		<dict/>
 	</dict>
 	<key>versionStr</key>
 	<string>Version: 1.1.0

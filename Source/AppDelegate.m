@@ -39,6 +39,7 @@
 #import "PZWebManager.h"
 #import "CashStoreManager.h"
 #import "DataStorageManager.h"
+#import "GameCenterManager.h"
 
 #import <StoreKit/StoreKit.h>
 
@@ -285,6 +286,7 @@
         }
     }
 
+    [[GameCenterManager sharedGameCenterManager] authenticateLocalPlayer];
 //    [[CCDirector sharedDirector] setDisplayStats:YES];
     return [CCBReader loadAsScene:@"MainScene"];
 }

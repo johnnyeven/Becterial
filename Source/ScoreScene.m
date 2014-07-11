@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Apportable. All rights reserved.
 //
 
+#import "define.h"
 #import "MainScene.h"
 #import "ScoreScene.h"
 #import "PZLabelScore.h"
@@ -23,6 +24,7 @@
 
 @implementation ScoreScene
 {
+    BOOL isR4;
     BOOL _over;
     int _score;
     int _time;
@@ -38,24 +40,60 @@
 
 -(void)didLoadFromCCB
 {
+    if(iPhone5)
+    {
+        isR4 = YES;
+    }
+    else
+    {
+        isR4 = NO;
+    }
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblScore.anchorPoint = ccp(0.f, 0.f);
-    _lblScore.position = ccp(24.f, 410.f);
+    if(isR4)
+    {
+        _lblScore.position = ccp(24.f, 486.f);
+    }
+    else
+    {
+        _lblScore.position = ccp(24.f, 410.f);
+    }
     [self addChild:_lblScore];
 
     _lblTime = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblTime.anchorPoint = ccp(0.f, 0.f);
-    _lblTime.position = ccp(24.f, 340.f);
+    if(isR4)
+    {
+        _lblTime.position = ccp(24.f, 416.f);
+    }
+    else
+    {
+        _lblTime.position = ccp(24.f, 340.f);
+    }
     [self addChild:_lblTime];
     
     _lblRate = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblRate.anchorPoint = ccp(0.f, 0.f);
-    _lblRate.position = ccp(24.f, 270.f);
+    if(isR4)
+    {
+        _lblRate.position = ccp(24.f, 346.f);
+    }
+    else
+    {
+        _lblRate.position = ccp(24.f, 270.f);
+    }
     [self addChild:_lblRate];
 
     _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
     _lblExp.anchorPoint = ccp(0.f, 0.f);
-    _lblExp.position = ccp(24.f, 205.f);
+    if(isR4)
+    {
+        _lblExp.position = ccp(24.f, 281.f);
+    }
+    else
+    {
+        _lblExp.position = ccp(24.f, 205.f);
+    }
     [self addChild:_lblExp];
     
     _over = NO;
@@ -130,7 +168,15 @@
 
 -(void)back
 {
-    MainScene *main = (MainScene *)[CCBReader load:@"MainScene"];
+    MainScene *main;
+    if(isR4)
+    {
+        main = (MainScene *)[CCBReader load:@"MainScene-r4"];
+    }
+    else
+    {
+        main = (MainScene *)[CCBReader load:@"MainScene"];
+    }
     CCScene *scene = [CCScene new];
     [scene addChild:main];
     [main reset];
@@ -150,19 +196,43 @@
 
 -(void)store
 {
-    CashStoreViewController *storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+    CashStoreViewController *storeView;
+    if(isR4)
+    {
+        storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreR4View" bundle:nil];
+    }
+    else
+    {
+        storeView = [[CashStoreViewController alloc] initWithNibName:@"CashStoreView" bundle:nil];
+    }
     [[[CCDirector sharedDirector] view] addSubview:storeView.view];
 }
 
 -(void)upgrade
 {
-    UpgradeViewController *upgradeView = [[UpgradeViewController alloc] initWithNibName:@"UpgradeView" bundle:nil];
+    UpgradeViewController *upgradeView;
+    if(isR4)
+    {
+        upgradeView = [[UpgradeViewController alloc] initWithNibName:@"UpgradeR4View" bundle:nil];
+    }
+    else
+    {
+        upgradeView = [[UpgradeViewController alloc] initWithNibName:@"UpgradeView" bundle:nil];
+    }
     [[[CCDirector sharedDirector] view] addSubview:upgradeView.view];
 }
 
 -(void)continueGame
 {
-    MainScene *main = (MainScene *)[CCBReader load:@"MainScene"];
+    MainScene *main;
+    if(isR4)
+    {
+        main = (MainScene *)[CCBReader load:@"MainScene-r4"];
+    }
+    else
+    {
+        main = (MainScene *)[CCBReader load:@"MainScene"];
+    }
     CCScene *scene = [CCScene new];
     [scene addChild:main];
     [[CCDirector sharedDirector] replaceScene:scene];

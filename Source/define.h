@@ -9,6 +9,8 @@
 #ifndef becterial_define_h
 #define becterial_define_h
 
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
 #define BECTERIAL_MESSAGE @"Becterial.BecterialTouched"
 #define BACTERIAL_BIOMASS 0.2f
 #define BACTERIAL_SCORE 1.7f

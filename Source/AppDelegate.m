@@ -24,6 +24,7 @@
  */
 
 #import "cocos2d.h"
+#import "define.h"
 
 #import "MobClick.h"
 #import "UMSocial.h"
@@ -288,7 +289,14 @@
 
     [[GameCenterManager sharedGameCenterManager] authenticateLocalPlayer];
 //    [[CCDirector sharedDirector] setDisplayStats:YES];
-    return [CCBReader loadAsScene:@"MainScene"];
+    if(iPhone5)
+    {
+        return [CCBReader loadAsScene:@"MainScene-r4"];
+    }
+    else
+    {
+        return [CCBReader loadAsScene:@"MainScene"];
+    }
 }
 
 @end

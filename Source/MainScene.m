@@ -24,6 +24,7 @@
 
 @implementation MainScene
 {
+    BOOL isR4;
     CCLabelTTF *_lblKillerCount;
     PZLabelScore *_lblExp;
     PZLabelScore *_lblStepCount;
@@ -48,20 +49,56 @@
 
 -(void)didLoadFromCCB
 {
+    if(iPhone5)
+    {
+        isR4 = YES;
+    }
+    else
+    {
+        isR4 = NO;
+    }
     _lblExp = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblExp.position = ccp(67.f, 455.5f);
+    if(isR4)
+    {
+        _lblExp.position = ccp(67.f, 543.5f);
+    }
+    else
+    {
+        _lblExp.position = ccp(67.f, 455.5f);
+    }
     [self addChild:_lblExp];
     
     _lblStepCount = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblStepCount.position = ccp(250.f, 455.5f);
+    if(isR4)
+    {
+        _lblStepCount.position = ccp(250.f, 543.5f);
+    }
+    else
+    {
+        _lblStepCount.position = ccp(250.f, 455.5f);
+    }
     [self addChild:_lblStepCount];
 
     _lblScore = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblScore.position = ccp(10.f, 390.f);
+    if(isR4)
+    {
+        _lblScore.position = ccp(10.f, 403.f);
+    }
+    else
+    {
+        _lblScore.position = ccp(10.f, 390.f);
+    }
     [self addChild:_lblScore];
 
     _lblBiomass = [PZLabelScore initWithScore:0 fileName:@"" itemWidth:14 itemHeight:22];
-    _lblBiomass.position = ccp(165.f, 390.f);
+    if(isR4)
+    {
+        _lblBiomass.position = ccp(165.f, 403.f);
+    }
+    else
+    {
+        _lblBiomass.position = ccp(165.f, 390.f);
+    }
     [self addChild:_lblBiomass];
     
     imgAccelerationBg.visible = NO;
@@ -374,15 +411,7 @@
 
 -(void)menu
 {
-    ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
-    [scoreScene setScore:_score];
-    [scoreScene setTime:runningTime];
-    [scoreScene setExp:[DataStorageManager sharedDataStorageManager].exp];
-    CGFloat rate = _score / runningTime;
-    [scoreScene setRate:rate];
-    CCScene *scene = [CCScene new];
-    [scene addChild:scoreScene];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    [self showScoreScene];
 }
 
 -(void)setStepCount:(int)stepCount
@@ -600,7 +629,15 @@
 
 -(ScoreScene *)showScoreScene
 {
-    ScoreScene *scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
+    ScoreScene *scoreScene;
+    if(isR4)
+    {
+        scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene-r4"];
+    }
+    else
+    {
+        scoreScene = (ScoreScene *)[CCBReader load:@"ScoreScene"];
+    }
     [scoreScene setScore:_score];
     [scoreScene setTime:runningTime];
     [scoreScene setExp:[DataStorageManager sharedDataStorageManager].exp];

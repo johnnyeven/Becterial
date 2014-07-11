@@ -81,8 +81,12 @@
 		BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */; };
 		BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE2119630DDE00994D13 /* CashStoreItemView.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
+		BEB8FAB11970368800755936 /* UpgradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB01970368800755936 /* UpgradeView.xib */; };
+		BEB8FAB51970393800755936 /* upgrade-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB41970393800755936 /* upgrade-hd.png */; };
+		BEB8FAB71970394400755936 /* store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB61970394400755936 /* store-hd.png */; };
+		BEB8FAB919703AFD00755936 /* CashStoreR4View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB819703AFD00755936 /* CashStoreR4View.xib */; };
 		BEBB31E119690FF200ECE458 /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */; };
-		BEBB31E219690FF200ECE458 /* UpgradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E019690FF200ECE458 /* UpgradeView.xib */; };
+		BEBB31E219690FF200ECE458 /* UpgradeR4View.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E019690FF200ECE458 /* UpgradeR4View.xib */; };
 		BEBB31F01969114D00ECE458 /* upgrade_level0.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E31969114D00ECE458 /* upgrade_level0.png */; };
 		BEBB31F11969114D00ECE458 /* upgrade_level1.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E41969114D00ECE458 /* upgrade_level1.png */; };
 		BEBB31F21969114D00ECE458 /* upgrade_level2.png in Resources */ = {isa = PBXBuildFile; fileRef = BEBB31E51969114D00ECE458 /* upgrade_level2.png */; };
@@ -240,9 +244,13 @@
 		BE89CE2119630DDE00994D13 /* CashStoreItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemView.m; path = Source/CashStoreItemView.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
+		BEB8FAB01970368800755936 /* UpgradeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeView.xib; path = Source/UpgradeView.xib; sourceTree = "<group>"; };
+		BEB8FAB41970393800755936 /* upgrade-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upgrade-hd.png"; path = "Source/upgrade-hd.png"; sourceTree = "<group>"; };
+		BEB8FAB61970394400755936 /* store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "store-hd.png"; path = "Source/store-hd.png"; sourceTree = "<group>"; };
+		BEB8FAB819703AFD00755936 /* CashStoreR4View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CashStoreR4View.xib; path = Source/CashStoreR4View.xib; sourceTree = "<group>"; };
 		BEBB31DE19690FF200ECE458 /* UpgradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpgradeViewController.h; path = Source/UpgradeViewController.h; sourceTree = "<group>"; };
 		BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpgradeViewController.m; path = Source/UpgradeViewController.m; sourceTree = "<group>"; };
-		BEBB31E019690FF200ECE458 /* UpgradeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeView.xib; path = Source/UpgradeView.xib; sourceTree = "<group>"; };
+		BEBB31E019690FF200ECE458 /* UpgradeR4View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeR4View.xib; path = Source/UpgradeR4View.xib; sourceTree = "<group>"; };
 		BEBB31E31969114D00ECE458 /* upgrade_level0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level0.png; path = Source/upgrade_level0.png; sourceTree = "<group>"; };
 		BEBB31E41969114D00ECE458 /* upgrade_level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level1.png; path = Source/upgrade_level1.png; sourceTree = "<group>"; };
 		BEBB31E51969114D00ECE458 /* upgrade_level2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_level2.png; path = Source/upgrade_level2.png; sourceTree = "<group>"; };
@@ -554,6 +562,7 @@
 			children = (
 				BE63466719683636007E375F /* success.png */,
 				BEFB261C19658DC900993C74 /* CashStoreManager.h */,
+				BEB8FAB61970394400755936 /* store-hd.png */,
 				BEFB261D19658DC900993C74 /* CashStoreManager.m */,
 				BEFB26211965AB9F00993C74 /* CashStorePaymentObserver.h */,
 				BEFB26221965AB9F00993C74 /* CashStorePaymentObserver.m */,
@@ -565,6 +574,7 @@
 				BE89CE1B19630B9E00994D13 /* store_img_icon_1.png */,
 				BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */,
 				BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */,
+				BEB8FAB819703AFD00755936 /* CashStoreR4View.xib */,
 				BE89CE091963007C00994D13 /* CashStoreViewController.h */,
 				BE89CE0A1963007C00994D13 /* CashStoreViewController.m */,
 				BE89CE1619630AF500994D13 /* CashStoreItemView.xib */,
@@ -584,6 +594,7 @@
 				BEBB31E51969114D00ECE458 /* upgrade_level2.png */,
 				BEBB31E61969114D00ECE458 /* upgrade_level3.png */,
 				BEBB31E71969114D00ECE458 /* upgrade_level4.png */,
+				BEB8FAB41970393800755936 /* upgrade-hd.png */,
 				BEBB31E81969114D00ECE458 /* upgrade_level5.png */,
 				BEBB31E91969114D00ECE458 /* upgrade_status0.png */,
 				BEBB31EA1969114D00ECE458 /* upgrade_status1.png */,
@@ -594,7 +605,8 @@
 				BEBB31EF1969114D00ECE458 /* upgrade.png */,
 				BEBB31DE19690FF200ECE458 /* UpgradeViewController.h */,
 				BEBB31DF19690FF200ECE458 /* UpgradeViewController.m */,
-				BEBB31E019690FF200ECE458 /* UpgradeView.xib */,
+				BEBB31E019690FF200ECE458 /* UpgradeR4View.xib */,
+				BEB8FAB01970368800755936 /* UpgradeView.xib */,
 				BEBB31FD1969151100ECE458 /* UpgradeView.h */,
 				BEBB31FE1969151100ECE458 /* UpgradeView.m */,
 				BEBB32001969157700ECE458 /* UpgradeItemView.xib */,
@@ -700,7 +712,7 @@
 				BEBB31FA1969114D00ECE458 /* upgrade_status4.png in Resources */,
 				BEBB31F91969114D00ECE458 /* upgrade_status3.png in Resources */,
 				BE058AC11961B18E005271F1 /* UMSCommentInputController.xib in Resources */,
-				BEBB31E219690FF200ECE458 /* UpgradeView.xib in Resources */,
+				BEBB31E219690FF200ECE458 /* UpgradeR4View.xib in Resources */,
 				BEBB31F81969114D00ECE458 /* upgrade_status2.png in Resources */,
 				BE89CE021962F17C00994D13 /* btnClose.png in Resources */,
 				BE12CB4A19586256006F775D /* Images.xcassets in Resources */,
@@ -715,8 +727,11 @@
 				BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */,
 				BE058AC21961B18E005271F1 /* UMSCommentInputControlleriPad.xib in Resources */,
 				BE89CE1D19630B9E00994D13 /* store_btn_buy.png in Resources */,
+				BEB8FAB51970393800755936 /* upgrade-hd.png in Resources */,
 				BEBB320619691CAC00ECE458 /* upgrade_const.plist in Resources */,
+				BEB8FAB11970368800755936 /* UpgradeView.xib in Resources */,
 				BE3610BB196AF03D0085BAF2 /* products.plist in Resources */,
+				BEB8FAB919703AFD00755936 /* CashStoreR4View.xib in Resources */,
 				BE058AC81961B18E005271F1 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
@@ -738,6 +753,7 @@
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				BEBB31F51969114D00ECE458 /* upgrade_level5.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
+				BEB8FAB71970394400755936 /* store-hd.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 				BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */,
 			);
@@ -898,7 +914,7 @@
 				);
 				PRODUCT_NAME = bacterial;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -947,7 +963,7 @@
 				);
 				PRODUCT_NAME = bacterial;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

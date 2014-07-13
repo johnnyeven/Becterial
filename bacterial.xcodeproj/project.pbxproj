@@ -65,6 +65,7 @@
 		BE3610B8196AE0400085BAF2 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3610B5196AE0400085BAF2 /* ios-social-sdk-shake.html */; };
 		BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */; };
 		BE3610BB196AF03D0085BAF2 /* products.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE3610BA196AF03D0085BAF2 /* products.plist */; };
+		BE5580751972DC7F00AE7BF8 /* Guide.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5580741972DC7F00AE7BF8 /* Guide.m */; };
 		BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5868BF196449A50007AF48 /* PZWebManager.m */; };
 		BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE58F2D11966F321009274E4 /* DataStorageManager.m */; };
 		BE63466819683636007E375F /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = BE63466719683636007E375F /* success.png */; };
@@ -219,6 +220,8 @@
 		BE3610B6196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_ScreenShot_1.0.a; sourceTree = "<group>"; };
 		BE3610B7196AE0400085BAF2 /* UMSocialScreenShoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialScreenShoter.h; sourceTree = "<group>"; };
 		BE3610BA196AF03D0085BAF2 /* products.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = products.plist; path = Source/products.plist; sourceTree = "<group>"; };
+		BE5580731972DC7F00AE7BF8 /* Guide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Guide.h; path = Source/Guide.h; sourceTree = "<group>"; };
+		BE5580741972DC7F00AE7BF8 /* Guide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Guide.m; path = Source/Guide.m; sourceTree = "<group>"; };
 		BE5868BE196449A50007AF48 /* PZWebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZWebManager.h; path = Source/PZWebManager.h; sourceTree = "<group>"; };
 		BE5868BF196449A50007AF48 /* PZWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZWebManager.m; path = Source/PZWebManager.m; sourceTree = "<group>"; };
 		BE58F2D01966F321009274E4 /* DataStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorageManager.h; path = Source/DataStorageManager.h; sourceTree = "<group>"; };
@@ -345,6 +348,8 @@
 				BE058A9F1961976D005271F1 /* ScoreScene.m */,
 				BE58F2D01966F321009274E4 /* DataStorageManager.h */,
 				BE58F2D11966F321009274E4 /* DataStorageManager.m */,
+				BE5580731972DC7F00AE7BF8 /* Guide.h */,
+				BE5580741972DC7F00AE7BF8 /* Guide.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -778,6 +783,7 @@
 				BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */,
+				BE5580751972DC7F00AE7BF8 /* Guide.m in Sources */,
 				BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */,
 				BEBB31FF1969151100ECE458 /* UpgradeView.m in Sources */,
 				BE1835A6195FE9DF00860689 /* Killer.m in Sources */,

@@ -67,7 +67,14 @@
             item.identifier = product.productIdentifier;
             [item.itemName setText:product.localizedTitle];
             [item.itemComment setText:product.localizedDescription];
-            [item.itemCash setText:product.price.stringValue];
+            
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+            [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [numberFormatter setLocale:product.priceLocale];
+            NSString *formattedPrice = [numberFormatter stringFromNumber:product.price];
+            
+            [item.itemCash setText:formattedPrice];
             [_scroller addSubview:item];
             item.backgroundColor = nil;
             item.frame = CGRectMake(0.f, offsetY, item.frame.size.width, item.frame.size.height);

@@ -40,6 +40,10 @@ static DataStorageManager *_sharedDataStorageManager;
     //load upgrade const data
     NSString *upgradeConstFilePath = [[NSBundle mainBundle] pathForResource:@"upgrade_const" ofType:@"plist"];
     self.upgradeConst = [[NSDictionary alloc] initWithContentsOfFile:upgradeConstFilePath];
+
+    //load achievement const data
+    NSString *achievementConstFilePath = [[NSBundle mainBundle] pathForResource:@"achievement_const" ofType:@"plist"];
+    self.achievementConst = [[NSDictionary alloc] initWithContentsOfFile:achievementConstFilePath];
     
     //load game data
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

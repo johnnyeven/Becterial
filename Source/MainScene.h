@@ -17,6 +17,7 @@
 @property (nonatomic) int stepCount;
 @property (nonatomic) int exp;
 @property (nonatomic) int killerCount;
+@property (nonatomic) int maxLevel;
 
 -(void)update10PerSecond:(CCTime)delta;
 -(void)prepareStage;

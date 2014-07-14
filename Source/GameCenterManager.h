@@ -26,5 +26,6 @@
 - (void) loadDefaultLeaderboard;
 - (void) reportScore: (int64_t) score;
 - (void) showLeaderboard;
+- (void) reportAchievementIdentifier: (NSString*) identifier percentComplete: (float) percent;
 
 @end

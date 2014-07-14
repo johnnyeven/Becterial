@@ -14,6 +14,7 @@
 #import "PZWebManager.h"
 #import "CashStoreManager.h"
 #import "DataStorageManager.h"
+#import "GameCenterManager.h"
 
 #define defaultStepCount 500
 #define defualtAccelerateTime 600.f;
@@ -21,6 +22,7 @@
 #define accelerateIncreaseBiomassRate 1.f;
 #define dataExp [DataStorageManager sharedDataStorageManager].exp
 #define dataKillerCount [DataStorageManager sharedDataStorageManager].killerCount
+#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievement_const
 
 @implementation MainScene
 {
@@ -101,6 +103,7 @@
     }
     [self addChild:_lblBiomass];
     
+    _maxLevel = 0;
     imgAccelerationBg.visible = NO;
     self.userInteractionEnabled = YES;
 }
@@ -170,6 +173,7 @@
         self.stepCount = defaultStepCount;
         self.exp = 0;
         self.killerCount = 10;
+        _maxLevel = 0;
     }
 }
 
@@ -219,6 +223,7 @@
             b.level = 1;
             b.position = ccp(position.x * 60.5f, position.y * 60.5f);
             [_container addChild:b];
+            self.maxLevel = 1;
             
             NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
             [_tmp replaceObjectAtIndex:position.y withObject:b];
@@ -320,6 +325,7 @@
                         {
                             becterial.level++;
                             self.exp = _exp + becterial.level;
+                            self.maxLevel = becterial.level;
                         }
                         runningAction--;
                         if(runningAction == 0)
@@ -461,6 +467,34 @@
     }
 }
 
+-(void)setMaxLevel:(int)maxLevel
+{
+    if(maxLevel > _maxLevel)
+    {
+        _maxLevel = maxLevel;
+
+        if(dataStorageManagerAchievement)
+        {
+            NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"level"];
+            NSArray *goalListKeys = [goalList allKeys];
+            NSDictionary *goal;
+            for(key in goalListKeys)
+            {
+                goal = [goalList objectForKey:key];
+                int goalValue = [[goal objectForKey:@"goal"] intValue];
+                if(_maxLevel >= goalValue)
+                {
+                    [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:100.f];
+                }
+                else
+                {
+                    [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_maxLevel / goalValue))];
+                }
+            }
+        }
+    }
+}
+
 -(CCNode *)container
 {
     return _container;
@@ -564,6 +598,7 @@
         [NSNumber numberWithInt:_stepCount], @"stepCount",
         [NSNumber numberWithFloat:_score], @"score",
         [NSNumber numberWithFloat:_biomass], @"biomass",
+        [NSNumber numberWithFloat:_maxLevel], @"maxLevel",
         [NSNumber numberWithInt:bacterialCount], @"bacterialCount",
         [NSNumber numberWithInt:enemyCount], @"enemyCount",
         [NSNumber numberWithFloat:bacterialBiomass], @"bacterialBiomass",
@@ -595,6 +630,7 @@
     self.stepCount = [[data objectForKey:@"stepCount"] intValue];
     self.score = [[data objectForKey:@"score"] floatValue];
     self.biomass = [[data objectForKey:@"biomass"] floatValue];
+    _maxLevel = [[data objectForKey:@"maxLevel"] floatValue];
     self.killerCount = dataKillerCount;
     bacterialCount = [[data objectForKey:@"bacterialCount"] intValue];
     enemyCount = [[data objectForKey:@"enemyCount"] intValue];
@@ -618,6 +654,7 @@
     inAccelerated = NO;
     accelerationTime = defualtAccelerateTime;
     runningTime = 0;
+    self.maxLevel = 0;
     self.stepCount = defaultStepCount;
     self.score = 0;
     self.biomass = 0;

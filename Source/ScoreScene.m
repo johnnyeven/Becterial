@@ -21,6 +21,7 @@
 #import "GameCenterManager.h"
 
 #define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
+#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievement_const
 
 @implementation ScoreScene
 {
@@ -140,6 +141,26 @@
 {
     _score = score;
     [_lblScore setScore:score];
+
+    if(dataStorageManagerAchievement)
+    {
+        NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"exp"];
+        NSArray *goalListKeys = [goalList allKeys];
+        NSDictionary *goal;
+        for(key in goalListKeys)
+        {
+            goal = [goalList objectForKey:key];
+            int goalValue = [[goal objectForKey:@"goal"] intValue];
+            if(_score > goalValue)
+            {
+                [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:100.f];
+            }
+            else
+            {
+                [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_score / goalValue))];
+            }
+        }
+    }
 }
 
 -(void)setRate:(CGFloat)rate

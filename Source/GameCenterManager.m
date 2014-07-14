@@ -152,10 +152,26 @@ static GameCenterManager *_instance = nil;
         scoreReporter.shouldSetDefaultLeaderboard = YES;
         scoreReporter.value = score;
         scoreReporter.context = 0;
-     
+    
         NSArray *scores = @[scoreReporter];
         [GKScore reportScores:scores withCompletionHandler:^(NSError *error)
         {
+        }];
+    }
+}
+
+- (void) reportAchievementIdentifier: (NSString*) identifier percentComplete: (float) percent
+{
+    GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: identifier];
+    if (achievement)
+    {
+        achievement.percentComplete = percent;
+        [achievement reportAchievementWithCompletionHandler:^(NSError *error)
+        {
+            if (error != nil)
+            {
+                NSLog(@"Error in reporting achievements: %@", error);
+            }
         }];
     }
 }

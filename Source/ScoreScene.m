@@ -21,7 +21,7 @@
 #import "GameCenterManager.h"
 
 #define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
-#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievement_const
+#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievementConst
 
 @implementation ScoreScene
 {
@@ -147,7 +147,7 @@
         NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"exp"];
         NSArray *goalListKeys = [goalList allKeys];
         NSDictionary *goal;
-        for(key in goalListKeys)
+        for(NSString *key in goalListKeys)
         {
             goal = [goalList objectForKey:key];
             int goalValue = [[goal objectForKey:@"goal"] intValue];
@@ -157,7 +157,7 @@
             }
             else
             {
-                [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_score / goalValue))];
+                [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_score / goalValue)];
             }
         }
     }

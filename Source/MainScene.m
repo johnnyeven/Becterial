@@ -9,6 +9,7 @@
 #import "MainScene.h"
 #import "ScoreScene.h"
 #import "Becterial.h"
+#import "Guide.h"
 #import "define.h"
 #import "PZLabelScore.h"
 #import "PZWebManager.h"
@@ -22,7 +23,9 @@
 #define accelerateIncreaseBiomassRate 1.f;
 #define dataExp [DataStorageManager sharedDataStorageManager].exp
 #define dataKillerCount [DataStorageManager sharedDataStorageManager].killerCount
-#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievement_const
+#define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievementConst
+#define dataStorageManagerGuide [DataStorageManager sharedDataStorageManager].guide
+#define dataStorageManagerGuideStep [DataStorageManager sharedDataStorageManager].guideStep
 
 @implementation MainScene
 {
@@ -33,6 +36,8 @@
     PZLabelScore *_lblScore;
     PZLabelScore *_lblBiomass;
     CCNode *_container;
+    CCButton *btnBiomass;
+    Guide *gLayer;
     NSMutableArray *_becterialContainer;
     NSMutableArray *_becterialList;
     int runningAction;
@@ -148,6 +153,26 @@
         [_becterialContainer addObject:_tmp];
     }
     
+    if (dataStorageManagerGuide)
+    {
+        int guideStep = dataStorageManagerGuideStep;
+        guideStep = fmax(1, guideStep);
+        
+        if(isR4)
+        {
+            gLayer = (Guide *)[CCBReader load:@"Guide-r4"];
+        }
+        else
+        {
+            gLayer = (Guide *)[CCBReader load:@"Guide"];
+        }
+        gLayer.step = guideStep;
+        [self addChild:gLayer];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBiomass" object:nil];
+    }
+    
     if([self loadGame])
     {
         for (int i = 0; i < [_becterialList count]; i++)
@@ -174,6 +199,18 @@
         self.exp = 0;
         self.killerCount = 10;
         _maxLevel = 0;
+    }
+}
+
+-(void)didReceiveGuideNotification:(NSNotification *) notification
+{
+    if([notification.name isEqualToString:@"guideClickBiomass"])
+    {
+        [self btnGenerateBiomass];
+        if (_biomass >= 50 && gLayer)
+        {
+            gLayer.step++;
+        }
     }
 }
 
@@ -478,7 +515,7 @@
             NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"level"];
             NSArray *goalListKeys = [goalList allKeys];
             NSDictionary *goal;
-            for(key in goalListKeys)
+            for(NSString *key in goalListKeys)
             {
                 goal = [goalList objectForKey:key];
                 int goalValue = [[goal objectForKey:@"goal"] intValue];
@@ -488,7 +525,7 @@
                 }
                 else
                 {
-                    [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_maxLevel / goalValue))];
+                    [[GameCenterManager sharedGameCenterManager] reportAchievementIdentifier:key percentComplete:(CGFloat)(_maxLevel / goalValue)];
                 }
             }
         }

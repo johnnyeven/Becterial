@@ -32,5 +32,6 @@
 -(void)checkResult;
 -(void)reset;
 -(ScoreScene *)showScoreScene;
+-(void)didReceiveGuideNotification:(NSNotification *) notification;
 
 @end

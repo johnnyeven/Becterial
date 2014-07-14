@@ -12,6 +12,8 @@
 
 @property (nonatomic) int killerCount;
 @property (nonatomic) int exp;
+@property (nonatomic) BOOL guide;
+@property (nonatomic) int guideStep;
 @property (nonatomic, strong) NSMutableDictionary *upgradeData;
 @property (nonatomic, strong) NSDictionary *upgradeConst;
 @property (nonatomic, strong) NSDictionary *achievementConst;

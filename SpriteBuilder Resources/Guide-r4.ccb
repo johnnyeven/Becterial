@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>7</integer>
+	<integer>8</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -41,7 +41,7 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>6</integer>
+				<integer>7</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>resources/guide_blackbg.png</string>
+							<string>resources/guide_blackbg-r4.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -132,14 +132,14 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>2</integer>
+				<integer>3</integer>
 				<key>baseClass</key>
 				<string>CCNode</string>
 				<key>children</key>
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>3</integer>
+						<integer>1</integer>
 						<key>baseClass</key>
 						<string>CCSprite</string>
 						<key>children</key>
@@ -228,7 +228,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>4</integer>
+						<integer>2</integer>
 						<key>baseClass</key>
 						<string>CCSprite</string>
 						<key>children</key>
@@ -341,8 +341,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>13.000030517578125</real>
-							<real>153.00003051757812</real>
+							<real>14.000030517578125</real>
+							<real>192.00003051757812</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -389,7 +389,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>5</integer>
+				<integer>6</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -420,7 +420,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>85.000015258789062</real>
+							<real>94.000015258789062</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -517,7 +517,7 @@
 				<key>value</key>
 				<array>
 					<real>320</real>
-					<real>480</real>
+					<real>568</real>
 					<integer>0</integer>
 					<integer>0</integer>
 				</array>
@@ -558,7 +558,7 @@
 			<key>ext</key>
 			<string>phone</string>
 			<key>height</key>
-			<integer>480</integer>
+			<integer>568</integer>
 			<key>name</key>
 			<string>Phone</string>
 			<key>scale</key>
@@ -572,7 +572,7 @@
 			<key>ext</key>
 			<string>tablet phonehd</string>
 			<key>height</key>
-			<integer>480</integer>
+			<integer>568</integer>
 			<key>name</key>
 			<string>Tablet</string>
 			<key>scale</key>

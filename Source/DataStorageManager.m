@@ -26,6 +26,8 @@ static DataStorageManager *_sharedDataStorageManager;
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *file = [path stringByAppendingPathComponent:@"savedata"];
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithBool:_guide], @"guide",
+                          [NSNumber numberWithInt:_guideStep], @"guide_step",
                           [NSNumber numberWithInt:_exp], @"exp",
                           [NSNumber numberWithInt:_killerCount], @"killerCount", nil
                           ];
@@ -52,11 +54,15 @@ static DataStorageManager *_sharedDataStorageManager;
     
     if(data == nil)
     {
+        self.guide = YES;
+        self.guideStep = 1;
         return NO;
     }
     
     self.exp = [[data objectForKey:@"exp"] intValue];
     self.killerCount = [[data objectForKey:@"killerCount"] intValue];
+    self.guide = [[data objectForKey:@"guide"] boolValue];
+    self.guideStep = [[data objectForKey:@"guide_step"] intValue];
     
     //load upgrade data
     path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

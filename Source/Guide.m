@@ -14,6 +14,7 @@
 {
     BOOL isR4;
     CCNode *container;
+    CCSprite *btnContinue;
     CCSprite *imgStep;
     CCSprite *arrow;
     CCSprite *mask;
@@ -27,6 +28,16 @@
     [self addChild:arrow];
     arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_arrow.png"];
     arrow.visible = NO;
+    container.cascadeOpacityEnabled = YES;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideRevolutionDone" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBacterialRevolution) name:@"guideRevolutionDone" object:nil];
+}
+
+-(void)didBacterialRevolution
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideRevolutionDone" object:nil];
+    self.step++;
 }
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -106,8 +117,8 @@
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
         }
-        else if (position.x > 6 && position.x < 67 &&
-            position.y > 319 && position.y < 380)
+        else if (position.x > 88 && position.x < 149 &&
+                 position.y > 319 && position.y < 380)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy2" object:nil];
         }
@@ -127,18 +138,25 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
         }
         else if (position.x > 6 && position.x < 67 &&
-            position.y > 319 && position.y < 380)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy3" object:nil];
-        }
-        else if (position.x > 6 && position.x < 67 &&
-            position.y > 319 && position.y < 380)
+                 position.y > 319 && position.y < 380)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial2" object:nil];
         }
     }
+    else if (_step == 9)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"guideTouchBacterial" object:touch];
+    }
     [DataStorageManager sharedDataStorageManager].guideStep = _step;
     [[DataStorageManager sharedDataStorageManager] saveData];
+}
+
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if(_step == 9)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"guideTouchBacterialEnd" object:touch];
+    }
 }
 
 -(void)setStep:(int)step
@@ -160,6 +178,7 @@
     }
     else if(_step == 3)
     {
+        btnContinue.visible = NO;
         container.position = ccp(13.f, 103.f);
         if(isR4)
         {
@@ -174,6 +193,7 @@
     }
     else if(_step == 4)
     {
+        btnContinue.visible = NO;
         container.position = ccp(13.f, 103.f);
         if(isR4)
         {
@@ -189,8 +209,10 @@
     else if(_step == 5)
     {
         //干得好，下面我们首先要放置红色的产生生物质的细菌，这会消耗20单位的生物酶
+        btnContinue.visible = NO;
         arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_circle.png"];
         container.position = ccp(13.f, 103.f);
+        container.opacity = 0.6f;
         if(isR4)
         {
             
@@ -205,8 +227,10 @@
     else if(_step == 6)
     {
         //下面我们来放置褐色的产生生物酶的细菌，这会消耗10单位的生物酶
+        btnContinue.visible = NO;
         arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_circle.png"];
         container.position = ccp(13.f, 103.f);
+        container.opacity = 0.6f;
         if(isR4)
         {
             
@@ -221,49 +245,28 @@
     else if(_step == 7)
     {
         //Cool 下面让我们来做更多的事情，首先再放置两个更多的红色细菌，如果生物酶不够那就想想我们第一步做了什么
+        btnContinue.visible = NO;
         arrow.visible = NO;
         container.position = ccp(13.f, 103.f);
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            arrow.visible = YES;
-            arrow.position = ccp(41.f, 347.f);
-        }
+        container.opacity = 0.6f;
         mask.visible = NO;
     }
     else if(_step == 8)
     {
         //好了吧？再放置两个更多的褐色细菌，如果生物酶不够那就想想我们第一步做了什么
+        btnContinue.visible = NO;
         arrow.visible = NO;
         container.position = ccp(13.f, 103.f);
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            arrow.visible = YES;
-            arrow.position = ccp(41.f, 347.f);
-        }
+        container.opacity = 0.6f;
         mask.visible = NO;
     }
     else if(_step == 9)
     {
         //好了？唔，看来你并不需要我的帮助，好了，下面用你灵巧的手指移动褐色细菌，让任意细菌周围存在2个或以上的相同等级细菌，像那样
+        btnContinue.visible = NO;
         arrow.visible = NO;
-        container.position = ccp(13.f, 103.f);
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            arrow.visible = YES;
-            arrow.position = ccp(41.f, 347.f);
-        }
+        container.position = ccp(13.f, 293.f);
+        container.opacity = .8f;
         mask.visible = NO;
     }
 }

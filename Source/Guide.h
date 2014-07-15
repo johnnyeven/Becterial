@@ -12,4 +12,6 @@
 
 @property (nonatomic) int step;
 
+-(void)didBacterialRevolution;
+
 @end

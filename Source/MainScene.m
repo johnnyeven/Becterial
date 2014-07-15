@@ -42,6 +42,10 @@
     NSMutableArray *_becterialList;
     int runningAction;
     CGFloat runningTime;
+    
+    int _lastX;
+    int _lastY;
+    Becterial *_lastBacterial;
 
     BOOL inAccelerated;
     CGFloat accelerationTime;
@@ -52,6 +56,11 @@
     CGFloat scoreOffset;        //分數增加量
     
     CCSprite *imgAccelerationBg;
+    
+    NSArray *guideEnemyPosition;
+    NSArray *guideBacterialPosition;
+    int guideEnemyPositionIndex;
+    int guideBacterialPositionIndex;
 }
 
 -(void)didLoadFromCCB
@@ -183,10 +192,24 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickScore2" object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy2" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickEnemy2" object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy3" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickEnemy3" object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBacterial2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideTouchBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterialEnd" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideTouchBacterialEnd" object:nil];
+        
+        guideEnemyPosition = [NSArray arrayWithObjects:
+                              [NSValue valueWithCGPoint:ccp(0.f, 0.f)],
+                              [NSValue valueWithCGPoint:ccp(1.f, 0.f)],
+                              [NSValue valueWithCGPoint:ccp(3.f, 0.f)], nil];
+        guideEnemyPositionIndex = 0;
+        
+        guideBacterialPosition = [NSArray arrayWithObjects:
+                              [NSValue valueWithCGPoint:ccp(4.f, 4.f)],
+                              [NSValue valueWithCGPoint:ccp(3.f, 4.f)],
+                              [NSValue valueWithCGPoint:ccp(1.f, 4.f)], nil];
+        guideBacterialPositionIndex = 0;
     }
     
     if([self loadGame])
@@ -231,14 +254,15 @@
     else if([notification.name isEqualToString:@"guideClickScore"])
     {
         [self btnGenerateScore];
-        if (_score >= 40 && gLayer)
+        if (_score >= 30 && gLayer)
         {
             gLayer.step++;
         }
     }
     else if([notification.name isEqualToString:@"guideClickEnemy"])
     {
-        [self putNewEnemy];
+        CGPoint p = [[guideEnemyPosition objectAtIndex:guideEnemyPositionIndex] CGPointValue];
+        [self putNewEnemy:p.x andY:p.y];
         if(enemyCount >= 1 && gLayer)
         {
             gLayer.step++;
@@ -246,7 +270,8 @@
     }
     else if([notification.name isEqualToString:@"guideClickBacterial"])
     {
-        [self putNewBacterial];
+        CGPoint p = [[guideBacterialPosition objectAtIndex:guideBacterialPositionIndex] CGPointValue];
+        [self putNewBacterial:p.x andY:p.y];
         if(bacterialCount >= 1 && gLayer)
         {
             gLayer.step++;
@@ -262,22 +287,85 @@
     }
     else if([notification.name isEqualToString:@"guideClickEnemy2"])
     {
-        [self putNewEnemy];
+        CGPoint p = [[guideEnemyPosition objectAtIndex:guideEnemyPositionIndex] CGPointValue];
+        [self putNewEnemy:p.x andY:p.y];
         if(enemyCount >= 3 && gLayer)
         {
             gLayer.step++;
         }
     }
-    else if([notification.name isEqualToString:@"guideClickEnemy3"])
-    {
-        [self putNewEnemy];
-    }
     else if([notification.name isEqualToString:@"guideClickBacterial2"])
     {
-        [self putNewBacterial];
+        CGPoint p = [[guideBacterialPosition objectAtIndex:guideBacterialPositionIndex] CGPointValue];
+        [self putNewBacterial:p.x andY:p.y];
         if(bacterialCount >= 3 && gLayer)
         {
             gLayer.step++;
+        }
+    }
+    else if([notification.name isEqualToString:@"guideTouchBacterial"])
+    {
+        UITouch *touch = (UITouch *)notification.object;
+        CGPoint position = touch.locationInWorld;
+        position = [[self container] convertToNodeSpace:position];
+        
+        int x = position.x / 60.5f;
+        int y = position.y / 60.5f;
+        
+        if (x > 4 || y > 4 || x < 0 || y < 0)
+        {
+            return;
+        }
+        
+        _lastX = position.x;
+        _lastY = position.y;
+        
+        NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
+        if([tmp objectAtIndex:y] != [NSNull null])
+        {
+            _lastBacterial = [tmp objectAtIndex:y];
+        }
+    }
+    else if([notification.name isEqualToString:@"guideTouchBacterialEnd"])
+    {
+        UITouch *touch = (UITouch *)notification.object;
+        CGPoint position = touch.locationInWorld;
+        if(_lastBacterial && abs(position.x - _lastX) > 1 && _lastBacterial.type == 0 && _biomass > 0)
+        {
+            if(abs(position.x - _lastX) > abs(position.y - _lastY))
+            {
+                if(position.x < _lastX)
+                {
+                    if(_lastBacterial.positionX > 0)
+                    {
+                        [self moveBecterial:_lastBacterial x:_lastBacterial.positionX - 1 y:_lastBacterial.positionY];
+                    }
+                }
+                else
+                {
+                    if(_lastBacterial.positionX < 4)
+                    {
+                        [self moveBecterial:_lastBacterial x:_lastBacterial.positionX + 1 y:_lastBacterial.positionY];
+                    }
+                }
+            }
+            else
+            {
+                if(position.y < _lastY)
+                {
+                    if(_lastBacterial.positionY > 0)
+                    {
+                        [self moveBecterial:_lastBacterial x:_lastBacterial.positionX y:_lastBacterial.positionY - 1];
+                    }
+                }
+                else
+                {
+                    if(_lastBacterial.positionY < 4)
+                    {
+                        [self moveBecterial:_lastBacterial x:_lastBacterial.positionX y:_lastBacterial.positionY + 1];
+                    }
+                }
+            }
         }
     }
 }
@@ -301,8 +389,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy2" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy3" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterial" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterialEnd" object:nil];
 
     [self saveGame];
 }
@@ -330,20 +419,33 @@
         if(count > 0)
         {
             CGPoint position = [[list objectAtIndex:(arc4random() % count)] CGPointValue];
+            return [self generateBacterial:type x:position.x y:position.y];
+        }
+    }
+    return NO;
+}
+
+-(BOOL)generateBacterial:(int)type x:(int)x y:(int)y
+{
+    if(type == 0 || type == 1)
+    {
+        NSMutableArray *tmp = [_becterialContainer objectAtIndex:x];
+        if([tmp objectAtIndex:y] == [NSNull null])
+        {
             Becterial *b = [[Becterial alloc] init];
-            b.positionX = position.x;
-            b.positionY = position.y;
+            b.positionX = x;
+            b.positionY = y;
             b.anchorPoint = ccp(0.f, 0.f);
             b.type = type;
             b.level = 1;
-            b.position = ccp(position.x * 60.5f, position.y * 60.5f);
+            b.position = ccp(x * 60.5f, y * 60.5f);
             [_container addChild:b];
             self.maxLevel = 1;
             
-            NSMutableArray *_tmp = [_becterialContainer objectAtIndex:position.x];
-            [_tmp replaceObjectAtIndex:position.y withObject:b];
+            NSMutableArray *_tmp = [_becterialContainer objectAtIndex:x];
+            [_tmp replaceObjectAtIndex:y withObject:b];
             [_becterialList addObject:b];
-
+            
             return YES;
         }
     }
@@ -441,6 +543,10 @@
                             becterial.level++;
                             self.exp = _exp + becterial.level;
                             self.maxLevel = becterial.level;
+                            if (gLayer)
+                            {
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideRevolutionDone" object:nil];
+                            }
                         }
                         runningAction--;
                         if(runningAction == 0)
@@ -515,6 +621,26 @@
     [self checkResult];
 }
 
+-(void)putNewBacterial:(int)x andY:(int)y
+{
+    if(_score >= NEW_BACTERIAL_COST && _biomass > 0 && [self generateBacterial:0 x:x y:y])
+    {
+        self.score = _score - NEW_BACTERIAL_COST;
+        
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+        
+        if(guideBacterialPositionIndex < 2)
+        {
+            guideBacterialPositionIndex++;
+        }
+    }
+    
+    [self checkResult];
+}
+
 -(void)putNewEnemy
 {
     if(_score >= NEW_ENEMY_COST && [self generateBacterial:1])
@@ -524,6 +650,26 @@
         if(![self evolution])
         {
             [self saveGame];
+        }
+    }
+    
+    [self checkResult];
+}
+
+-(void)putNewEnemy:(int)x andY:(int)y
+{
+    if(_score >= NEW_ENEMY_COST && [self generateBacterial:1 x:x y:y])
+    {
+        self.score = _score - NEW_ENEMY_COST;
+        
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+        
+        if(guideEnemyPositionIndex < 2)
+        {
+            guideEnemyPositionIndex++;
         }
     }
     
@@ -722,6 +868,8 @@
         [NSNumber numberWithFloat:runningTime], @"runningTime",
         [NSNumber numberWithBool:inAccelerated], @"inAccelerated",
         [NSNumber numberWithInt:accelerationTime], @"accelerationTime",
+        [NSNumber numberWithInt:guideEnemyPositionIndex], @"guideEnemyPositionIndex",
+        [NSNumber numberWithInt:guideBacterialPositionIndex], @"guideBacterialPositionIndex",
                           
         becterials, @"bacterials", nil
     ];
@@ -756,6 +904,8 @@
     runningTime = [[data objectForKey:@"runningTime"] floatValue];
     inAccelerated = [[data objectForKey:@"inAccelerated"] boolValue];
     accelerationTime = [[data objectForKey:@"accelerationTime"] intValue];
+    guideEnemyPositionIndex = [[data objectForKey:@"guideEnemyPositionIndex"] intValue];
+    guideBacterialPositionIndex = [[data objectForKey:@"guideBacterialPositionIndex"] intValue];
     if(_becterialList == nil)
     {
         _becterialList = [[NSMutableArray alloc] init];

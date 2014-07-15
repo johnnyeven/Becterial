@@ -22,6 +22,7 @@
 -(void)update10PerSecond:(CCTime)delta;
 -(void)prepareStage;
 -(BOOL)generateBacterial:(int)type;
+-(BOOL)generateBacterial:(int)type x:(int)x y:(int)y;
 -(void)moveBecterial:(Becterial *)becterial x:(int)x y:(int)y;
 -(BOOL)isEvolution:(Becterial *)becterial;
 -(BOOL)evolution;

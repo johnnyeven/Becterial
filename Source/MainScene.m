@@ -171,6 +171,22 @@
         
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBiomass" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickScore" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickEnemy" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass2" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBiomass2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore2" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickScore2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy2" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickEnemy2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy3" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickEnemy3" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideClickBacterial2" object:nil];
     }
     
     if([self loadGame])
@@ -212,6 +228,58 @@
             gLayer.step++;
         }
     }
+    else if([notification.name isEqualToString:@"guideClickScore"])
+    {
+        [self btnGenerateScore];
+        if (_score >= 40 && gLayer)
+        {
+            gLayer.step++;
+        }
+    }
+    else if([notification.name isEqualToString:@"guideClickEnemy"])
+    {
+        [self putNewEnemy];
+        if(enemyCount >= 1 && gLayer)
+        {
+            gLayer.step++;
+        }
+    }
+    else if([notification.name isEqualToString:@"guideClickBacterial"])
+    {
+        [self putNewBacterial];
+        if(bacterialCount >= 1 && gLayer)
+        {
+            gLayer.step++;
+        }
+    }
+    else if([notification.name isEqualToString:@"guideClickBiomass2"])
+    {
+        [self btnGenerateBiomass];
+    }
+    else if([notification.name isEqualToString:@"guideClickScore2"])
+    {
+        [self btnGenerateScore];
+    }
+    else if([notification.name isEqualToString:@"guideClickEnemy2"])
+    {
+        [self putNewEnemy];
+        if(enemyCount >= 3 && gLayer)
+        {
+            gLayer.step++;
+        }
+    }
+    else if([notification.name isEqualToString:@"guideClickEnemy3"])
+    {
+        [self putNewEnemy];
+    }
+    else if([notification.name isEqualToString:@"guideClickBacterial2"])
+    {
+        [self putNewBacterial];
+        if(bacterialCount >= 3 && gLayer)
+        {
+            gLayer.step++;
+        }
+    }
 }
 
 -(void)onEnter
@@ -225,6 +293,16 @@
 -(void)onExit
 {
     [super onExit];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass2" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore2" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy2" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy3" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
 
     [self saveGame];
 }

@@ -51,7 +51,7 @@
         }
         if(!upgradeConst)
         {
-            upgradeConst = [dataStorageManager.upgradeConst];
+            upgradeConst = dataStorageManager.upgradeConst;
         }
         NSArray *keys = [upgradeConst allKeys];
         NSDictionary *item;
@@ -107,6 +107,7 @@
             contentSizeHeight = contentSizeHeight + item.frame.size.height;
             contentSizeWidth = item.frame.size.width;
         }
+        upgradeView.scroller.contentSize = CGSizeMake(contentSizeWidth, contentSizeHeight);
     }
 }
 

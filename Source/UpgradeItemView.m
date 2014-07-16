@@ -12,6 +12,7 @@
 #import "MobClickGameAnalytics.h"
 
 #define dataStorageManager [DataStorageManager sharedDataStorageManager]
+#define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
 
 @implementation UpgradeItemView
 
@@ -26,9 +27,11 @@
 
 -(void)updateItemViewByUpgradeId:(NSString *)upgradeId level:(int)level
 {
-    if(dataStorageManager.upgradeConst)
+    NSDictionary *upgradeConstData = [dataStorageManagerConfig objectForKey:@"upgrade_const"];
+    NSDictionary *upgradeConst = [upgradeConstData objectForKey:@"result"];
+    if(upgradeConst)
     {
-        NSDictionary *item = [dataStorageManager.upgradeConst objectForKey:upgradeId];
+        NSDictionary *item = [upgradeConst objectForKey:upgradeId];
         NSArray *levels = [item objectForKey:@"levels"];
         level = fmin(5, fmax(0, level));
         int nextLevel = fmin(5, fmax(0, level + 1));
@@ -55,9 +58,11 @@
 -(IBAction)btnUpgradeTouch:(id)sender
 {
     UpgradeView *parentView = (UpgradeView *)self.superview.superview;
-	if(self.upgradeId)
+    NSDictionary *upgradeConstData = [dataStorageManagerConfig objectForKey:@"upgrade_const"];
+    NSDictionary *upgradeConst = [upgradeConstData objectForKey:@"result"];
+	if(self.upgradeId && upgradeConst)
 	{
-		NSDictionary *constItem = [dataStorageManager.upgradeConst objectForKey:self.upgradeId];
+		NSDictionary *constItem = [upgradeConst objectForKey:self.upgradeId];
         NSArray *levels = [constItem objectForKey:@"levels"];
         NSNumber *number = [dataStorageManager.upgradeData objectForKey:self.upgradeId];
 		int index = 0;

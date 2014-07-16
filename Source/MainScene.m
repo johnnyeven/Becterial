@@ -198,6 +198,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideTouchBacterial" object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterialEnd" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideTouchBacterialEnd" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideFinish" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveGuideNotification:) name:@"guideFinish" object:nil];
         
         guideEnemyPosition = [NSArray arrayWithObjects:
                               [NSValue valueWithCGPoint:ccp(0.f, 0.f)],
@@ -368,6 +370,23 @@
             }
         }
     }
+    else if([notification.name isEqualToString:@"guideFinish"])
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBiomass2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickScore2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickEnemy2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterial" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterialEnd" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideFinish" object:nil];
+        [self removeChild:gLayer cleanup:YES];
+        gLayer = nil;
+        [self reset];
+    }
 }
 
 -(void)onEnter
@@ -392,6 +411,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideClickBacterial2" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterial" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideTouchBacterialEnd" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"guideFinish" object:nil];
 
     [self saveGame];
 }
@@ -536,7 +556,7 @@
                             NSMutableArray *tmp = [_becterialContainer objectAtIndex:becterial.positionX];
                             [tmp replaceObjectAtIndex:becterial.positionY withObject:[NSNull null]];
                             [_becterialList removeObjectIdenticalTo:becterial];
-                            [_container removeChild:becterial];
+                            [_container removeChild:becterial cleanup:YES];
                         }
                         else
                         {

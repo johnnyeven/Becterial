@@ -43,7 +43,17 @@
     {
         NSString *name;
         NSArray *levels;
-        NSArray *keys = [dataStorageManager.upgradeConst allKeys];
+        NSDictionary *upgradeConstData = [dataStorageManager.config objectForKey:@"upgrade_const"];
+        NSDictionary *upgradeConst = nil;
+        if(upgradeConstData)
+        {
+            upgradeConst = [upgradeConstData objectForKey:@"result"];
+        }
+        if(!upgradeConst)
+        {
+            upgradeConst = [dataStorageManager.upgradeConst];
+        }
+        NSArray *keys = [upgradeConst allKeys];
         NSDictionary *item;
         
         CGFloat offsetY = 0.f;
@@ -52,7 +62,7 @@
         
         for (NSString *key in keys)
         {
-            item = [dataStorageManager.upgradeConst objectForKey:key];
+            item = [upgradeConst objectForKey:key];
             name = [item objectForKey:@"name"];
             levels = [item objectForKey:@"levels"];
             

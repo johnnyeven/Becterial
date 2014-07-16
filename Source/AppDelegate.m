@@ -196,6 +196,21 @@
             [[CashStoreManager sharedCashStoreManager] validateProductIdentifiers:productArray];
 
             //upgrade
+            NSDictionary *upgradeData = [data objectForKey:@"upgrade_const"];
+            NSDictionary *upgrade = [upgradeData objectForKey:@"result"];
+            version = [upgradeData objectForKey:@"version"];
+            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"upgrade_const"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"upgrade_const"];
+            }
+            [config setObject:upgrade forKey:@"result"];
 
             //score board
             NSDictionary *scoreboardResult = [data objectForKey:@"score_board"];
@@ -236,7 +251,21 @@
         }
         else if([command isEqualToString:@"requestUpgradeConst"])
         {
-
+            NSDictionary *upgradeData = [data objectForKey:@"upgrade_const"];
+            NSDictionary *upgrade = [upgradeData objectForKey:@"result"];
+            version = [upgradeData objectForKey:@"version"];
+            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"upgrade_const"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"upgrade_const"];
+            }
+            [config setObject:upgrade forKey:@"result"];
         }
         else if([command isEqualToString:@"requestScoreBoard"])
         {

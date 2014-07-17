@@ -10,10 +10,11 @@
 
 @interface CashStoreView : UIView
 
-@property (nonatomic, retain) IBOutlet UIButton *btnClose;
-@property (nonatomic, retain) IBOutlet UIScrollView *scroller;
-@property (nonatomic, retain) IBOutlet UIView *loadingView;
-@property (nonatomic, retain) IBOutlet UIView *successView;
+@property (nonatomic, strong) IBOutlet UIButton *btnClose;
+@property (nonatomic, strong) IBOutlet UIScrollView *scroller;
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
+@property (nonatomic, strong) IBOutlet UIView *successView;
+@property (nonatomic, strong) IBOutlet UILabel *lblMessage;
 
 -(IBAction)closeView:(id)sender;
 -(IBAction)closeSuccessView:(id)sender;

@@ -576,6 +576,23 @@
                                 [self saveGame];
                                 [self checkResult];
                             }
+                            
+                            CGFloat rate = [Becterial getUpgradeSplit];
+                            if(rate > 0)
+                            {
+                                rate = rate * 100;
+                                if(arc4random() % 100 <= rate)
+                                {
+                                    if (becterial.type == 0)
+                                    {
+                                        [self putNewBacterialNoCost];
+                                    }
+                                    else
+                                    {
+                                        [self putNewEnemyNoCost];
+                                    }
+                                }
+                            }
                         }
                     }];
                     isCallback = YES;
@@ -630,8 +647,21 @@
 {
     if(_score >= NEW_BACTERIAL_COST && _biomass > 0 && [self generateBacterial:0])
     {
-        self.score = _score - NEW_BACTERIAL_COST;
+        self.score = _score - NEW_BACTERIAL_COST * (1 - [Becterial getUpgradeScoreCostDec]);
         
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+    }
+    
+    [self checkResult];
+}
+
+-(void)putNewBacterialNoCost
+{
+    if([self generateBacterial:0])
+    {
         if(![self evolution])
         {
             [self saveGame];
@@ -645,7 +675,7 @@
 {
     if(_score >= NEW_BACTERIAL_COST && _biomass > 0 && [self generateBacterial:0 x:x y:y])
     {
-        self.score = _score - NEW_BACTERIAL_COST;
+        self.score = _score - NEW_BACTERIAL_COST * (1 - [Becterial getUpgradeScoreCostDec]);
         
         if(![self evolution])
         {
@@ -665,8 +695,21 @@
 {
     if(_score >= NEW_ENEMY_COST && [self generateBacterial:1])
     {
-        self.score = _score - NEW_ENEMY_COST;
+        self.score = _score - NEW_ENEMY_COST * (1 - [Becterial getUpgradeScoreCostDec]);
 
+        if(![self evolution])
+        {
+            [self saveGame];
+        }
+    }
+    
+    [self checkResult];
+}
+
+-(void)putNewEnemyNoCost
+{
+    if([self generateBacterial:1])
+    {
         if(![self evolution])
         {
             [self saveGame];
@@ -680,7 +723,7 @@
 {
     if(_score >= NEW_ENEMY_COST && [self generateBacterial:1 x:x y:y])
     {
-        self.score = _score - NEW_ENEMY_COST;
+        self.score = _score - NEW_ENEMY_COST * (1 - [Becterial getUpgradeScoreCostDec]);
         
         if(![self evolution])
         {
@@ -852,8 +895,8 @@
 
     bacterialCount = bCount;
     enemyCount = eCount;
-    bacterialBiomass = bBiomass;
-    enemyBiomass = eBiomass;
+    bacterialBiomass = bBiomass * (1 - [Becterial getUpgradeBiomassDec]);
+    enemyBiomass = eBiomass * (1 + [Becterial getUpgradeBiomassInc]);
 
     CGFloat scoreIncreaseRate = 1 + [Becterial getUpgradeScoreInc];
     if(inAccelerated)

@@ -83,11 +83,12 @@
         if(dataStorageManager.exp >= cost)
         {
         	//经验满足
+            dataStorageManager.exp = dataStorageManager.exp - cost;
+            
         	int r = arc4random() % 100;
         	if(r < rate)
         	{
         		//改造成功
-        		dataStorageManager.exp = dataStorageManager.exp - cost;
         		index++;
         		NSNumber *newNumber = [NSNumber numberWithInt:index];
         		[dataStorageManager.upgradeData setObject:newNumber forKey:self.upgradeId];

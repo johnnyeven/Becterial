@@ -314,6 +314,26 @@
                 {
                     [Becterial setUpgradeScoreInc:[[additional objectForKey:add] floatValue]];
                 }
+                else if([add isEqualToString:@"upgradeBiomassDec"])
+                {
+                    [Becterial setUpgradeBiomassDec:[[additional objectForKey:add] floatValue]];
+                }
+                else if([add isEqualToString:@"upgradeBiomassInc"])
+                {
+                    [Becterial setUpgradeBiomassInc:[[additional objectForKey:add] floatValue]];
+                }
+                else if([add isEqualToString:@"upgradeSplit"])
+                {
+                    [Becterial setUpgradeSplit:[[additional objectForKey:add] floatValue]];
+                }
+                else if([add isEqualToString:@"upgradeScoreCostDec"])
+                {
+                    [Becterial setUpgradeScoreCostDec:[[additional objectForKey:add] floatValue]];
+                }
+                else if([add isEqualToString:@"upgradeAutoRevolution"])
+                {
+                    [Becterial setUpgradeAutoRevolution:[[additional objectForKey:add] floatValue]];
+                }
             }
         }
     }

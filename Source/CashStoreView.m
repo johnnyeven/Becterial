@@ -93,7 +93,9 @@
 
 -(void)showSuccessView:(NSNotification *)notification
 {
+    NSString *content = (NSString *)[notification object];
     self.successView.hidden = NO;
+    [self.lblMessage setText:content];
 }
 
 /*

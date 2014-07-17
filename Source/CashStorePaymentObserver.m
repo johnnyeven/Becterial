@@ -61,7 +61,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 -(void)deliverComplete:(NSString *)identifier;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:@"购买成功"];
     //find transaction with identifier
     if(_transactions)
     {
@@ -114,7 +114,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
             }
             case SKPaymentTransactionStateFailed:
             {
-                NSLog(@"%@", transaction.error.localizedDescription);
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:transaction.error.localizedDescription];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;

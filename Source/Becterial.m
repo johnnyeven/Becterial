@@ -17,6 +17,11 @@
 }
 
 static CGFloat upgradeScoreInc = 0.f;
+static CGFloat upgradeBiomassDec = 0.f;
+static CGFloat upgradeBiomassInc = 0.f;
+static CGFloat upgradeSplit = 0.f;
+static CGFloat upgradeScoreCostDec = 0.f;
+static CGFloat upgradeAutoRevolution = 0.f;
 
 +(CGFloat)getUpgradeScoreInc
 {
@@ -26,6 +31,56 @@ static CGFloat upgradeScoreInc = 0.f;
 +(void)setUpgradeScoreInc:(CGFloat)value
 {
     upgradeScoreInc = value;
+}
+
++(CGFloat)getUpgradeBiomassDec
+{
+    return upgradeBiomassDec;
+}
+
++(CGFloat)getUpgradeBiomassInc
+{
+    return upgradeBiomassInc;
+}
+
++(CGFloat)getUpgradeSplit
+{
+    return upgradeSplit;
+}
+
++(CGFloat)getUpgradeScoreCostDec
+{
+    return upgradeScoreCostDec;
+}
+
++(CGFloat)getUpgradeAutoRevolution
+{
+    return upgradeAutoRevolution;
+}
+
++(void)setUpgradeBiomassDec:(CGFloat)value
+{
+    upgradeBiomassDec = value;
+}
+
++(void)setUpgradeBiomassInc:(CGFloat)value
+{
+    upgradeBiomassInc = value;
+}
+
++(void)setUpgradeSplit:(CGFloat)value
+{
+    upgradeSplit = value;
+}
+
++(void)setUpgradeScoreCostDec:(CGFloat)value
+{
+    upgradeScoreCostDec = value;
+}
+
++(void)setUpgradeAutoRevolution:(CGFloat)value
+{
+    upgradeAutoRevolution = value;
 }
 
 -(id)init

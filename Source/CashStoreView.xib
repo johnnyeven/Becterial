@@ -60,10 +60,17 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="success.png" translatesAutoresizingMaskIntoConstraints="NO" id="7LG-U1-BKw">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="upgrade_message.png" translatesAutoresizingMaskIntoConstraints="NO" id="7LG-U1-BKw">
                             <rect key="frame" x="36" y="170" width="247" height="141"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="characterWrap" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFi-kQ-bkb">
+                            <rect key="frame" x="49" y="190" width="221" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.2356305803571429" green="0.19650253387168848" blue="0.15378596143916159" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNZ-Cy-bPV">
                             <rect key="frame" x="122" y="248" width="74" height="38"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -83,6 +90,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnClose" destination="egb-sD-dms" id="E93-jS-E80"/>
+                <outlet property="lblMessage" destination="lFi-kQ-bkb" id="FXZ-VX-Ad0"/>
                 <outlet property="loadingView" destination="3CF-4l-BiQ" id="raS-ib-1n9"/>
                 <outlet property="scroller" destination="gwE-b3-quQ" id="J1P-wD-6fu"/>
                 <outlet property="successView" destination="sPc-MO-Ugy" id="J5a-s3-Zjo"/>
@@ -93,6 +101,6 @@
         <image name="btnClose.png" width="23" height="23"/>
         <image name="store.png" width="320" height="480"/>
         <image name="store_btn_buy.png" width="74" height="38"/>
-        <image name="success.png" width="494" height="281"/>
+        <image name="upgrade_message.png" width="494" height="281"/>
     </resources>
 </document>

@@ -35,6 +35,7 @@
 	else
 	{
 		v.loadingView.hidden = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:@"似乎没有网络连接哦"];
 	}
 }
 

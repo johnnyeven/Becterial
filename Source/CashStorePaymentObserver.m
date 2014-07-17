@@ -94,6 +94,11 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
     {
         switch (transaction.transactionState)
         {
+            case SKPaymentTransactionStatePurchasing:
+            {
+                NSLog(@"purchasing");
+                break;
+            }
             case SKPaymentTransactionStatePurchased:
             {
                 NSString *receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes
@@ -108,16 +113,29 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                 break;
             }
             case SKPaymentTransactionStateFailed:
+            {
                 NSLog(@"%@", transaction.error.localizedDescription);
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;
+            }
             case SKPaymentTransactionStateRestored:
+            {
                 NSLog(@"restored");
+                NSString *receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes
+                                          length:transaction.transactionReceipt.length];
+                [[NSNotificationCenter defaultCenter] removeObserver:self name:@"checkReceipt" object:nil];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveFromServer:) name:@"checkReceipt" object:nil];
+                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      transaction.payment.productIdentifier, @"identifier",
+                                      receipt, @"receipt", nil];
+                [[PZWebManager sharedPZWebManager] asyncPostRequest:@"http://b.profzone.net/order/check_receipt" withData:data];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;
+            }
             default:
+                NSLog(@"default");
                 break;
         }
     }

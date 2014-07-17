@@ -80,8 +80,10 @@
     [YouMiConfig launchWithAppID:@"5993d19fa9e134c3" appSecret:@"e620f97ee3da012d"];
     [YouMiPointsManager enable];
     [YouMiWall enable];
-    
-//    [MobClick setLogEnabled:YES];
+
+#ifdef DEBUG_MODE
+   [MobClick setLogEnabled:YES];
+#endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoadVersionConfig:) name:@"requestVersionConfig" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnectFailed:) name:@"connectionError1009" object:nil];
@@ -317,7 +319,11 @@
     }
 
     [[GameCenterManager sharedGameCenterManager] authenticateLocalPlayer];
-//    [[CCDirector sharedDirector] setDisplayStats:YES];
+
+    #ifdef DEBUG_MODE
+    [[CCDirector sharedDirector] setDisplayStats:YES];
+    #endif
+
     if(iPhone5)
     {
         return [CCBReader loadAsScene:@"MainScene-r4"];

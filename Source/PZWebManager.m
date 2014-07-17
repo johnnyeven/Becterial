@@ -7,6 +7,7 @@
 //
 
 #import "PZWebManager.h"
+#import "define.h"
 
 @implementation PZWebManager
 {
@@ -66,7 +67,11 @@ static PZWebManager *_sharedPZWebManager = nil;
 {
     NSError *error;
     NSString *json = [[NSString alloc] initWithData:receiveData encoding:NSUTF8StringEncoding];
+
+    #ifdef DEBUG_MODE
     NSLog(@"%@", json);
+    #endif
+    
     NSDictionary *data = [NSJSONSerialization JSONObjectWithData:receiveData options:NSJSONReadingMutableLeaves error:&error];
     NSString *command = [data objectForKey:@"command"];
     

@@ -197,14 +197,14 @@
     else if(_step == 3)
     {
         btnContinue.visible = NO;
-        container.position = ccp(13.f, 103.f);
+        arrow.visible = YES;
         if(isR4)
         {
             
         }
         else
         {
-            arrow.visible = YES;
+            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(240.f, 410.f);
         }
         mask.visible = NO;
@@ -212,14 +212,14 @@
     else if(_step == 4)
     {
         btnContinue.visible = NO;
-        container.position = ccp(13.f, 103.f);
+        arrow.visible = YES;
         if(isR4)
         {
             
         }
         else
         {
-            arrow.visible = YES;
+            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(80.f, 410.f);
         }
         mask.visible = NO;
@@ -229,15 +229,15 @@
         //干得好，下面我们首先要放置红色的产生生物质的细菌，这会消耗20单位的生物酶
         btnContinue.visible = NO;
         arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_circle.png"];
-        container.position = ccp(13.f, 103.f);
         container.opacity = 0.6f;
+        arrow.visible = YES;
         if(isR4)
         {
             
         }
         else
         {
-            arrow.visible = YES;
+            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(118.f, 347.f);
         }
         mask.visible = NO;
@@ -247,15 +247,15 @@
         //下面我们来放置褐色的产生生物酶的细菌，这会消耗10单位的生物酶
         btnContinue.visible = NO;
         arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_circle.png"];
-        container.position = ccp(13.f, 103.f);
         container.opacity = 0.6f;
+        arrow.visible = YES;
         if(isR4)
         {
             
         }
         else
         {
-            arrow.visible = YES;
+            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(41.f, 347.f);
         }
         mask.visible = NO;
@@ -265,7 +265,14 @@
         //Cool 下面让我们来做更多的事情，首先再放置两个更多的红色细菌，如果生物酶不够那就想想我们第一步做了什么
         btnContinue.visible = NO;
         arrow.visible = NO;
-        container.position = ccp(13.f, 103.f);
+        if(isR4)
+        {
+            
+        }
+        else
+        {
+            container.position = ccp(13.f, 103.f);
+        }
         container.opacity = 0.6f;
         mask.visible = NO;
     }
@@ -274,7 +281,14 @@
         //好了吧？再放置两个更多的褐色细菌，如果生物酶不够那就想想我们第一步做了什么
         btnContinue.visible = NO;
         arrow.visible = NO;
-        container.position = ccp(13.f, 103.f);
+        if(isR4)
+        {
+            
+        }
+        else
+        {
+            container.position = ccp(13.f, 103.f);
+        }
         container.opacity = 0.6f;
         mask.visible = NO;
     }
@@ -283,7 +297,14 @@
         //好了？唔，看来你并不需要我的帮助，好了，下面用你灵巧的手指移动褐色细菌，让任意细菌周围存在2个或以上的相同等级细菌，像那样
         btnContinue.visible = NO;
         arrow.visible = NO;
-        container.position = ccp(13.f, 293.f);
+        if(isR4)
+        {
+            
+        }
+        else
+        {
+            container.position = ccp(13.f, 293.f);
+        }
         container.opacity = .8f;
         mask.visible = NO;
     }
@@ -291,11 +312,23 @@
     {
         //看见了吗？只要任意细菌周围存在2个或以上相同等级的细菌，他就会进化，这包括褐色和红色的细菌
         btnContinue.visible = YES;
+        arrow.visible = NO;
         mask.visible = YES;
+        if(isR4)
+        {
+            
+        }
+        else
+        {
+            container.position = ccp(13.f, 103.f);
+        }
     }
     else if(_step == 11)
     {
         //这里有个关键问题，红色细菌会攻击褐色细菌，当被进化的目标是褐色细菌，如果周围存在红色细菌，那么进化后细菌会被消灭
+        btnContinue.visible = YES;
+        arrow.visible = NO;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -304,12 +337,13 @@
         {
             container.position = ccp(13.f, 103.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
     else if(_step == 12)
     {
         //当被进化的目标是红色细菌，只要周围存在2个以上相同等级(不论颜色)的细菌，他就会进化
+        btnContinue.visible = YES;
+        arrow.visible = NO;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -318,12 +352,13 @@
         {
             container.position = ccp(13.f, 103.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
     else if(_step == 13)
     {
         //明白了吧？褐色与红色的细菌彼此对立又缺一不可。还有一点，红色细菌是无法移动的！
+        btnContinue.visible = YES;
+        arrow.visible = NO;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -332,12 +367,13 @@
         {
             container.position = ccp(13.f, 103.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
     else if(_step == 14)
     {
         //你需要合理移动褐色细菌，来进化更多高等级的褐色细菌，以提高生物酶的生产效率，这个才是你的终极目标！
+        arrow.visible = NO;
+        btnContinue.visible = YES;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -346,12 +382,13 @@
         {
             container.position = ccp(13.f, 103.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
     else if(_step == 15)
     {
         //最后一件事，看见这个瓶子了吗？这是激素，拖动这个到下面的方格子中会在1分钟之内提升100%生物酶的生产效率！
+        arrow.visible = YES;
+        btnContinue.visible = YES;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -359,13 +396,15 @@
         else
         {
             container.position = ccp(13.f, 103.f);
+            arrow.position = ccp(200.f, 347.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
     else if(_step == 16)
     {
         //好了，就到这儿，我先把你的试验结果清理掉，你可以自己重新开始了，祝你好运！
+        arrow.visible = NO;
+        btnContinue.visible = YES;
+        mask.visible = YES;
         if(isR4)
         {
             
@@ -374,8 +413,6 @@
         {
             container.position = ccp(13.f, 103.f);
         }
-        btnContinue.visible = YES;
-        mask.visible = YES;
     }
 }
 

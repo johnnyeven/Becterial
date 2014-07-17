@@ -41,8 +41,7 @@
 			<string>sinaweibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sina.</string>
-				<string>53b031e856240b128d1615f7</string>
+				<string>sina.53b031e856240b128d1615f7</string>
 			</array>
 		</dict>
 		<dict>

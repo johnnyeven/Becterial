@@ -255,8 +255,8 @@
         {
             NSDictionary *upgradeData = [data objectForKey:@"upgrade_const"];
             NSDictionary *upgrade = [upgradeData objectForKey:@"result"];
-            version = [upgradeData objectForKey:@"version"];
-            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"upgrade_const"];
+            NSDictionary *version = [upgradeData objectForKey:@"version"];
+            NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"upgrade_const"];
             if(config)
             {
                 [config setObject:version forKey:@"version"];

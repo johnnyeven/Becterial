@@ -101,6 +101,7 @@
     _over = NO;
     
     btnTop10.enabled = [GameCenterManager sharedGameCenterManager].enabled;
+    btnScoreboard.visible = NO;
 
     if(dataStorageManagerConfig)
     {
@@ -120,11 +121,21 @@
             }
             free(points);
         }
-        else
-        {
-            btnScoreboard.visible = NO;
-        }
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadExp" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadExp) name:@"reloadExp" object:nil];
+}
+
+-(void)onExit
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadExp" object:nil];
+    [super onExit];
+}
+
+-(void)reloadExp
+{
+    [self setExp:[DataStorageManager sharedDataStorageManager].exp];
 }
 
 -(void)setOver:(BOOL)over

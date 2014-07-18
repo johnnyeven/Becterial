@@ -107,7 +107,7 @@
         NSArray *result = [[NSArray alloc] initWithContentsOfFile:file];
         NSDictionary *productsResult = [NSDictionary dictionaryWithObjectsAndKeys:
                                         result, @"result",
-                                        @"", @"version", nil];
+                                        [NSDictionary new], @"version", nil];
         [[DataStorageManager sharedDataStorageManager].config setObject:productsResult forKey:@"products"];
         
         //Upgrade配置

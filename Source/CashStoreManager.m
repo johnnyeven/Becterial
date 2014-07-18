@@ -10,6 +10,8 @@
 #import "CashStoreManager.h"
 #import "DataStorageManager.h"
 
+#define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
+
 @implementation CashStoreManager
 
 static CashStoreManager *_instance = nil;
@@ -55,28 +57,57 @@ static CashStoreManager *_instance = nil;
 	_products = response.products;
     _invalidProducts = response.invalidProductIdentifiers;
     
-    NSMutableArray *array = [NSMutableArray new];
-    for (SKProduct *product in _products)
+    if(dataStorageManagerConfig)
     {
-        NSMutableDictionary *p = [NSMutableDictionary new];
-        [p setObject:product.productIdentifier forKey:@"productIdentifier"];
-        [p setObject:product.localizedTitle forKey:@"localizedTitle"];
-        [p setObject:product.localizedDescription forKey:@"localizedDescription"];
-        [p setObject:product.price.stringValue forKey:@"price"];
-        [array addObject:p];
+        NSDictionary *productData = [dataStorageManagerConfig objectForKey:@"products"];
+        NSArray *products = [productData objectForKey:@"result"];
+        if(products)
+        {
+            NSComparator sorter = ^NSComparisonResult(SKProduct *p1, SKProduct *p2)
+            {
+                NSString *identifier1 = p1.productIdentifier;
+                NSString *identifier2 = p2.productIdentifier;
+                NSDictionary *product1;
+                NSDictionary *product2;
+                for (NSDictionary *p in products)
+                {
+                    if([identifier1 isEqualToString:[p objectForKey:@"productIdentifier"]])
+                    {
+                        product1 = p;
+                    }
+                    else if([identifier2 isEqualToString:[p objectForKey:@"productIdentifier"]])
+                    {
+                        product2 = p;
+                    }
+                    if(product1 && product2)
+                    {
+                        break;
+                    }
+                }
+                if(product1 && product2)
+                {
+                    int sort1 = [[product1 objectForKey:@"sort"] intValue];
+                    int sort2 = [[product2 objectForKey:@"sort"] intValue];
+                    if(sort1 > sort2)
+                    {
+                        return (NSComparisonResult)NSOrderedDescending;
+                    }
+                    else if(sort1 < sort2)
+                    {
+                        return (NSComparisonResult)NSOrderedAscending;
+                    }
+                    else
+                    {
+                        return (NSComparisonResult)NSOrderedSame;
+                    }
+                }
+                
+                return (NSComparisonResult)NSOrderedSame;
+            };
+            
+            _products = [_products sortedArrayUsingComparator:sorter];
+        }
     }
-
-//    NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"products"];
-//    if(!config)
-//    {
-//        config = [NSMutableDictionary new];
-//        [config setObject:[NSDictionary new] forKey:@"version"];
-//    }
-//    else
-//    {
-//        [[DataStorageManager sharedDataStorageManager].config setObject:array forKey:@"result"];
-//    }
-//    [[DataStorageManager sharedDataStorageManager] saveConfig];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCashStoreView" object:nil];

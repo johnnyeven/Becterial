@@ -84,7 +84,7 @@
         {
         	//经验满足
             dataStorageManager.exp = dataStorageManager.exp - cost;
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadExp" object:nil];
         	int r = arc4random() % 100;
         	if(r < rate)
         	{

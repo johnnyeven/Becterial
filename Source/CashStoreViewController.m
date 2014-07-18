@@ -75,6 +75,23 @@
         NSDictionary *config = [DataStorageManager sharedDataStorageManager].config;
         NSDictionary *productsResult = [config objectForKey:@"products"];
         NSArray *products = [productsResult objectForKey:@"result"];
+        NSComparator sorter = ^NSComparisonResult(NSDictionary *item1, NSDictionary *item2)
+        {
+            int sort1 = [[item1 objectForKey:@"sort"] intValue];
+            int sort2 = [[item2 objectForKey:@"sort"] intValue];
+            if(sort1 > sort2)
+            {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            else if(sort1 < sort2)
+            {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            else
+            {
+                return (NSComparisonResult)NSOrderedSame;
+            }
+        };
         NSMutableArray *idArray = [NSMutableArray new];
         if (!products)
         {
@@ -82,7 +99,8 @@
             NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
             products = [[NSArray alloc] initWithContentsOfFile:file];
         }
-
+        
+        products = [products sortedArrayUsingComparator:sorter];
         Reachability *reach = [Reachability reachabilityForInternetConnection];     
         NetworkStatus netStatus = [reach currentReachabilityStatus];
         if(netStatus != NotReachable)
@@ -97,9 +115,6 @@
         }
         else
         {
-            //取默认plist
-            NSString *file = [[NSBundle mainBundle] pathForResource:@"products" ofType:@"plist"];
-            products = [[NSArray alloc] initWithContentsOfFile:file];
             for (NSDictionary *product in products)
             {
                 NSArray *xibArray = [[NSBundle mainBundle] loadNibNamed:@"CashStoreItemView" owner:nil options:nil];

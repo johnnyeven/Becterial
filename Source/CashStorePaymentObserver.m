@@ -73,6 +73,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
     
     [DataStorageManager sharedDataStorageManager].exp = exp;
     [[DataStorageManager sharedDataStorageManager] saveData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadExp" object:nil];
     [self deliverComplete:identifier];
 }
 
@@ -87,6 +88,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
         {
             if ([identifier isEqualToString:transaction.payment.productIdentifier])
             {
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 NSArray *tmp = [identifier componentsSeparatedByString:@"."];
                 NSString *itemId;
                 if([tmp count] > 1)
@@ -112,11 +114,6 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
     {
         switch (transaction.transactionState)
         {
-            case SKPaymentTransactionStatePurchasing:
-            {
-                NSLog(@"purchasing");
-                break;
-            }
             case SKPaymentTransactionStatePurchased:
             {
                 NSString *receipt = [self encode:(uint8_t *)transaction.transactionReceipt.bytes
@@ -127,7 +124,6 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                                       transaction.payment.productIdentifier, @"identifier",
                                       receipt, @"receipt", nil];
                 [[PZWebManager sharedPZWebManager] asyncPostRequest:@"http://b.profzone.net/order/check_receipt" withData:data];
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             }
             case SKPaymentTransactionStateFailed:
@@ -148,12 +144,10 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                                       transaction.payment.productIdentifier, @"identifier",
                                       receipt, @"receipt", nil];
                 [[PZWebManager sharedPZWebManager] asyncPostRequest:@"http://b.profzone.net/order/check_receipt" withData:data];
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
                 break;
             }
             default:
-                NSLog(@"default");
                 break;
         }
     }
@@ -162,6 +156,21 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
 -(void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
 {
     NSLog(@"transaction removed!");
+}
+
+-(void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+    NSLog(@"restoreCompletedTransactionsFailedWithError: %@", error.localizedDescription);
+}
+
+-(void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray *)downloads
+{
+    NSLog(@"updatedDownloads: %@", downloads);
+}
+
+-(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished");
 }
 
 -(NSString *)encode:(const uint8_t *)input length:(NSInteger)length

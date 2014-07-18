@@ -54,8 +54,28 @@
             upgradeConst = dataStorageManager.upgradeConst;
         }
         NSArray *keys = [upgradeConst allKeys];
-        NSDictionary *item;
+        NSComparator sorter = ^NSComparisonResult(NSString *key1, NSString *key2)
+        {
+            NSDictionary *item1 = [upgradeConst objectForKey:key1];
+            NSDictionary *item2 = [upgradeConst objectForKey:key2];
+            int sort1 = [[item1 objectForKey:@"sort"] intValue];
+            int sort2 = [[item2 objectForKey:@"sort"] intValue];
+            if(sort1 > sort2)
+            {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            else if(sort1 < sort2)
+            {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            else
+            {
+                return (NSComparisonResult)NSOrderedSame;
+            }
+        };
+        keys = [keys sortedArrayUsingComparator:sorter];
         
+        NSDictionary *item;
         CGFloat offsetY = 0.f;
         CGFloat contentSizeWidth = 0.f;
         CGFloat contentSizeHeight = 0.f;

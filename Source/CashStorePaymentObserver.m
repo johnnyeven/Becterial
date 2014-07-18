@@ -38,6 +38,24 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
         NSArray *items = [data objectForKey:@"items"];
         [self deliverProduct:items withIdentifier:identifier];
     }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
+        NSString *message;
+        if(code == 1403)
+        {
+            message = @"交易凭证验证失败";
+        }
+        else if(code == 1404)
+        {
+            message = @"道具编号未找到";
+        }
+        else
+        {
+            message = @"难以理解的错误";
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:message];
+    }
 }
 
 -(void)deliverProduct:(NSArray *)items withIdentifier:(NSString *)identifier

@@ -6,6 +6,8 @@
 	<dict>
 		<key>name</key>
 		<string>生物酶基因改造</string>
+		<key>sort</key>
+		<integer>1</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -89,6 +91,8 @@
 	<dict>
 		<key>name</key>
 		<string>适应性改造-初级</string>
+		<key>sort</key>
+		<integer>2</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -172,6 +176,8 @@
 	<dict>
 		<key>name</key>
 		<string>适应性改造-高级</string>
+		<key>sort</key>
+		<integer>3</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -255,6 +261,8 @@
 	<dict>
 		<key>name</key>
 		<string>分裂</string>
+		<key>sort</key>
+		<integer>4</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -338,6 +346,8 @@
 	<dict>
 		<key>name</key>
 		<string>细胞基因序列优化</string>
+		<key>sort</key>
+		<integer>5</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -421,6 +431,8 @@
 	<dict>
 		<key>name</key>
 		<string>养精蓄锐</string>
+		<key>sort</key>
+		<integer>6</integer>
 		<key>levels</key>
 		<array>
 			<dict>
@@ -514,6 +526,8 @@
 	<dict>
 		<key>name</key>
 		<string>终极进化</string>
+		<key>sort</key>
+		<integer>7</integer>
 		<key>levels</key>
 		<array>
 			<dict>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>number/number_0.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_1.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{111, 1}, {9, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2, 0}, {9, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 25}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_3.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 49}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_4.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 73}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_5.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 97}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_6.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{15, 1}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_7.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{39, 1}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_8.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{63, 1}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+		<key>number/number_9.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{87, 1}, {12, 22}}</string>
+			<key>offset</key>
+			<string>{0, 0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {12, 22}}</string>
+			<key>sourceSize</key>
+			<string>{14, 22}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{128, 128}</string>
+		<key>textureFileName</key>
+		<string>number.png</string>
+	</dict>
+</dict>
+</plist>

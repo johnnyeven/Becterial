@@ -164,13 +164,14 @@
 			<key>tabletScale</key>
 			<integer>1</integer>
 		</dict>
+		<key>number</key>
+		<dict>
+			<key>isSmartSpriteSheet</key>
+			<true/>
+		</dict>
 		<key>resources</key>
 		<dict/>
 		<key>resources/number_9.png</key>
-		<dict/>
-		<key>resources/scene_bg-hd.png</key>
-		<dict/>
-		<key>resources/scene_bg.png</key>
 		<dict/>
 	</dict>
 	<key>versionStr</key>

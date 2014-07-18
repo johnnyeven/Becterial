@@ -9,9 +9,6 @@
 #import "PZLabelScore.h"
 
 @implementation PZLabelScore
-{
-    CCSpriteBatchNode *spriteSheet;
-}
 
 +(id)initWithScore:(int)score fileName:(NSString *)fileName itemWidth:(int)itemWidth itemHeight:(int)itemHeight
 {
@@ -21,18 +18,6 @@
     label.itemHeight = itemHeight;
     label.score = score;
     return label;
-}
-
--(id)init
-{
-    self = [super init];
-    if(self)
-    {
-        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"number.png"];
-        [self addChild:spriteSheet];
-        return self;
-    }
-    return nil;
 }
 
 -(void)setPadding:(int)padding
@@ -46,20 +31,20 @@
     if(score == 0)
     {
         _score = score;
-        [spriteSheet removeAllChildren];
+        [self removeAllChildren];
         
-        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"number_0.png"];
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"number/number_0.png"];
         CCSprite *numSprite = [CCSprite spriteWithSpriteFrame:frame];
         [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
         numSprite.anchorPoint = ccp(0, 0);
         numSprite.position = ccp(0, 0);
-        [spriteSheet addChild:numSprite];
+        [self addChild:numSprite];
         return;
     }
     else if(_score != score)
     {
         _score = score;
-        [spriteSheet removeAllChildren];
+        [self removeAllChildren];
         NSMutableArray *arr = [[NSMutableArray alloc] init];
         while (score)
         {
@@ -75,13 +60,13 @@
         NSString *fileName;
         for(long i = count - 1; i >= 0; i--)
         {
-            fileName = [NSString stringWithFormat:@"number_%i.png", [[arr objectAtIndex:i] intValue]];
+            fileName = [NSString stringWithFormat:@"number/number_%i.png", [[arr objectAtIndex:i] intValue]];
             frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:fileName];
             CCSprite *numSprite = [CCSprite spriteWithSpriteFrame:frame];
             [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
             numSprite.anchorPoint = ccp(0, 0);
             numSprite.position = ccp((count - 1 - i) * numSprite.contentSize.width, 0);
-            [spriteSheet addChild:numSprite];
+            [self addChild:numSprite];
         }
     }
 }

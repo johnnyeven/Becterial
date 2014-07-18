@@ -347,7 +347,7 @@
     }
 
     //加载资源
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrameWithFile:@"number.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"number.plist"];
 
     [[GameCenterManager sharedGameCenterManager] authenticateLocalPlayer];
 

@@ -55,6 +55,16 @@ static CGFloat upgradeAutoRevolution = 0.f;
     return upgradeScoreCostDec;
 }
 
++(int)getUpgradeStepInc
+{
+    return upgradeStepInc;
+}
+
++(CGFloat)getUpgradeStepIncRate
+{
+    return upgradeStepIncRate;
+}
+
 +(CGFloat)getUpgradeAutoRevolution
 {
     return upgradeAutoRevolution;
@@ -78,6 +88,16 @@ static CGFloat upgradeAutoRevolution = 0.f;
 +(void)setUpgradeScoreCostDec:(CGFloat)value
 {
     upgradeScoreCostDec = value;
+}
+
++(void)setUpgradeStepInc:(int)value
+{
+    upgradeStepInc = value;
+}
+
++(void)setUpgradeStepIncRate:(CGFloat)value
+{
+    upgradeStepIncRate = value;
 }
 
 +(void)setUpgradeAutoRevolution:(CGFloat)value

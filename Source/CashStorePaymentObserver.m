@@ -52,7 +52,7 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
         }
         else
         {
-            message = @"难以理解的错误";
+            message = @"缺少交易的必要参数";
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:message];
     }

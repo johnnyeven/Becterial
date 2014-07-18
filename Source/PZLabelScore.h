@@ -14,6 +14,7 @@
 @property (nonatomic) int score;
 @property (nonatomic) int itemWidth;
 @property (nonatomic) int itemHeight;
+@property (nonatomic, strong) NSString *fileName;
 
 +(id)initWithScore:(int)score fileName:(NSString *)fileName itemWidth:(int)itemWidth itemHeight:(int)itemHeight;
 

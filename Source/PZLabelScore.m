@@ -10,12 +10,13 @@
 
 @implementation PZLabelScore
 {
-    NSMutableArray *numberSpriteArr;
+    CCSpriteBatchNode *spriteSheet;
 }
 
 +(id)initWithScore:(int)score fileName:(NSString *)fileName itemWidth:(int)itemWidth itemHeight:(int)itemHeight
 {
     PZLabelScore *label = [[PZLabelScore alloc] init];
+    label.fileName = fileName;
     label.itemWidth = itemWidth;
     label.itemHeight = itemHeight;
     label.score = score;
@@ -27,7 +28,8 @@
     self = [super init];
     if(self)
     {
-        numberSpriteArr = [[NSMutableArray alloc] init];
+        spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"number.png"];
+        [self addChild:spriteSheet];
         return self;
     }
     return nil;
@@ -44,23 +46,20 @@
     if(score == 0)
     {
         _score = score;
-        [self removeAllChildren];
-        [numberSpriteArr removeAllObjects];
+        [spriteSheet removeAllChildren];
         
-        NSString *fileName = [NSString stringWithFormat:@"number/number_%i.png", 0];
-        CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];
+        CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"number_0.png"];
+        CCSprite *numSprite = [CCSprite spriteWithSpriteFrame:frame];
         [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
         numSprite.anchorPoint = ccp(0, 0);
         numSprite.position = ccp(0, 0);
-        [numberSpriteArr addObject:numSprite];
-        [self addChild:numSprite];
+        [spriteSheet addChild:numSprite];
         return;
     }
-    if(_score != score)
+    else if(_score != score)
     {
         _score = score;
-        [self removeAllChildren];
-        [numberSpriteArr removeAllObjects];
+        [spriteSheet removeAllChildren];
         NSMutableArray *arr = [[NSMutableArray alloc] init];
         while (score)
         {
@@ -72,15 +71,17 @@
         }
         
         long count = [arr count];
+        CCSpriteFrame *frame;
+        NSString *fileName;
         for(long i = count - 1; i >= 0; i--)
         {
-            NSString *fileName = [NSString stringWithFormat:@"number/number_%i.png", [[arr objectAtIndex:i] intValue]];
-            CCSprite *numSprite = [CCSprite spriteWithImageNamed:fileName];
+            fileName = [NSString stringWithFormat:@"number_%i.png", [[arr objectAtIndex:i] intValue]];
+            frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:fileName];
+            CCSprite *numSprite = [CCSprite spriteWithSpriteFrame:frame];
             [numSprite setContentSize:CGSizeMake(_itemWidth, _itemHeight)];
             numSprite.anchorPoint = ccp(0, 0);
             numSprite.position = ccp((count - 1 - i) * numSprite.contentSize.width, 0);
-            [numberSpriteArr addObject:numSprite];
-            [self addChild:numSprite];
+            [spriteSheet addChild:numSprite];
         }
     }
 }

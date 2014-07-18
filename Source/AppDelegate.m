@@ -338,6 +338,9 @@
         }
     }
 
+    //加载资源
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFrameWithFile:@"number.plist"];
+
     [[GameCenterManager sharedGameCenterManager] authenticateLocalPlayer];
 
     #ifdef DEBUG_MODE

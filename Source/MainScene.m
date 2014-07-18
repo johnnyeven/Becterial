@@ -571,12 +571,8 @@
                         runningAction--;
                         if(runningAction == 0)
                         {
-                            if(![self evolution])
-                            {
-                                [self saveGame];
-                                [self checkResult];
-                            }
-                            
+                            //进化动画结束
+                            //分裂
                             CGFloat rate = [Becterial getUpgradeSplit];
                             if(rate > 0)
                             {
@@ -592,6 +588,37 @@
                                         [self putNewEnemyNoCost];
                                     }
                                 }
+                            }
+
+                            //养精蓄锐
+                            rate = [Becterial getUpgradeStepIncRate];
+                            if(rate > 0)
+                            {
+                                rate = rate * 100;
+                                if(arc4random() % 100 <= rate)
+                                {
+                                    int stepInc = [Becterial getUpgradeStepInc];
+                                    self.stepCount = _stepCount + stepInc;
+                                }
+                            }
+
+                            //终极进化
+                            rate = [Becterial getUpgradeAutoRevolution];
+                            if(rate > 0)
+                            {
+                                rate = rate * 100;
+                                if(arc4random() % 100 <= rate)
+                                {
+                                    becterial.level++;
+                                    self.exp = _exp + becterial.level;
+                                    self.maxLevel = becterial.level;
+                                }
+                            }
+
+                            if(![self evolution])
+                            {
+                                [self saveGame];
+                                [self checkResult];
                             }
                         }
                     }];

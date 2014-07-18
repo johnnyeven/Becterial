@@ -420,6 +420,99 @@
 	<key>upgrade6</key>
 	<dict>
 		<key>name</key>
+		<string>养精蓄锐</string>
+		<key>levels</key>
+		<array>
+			<dict>
+				<key>level</key>
+				<integer>1</integer>
+				<key>comment</key>
+				<string>进化时10%机率恢复1点体力</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeStepInc</key>
+					<real>1</real>
+					<key>upgradeStepIncRate</key>
+					<real>0.1</real>
+				</dict>
+				<key>cost</key>
+				<string>500</string>
+				<key>rate</key>
+				<integer>100</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>2</integer>
+				<key>comment</key>
+				<string>进化时20%机率恢复1点体力</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeStepInc</key>
+					<real>1</real>
+					<key>upgradeStepIncRate</key>
+					<real>0.2</real>
+				</dict>
+				<key>cost</key>
+				<string>1500</string>
+				<key>rate</key>
+				<integer>80</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>3</integer>
+				<key>comment</key>
+				<string>进化时30%机率恢复1点体力</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeStepInc</key>
+					<real>1</real>
+					<key>upgradeStepIncRate</key>
+					<real>0.3</real>
+				</dict>
+				<key>cost</key>
+				<string>4000</string>
+				<key>rate</key>
+				<integer>60</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>4</integer>
+				<key>comment</key>
+				<string>进化时30%机率恢复2点体力</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeStepInc</key>
+					<real>2</real>
+					<key>upgradeStepIncRate</key>
+					<real>0.3</real>
+				</dict>
+				<key>cost</key>
+				<string>8000</string>
+				<key>rate</key>
+				<integer>40</integer>
+			</dict>
+			<dict>
+				<key>level</key>
+				<integer>5</integer>
+				<key>comment</key>
+				<string>进化时40%机率恢复2点体力</string>
+				<key>additional</key>
+				<dict>
+					<key>upgradeStepInc</key>
+					<real>2</real>
+					<key>upgradeStepIncRate</key>
+					<real>0.4</real>
+				</dict>
+				<key>cost</key>
+				<string>16000</string>
+				<key>rate</key>
+				<integer>20</integer>
+			</dict>
+		</array>
+	</dict>
+	<key>upgrade7</key>
+	<dict>
+		<key>name</key>
 		<string>终极进化</string>
 		<key>levels</key>
 		<array>
@@ -427,7 +520,7 @@
 				<key>level</key>
 				<integer>1</integer>
 				<key>comment</key>
-				<string>%2机率样本自动进化</string>
+				<string>%2机率样本进化时等级+2</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeAutoRevolution</key>
@@ -442,7 +535,7 @@
 				<key>level</key>
 				<integer>2</integer>
 				<key>comment</key>
-				<string>%3机率样本自动进化</string>
+				<string>%3机率样本进化时等级+2</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeAutoRevolution</key>
@@ -457,7 +550,7 @@
 				<key>level</key>
 				<integer>3</integer>
 				<key>comment</key>
-				<string>%4机率样本自动进化</string>
+				<string>%4机率样本进化时等级+2</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeAutoRevolution</key>
@@ -472,7 +565,7 @@
 				<key>level</key>
 				<integer>4</integer>
 				<key>comment</key>
-				<string>%5机率样本自动进化</string>
+				<string>%5机率样本进化时等级+2</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeAutoRevolution</key>
@@ -487,7 +580,7 @@
 				<key>level</key>
 				<integer>5</integer>
 				<key>comment</key>
-				<string>%8机率样本自动进化</string>
+				<string>%8机率样本进化时等级+2</string>
 				<key>additional</key>
 				<dict>
 					<key>upgradeAutoRevolution</key>

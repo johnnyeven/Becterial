@@ -21,6 +21,8 @@ static CGFloat upgradeBiomassDec = 0.f;
 static CGFloat upgradeBiomassInc = 0.f;
 static CGFloat upgradeSplit = 0.f;
 static CGFloat upgradeScoreCostDec = 0.f;
+static int upgradeStepInc = 0;
+static CGFloat upgradeStepIncRate = 0.f;
 static CGFloat upgradeAutoRevolution = 0.f;
 
 +(CGFloat)getUpgradeScoreInc

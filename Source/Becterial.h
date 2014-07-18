@@ -21,12 +21,16 @@
 +(CGFloat)getUpgradeBiomassInc;
 +(CGFloat)getUpgradeSplit;
 +(CGFloat)getUpgradeScoreCostDec;
++(int)getUpgradeStepInc;
++(CGFloat)getUpgradeStepIncRate;
 +(CGFloat)getUpgradeAutoRevolution;
 +(void)setUpgradeScoreInc:(CGFloat)value;
 +(void)setUpgradeBiomassDec:(CGFloat)value;
 +(void)setUpgradeBiomassInc:(CGFloat)value;
 +(void)setUpgradeSplit:(CGFloat)value;
 +(void)setUpgradeScoreCostDec:(CGFloat)value;
++(void)setUpgradeStepInc:(int)value;
++(void)setUpgradeStepIncRate:(CGFloat)value;
 +(void)setUpgradeAutoRevolution:(CGFloat)value;
 -(Becterial *)clone;
 

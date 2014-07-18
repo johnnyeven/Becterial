@@ -334,6 +334,14 @@
                 {
                     [Becterial setUpgradeAutoRevolution:[[additional objectForKey:add] floatValue]];
                 }
+                else if([add isEqualToString:@"upgradeStepInc"])
+                {
+                    [Becterial setUpgradeStepInc:[[additional objectForKey:add] intValue]];
+                }
+                else if([add isEqualToString:@"upgradeStepIncRate"])
+                {
+                    [Becterial setUpgradeStepIncRate:[[additional objectForKey:add] floatValue]];
+                }
             }
         }
     }

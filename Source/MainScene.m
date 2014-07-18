@@ -797,7 +797,7 @@
     {
         _maxLevel = maxLevel;
 
-        if(dataStorageManagerAchievement)
+        if([GameCenterManager sharedGameCenterManager].enabled && dataStorageManagerAchievement)
         {
             NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"level"];
             NSArray *goalListKeys = [goalList allKeys];

@@ -142,7 +142,7 @@
     _score = score;
     [_lblScore setScore:score];
 
-    if(dataStorageManagerAchievement)
+    if([GameCenterManager sharedGameCenterManager].enabled && dataStorageManagerAchievement)
     {
         NSDictionary *goalList = [dataStorageManagerAchievement objectForKey:@"exp"];
         NSArray *goalListKeys = [goalList allKeys];

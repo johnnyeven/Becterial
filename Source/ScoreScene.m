@@ -245,7 +245,7 @@
 {
     UIImage *screenshot = [[UMSocialScreenShoterCocos2d screenShoter] getScreenShot];
     [UMSocialSnsService presentSnsIconSheetView:(UIViewController *)[CCDirector sharedDirector].view.nextResponder
-                                         appKey:@"53b031e856240b128d1615f7"
+                                         appKey:@"53ca09da56240bbd9b011e55"
                                       shareText:[NSString stringWithFormat:@"我在细菌培育者中获得了 %i 的生物酶，你也来试试吧！", _score]
                                      shareImage:screenshot
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,nil]

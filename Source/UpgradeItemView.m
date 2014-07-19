@@ -84,6 +84,8 @@
         {
         	//经验满足
             dataStorageManager.exp = dataStorageManager.exp - cost;
+            [MobClickGameAnalytics buy:self.upgradeId amount:1 price:cost];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadExp" object:nil];
         	int r = arc4random() % 100;
         	if(r < rate)
@@ -96,7 +98,6 @@
                 [dataStorageManager loadData];
                 
                 [self updateItemViewByUpgradeId:self.upgradeId level:index];
-                [MobClickGameAnalytics use:@"exp" amount:cost price:cost / 167.f];
         	}
             else
             {

@@ -12,6 +12,7 @@
 #import "PZLabelScore.h"
 #import "UMSocial.h"
 #import "UMSocialScreenShoter.h"
+#import "MobClick.h"
 #import "YouMiWall.h"
 #import "YouMiPointsManager.h"
 
@@ -219,6 +220,7 @@
 
 -(void)btnAdTouch
 {
+    [MobClick event:@"touchTaobaoUrl"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://moesister.taobao.com/"]];
 }
 
@@ -244,7 +246,7 @@
     UIImage *screenshot = [[UMSocialScreenShoterCocos2d screenShoter] getScreenShot];
     [UMSocialSnsService presentSnsIconSheetView:(UIViewController *)[CCDirector sharedDirector].view.nextResponder
                                          appKey:@"53b031e856240b128d1615f7"
-                                      shareText:@"从IOS发来的测试"
+                                      shareText:[NSString stringWithFormat:@"我在细菌培育者中获得了 %i 的生物酶，你也来试试吧！", _score]
                                      shareImage:screenshot
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,nil]
                                        delegate:nil];

@@ -74,10 +74,10 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
     [DataStorageManager sharedDataStorageManager].exp = exp;
     [[DataStorageManager sharedDataStorageManager] saveData];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadExp" object:nil];
-    [self deliverComplete:identifier];
+    [self deliverComplete:identifier withItem:items];
 }
 
--(void)deliverComplete:(NSString *)identifier;
+-(void)deliverComplete:(NSString *)identifier withItem:(NSArray *)items;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideLoadingIcon" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showSuccessView" object:@"购买成功"];
@@ -100,7 +100,16 @@ static CashStorePaymentObserver *_sharedCashStorePaymentObserver = nil;
                     itemId = identifier;
                 }
                 int cash = [[itemId substringFromIndex:6] intValue];
-                [MobClickGameAnalytics pay:cash source:1 item:itemId amount:1 price:10];
+                
+                for(NSDictionary *item in items)
+                {
+                    NSString *name = [item objectForKey:@"name"];
+                    int count = [[item objectForKey:@"count"] intValue];
+                    if([name isEqualToString:@"exp"])
+                    {
+                        [MobClickGameAnalytics pay:cash source:1 coin:count];
+                    }
+                }
                 break;
             }
         }

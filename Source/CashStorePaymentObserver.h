@@ -16,6 +16,5 @@
 -(NSString *)encode:(const uint8_t *)input length:(NSInteger)length;
 -(void)didReceiveFromServer:(NSNotification *)notification;
 -(void)deliverProduct:(NSArray *)items withIdentifier:(NSString *)identifier;
--(void)deliverComplete:(NSString *)identifier;
 
 @end

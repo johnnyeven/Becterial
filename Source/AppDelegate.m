@@ -72,9 +72,9 @@
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[CashStorePaymentObserver sharedCashStorePaymentObserver]];
     
-    [MobClick startWithAppkey:@"53b031e856240b128d1615f7"];
-    [UMSocialData setAppKey:@"53b031e856240b128d1615f7"];
-    [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:nil];
+    [MobClick startWithAppkey:@"53ca09da56240bbd9b011e55"];
+    [UMSocialData setAppKey:@"53ca09da56240bbd9b011e55"];
+    [UMSocialWechatHandler setWXAppId:@"wxfa1868e8028fdf80" url:@"http://b.profzone.net/services/share/wechat"];
 
     [YouMiConfig setShouldGetLocation:NO];
     [YouMiConfig launchWithAppID:@"5993d19fa9e134c3" appSecret:@"e620f97ee3da012d"];

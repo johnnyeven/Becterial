@@ -66,11 +66,11 @@ static PZWebManager *_sharedPZWebManager = nil;
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
     NSError *error;
-    NSString *json = [[NSString alloc] initWithData:receiveData encoding:NSUTF8StringEncoding];
 
-    #ifdef DEBUG_MODE
+#ifdef DEBUG_MODE
+    NSString *json = [[NSString alloc] initWithData:receiveData encoding:NSUTF8StringEncoding];
     NSLog(@"%@", json);
-    #endif
+#endif
     
     NSDictionary *data = [NSJSONSerialization JSONObjectWithData:receiveData options:NSJSONReadingMutableLeaves error:&error];
     NSString *command = [data objectForKey:@"command"];

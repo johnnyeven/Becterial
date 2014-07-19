@@ -38,6 +38,7 @@
     CCButton *btnContinue;
     CCButton *btnScoreboard;
     CCButton *btnTop10;
+    CCNode *nodeAd;
 }
 
 -(void)didLoadFromCCB
@@ -121,6 +122,16 @@
             }
             free(points);
         }
+        
+        if(nodeAd)
+        {
+            NSDictionary *adResult = [dataStorageManagerConfig objectForKey:@"ad"];
+            int ad = [[adResult objectForKey:@"result"] intValue];
+            if(ad == 0)
+            {
+                nodeAd.visible = NO;
+            }
+        }
     }
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadExp" object:nil];
@@ -199,6 +210,16 @@
     } didDismissBlock:^{
         NSLog(@"有米积分墙已退出");
     }];
+}
+
+-(void)btnCloseAd
+{
+    [self removeChild:nodeAd cleanup:YES];
+}
+
+-(void)btnAdTouch
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://moesister.taobao.com/"]];
 }
 
 -(void)back

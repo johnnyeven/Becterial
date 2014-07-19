@@ -124,6 +124,12 @@
                                       [NSDictionary new], @"version", nil];
     [[DataStorageManager sharedDataStorageManager].config setObject:scoreboardResult forKey:@"score_board"];
     
+    //ad
+    NSDictionary *adResult = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [NSNumber numberWithInt:0], @"result",
+                                      [NSDictionary new], @"version", nil];
+    [[DataStorageManager sharedDataStorageManager].config setObject:adResult forKey:@"ad"];
+    
     [[DataStorageManager sharedDataStorageManager] saveConfig];
 }
 
@@ -230,6 +236,23 @@
                 [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"score_board"];
             }
             [config setObject:[NSNumber numberWithInt:scoreboard] forKey:@"result"];
+            
+            //ad
+            NSDictionary *adResult = [data objectForKey:@"ad"];
+            int ad = [[adResult objectForKey:@"result"] intValue];
+            version = [adResult objectForKey:@"version"];
+            config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"ad"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"ad"];
+            }
+            [config setObject:[NSNumber numberWithInt:ad] forKey:@"result"];
         }
         else if([command isEqualToString:@"requestProductIds"])
         {
@@ -286,6 +309,24 @@
                 [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"score_board"];
             }
             [config setObject:[NSNumber numberWithInt:scoreboard] forKey:@"result"];
+        }
+        else if([command isEqualToString:@"requestAd"])
+        {
+            NSDictionary *adResult = [data objectForKey:@"ad"];
+            int ad = [[adResult objectForKey:@"result"] intValue];
+            NSDictionary *version = [adResult objectForKey:@"version"];
+            NSMutableDictionary *config = [[DataStorageManager sharedDataStorageManager].config objectForKey:@"ad"];
+            if(config)
+            {
+                [config setObject:version forKey:@"version"];
+            }
+            else
+            {
+                config = [NSMutableDictionary new];
+                [config setObject:version forKey:@"version"];
+                [[DataStorageManager sharedDataStorageManager].config setObject:config forKey:@"ad"];
+            }
+            [config setObject:[NSNumber numberWithInt:ad] forKey:@"result"];
         }
 
         [[DataStorageManager sharedDataStorageManager] saveConfig];

@@ -57,7 +57,7 @@ static CashStoreManager *_instance = nil;
 	_products = response.products;
     _invalidProducts = response.invalidProductIdentifiers;
     
-    if(dataStorageManagerConfig)
+    if(!dataStorageManagerConfig)
     {
         NSDictionary *productData = [dataStorageManagerConfig objectForKey:@"products"];
         NSArray *products = [productData objectForKey:@"result"];

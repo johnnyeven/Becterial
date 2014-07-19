@@ -56,89 +56,175 @@
     {
         //准备进入第四步，判断是否点击了生成生物质的按钮
         CGPoint position = touch.locationInWorld;
-        if (position.x > 160 && position.x < 310 &&
-            position.y > 410 && position.y < 440)
+        if(isR4)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass" object:nil];
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass" object:nil];
+            }
+        }
+        else
+        {
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass" object:nil];
+            }
         }
     }
     else if (_step == 4)
     {
         //准备进入第五步，判断是否点击了生成生物酶的按钮
         CGPoint position = touch.locationInWorld;
-        if (position.x > 10 && position.x < 290 &&
-            position.y > 410 && position.y < 440)
+        if(isR4)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore" object:nil];
+            if (position.x > 10 && position.x < 290 &&
+                position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore" object:nil];
+            }
+        }
+        else
+        {
+            if (position.x > 10 && position.x < 290 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore" object:nil];
+            }
         }
     }
     else if (_step == 5)
     {
         //准备进入第六步，判断是否点击了放置红色细菌的按钮
         CGPoint position = touch.locationInWorld;
-        if (position.x > 88 && position.x < 149 &&
-            position.y > 319 && position.y < 380)
+        if(isR4)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy" object:nil];
+            if (position.x > 88 && position.x < 149 &&
+                position.y > 326 && position.y < 387)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy" object:nil];
+            }
+        }
+        else
+        {
+            if (position.x > 88 && position.x < 149 &&
+                position.y > 319 && position.y < 380)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy" object:nil];
+            }
         }
     }
     else if (_step == 6)
     {
         //准备进入第七步，判断是否点击了放置褐色细菌的按钮
         CGPoint position = touch.locationInWorld;
-        if (position.x > 6 && position.x < 67 &&
-            position.y > 319 && position.y < 380)
+        if(isR4)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial" object:nil];
+            if (position.x > 6 && position.x < 67 &&
+                position.y > 326 && position.y < 387)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial" object:nil];
+            }
+        }
+        else
+        {
+            if (position.x > 6 && position.x < 67 &&
+                position.y > 319 && position.y < 380)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial" object:nil];
+            }
         }
     }
     else if (_step == 7)
     {
-        //准备进入第八步，判断是否点击了生成生物质的按钮/生成生物酶的按钮/放置红色细菌的按钮
-        CGPoint position = touch.locationInWorld;
-        if (position.x > 160 && position.x < 310 &&
-            position.y > 410 && position.y < 440)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
-        }
-        else if (position.x > 10 && position.x < 290 &&
-            position.y > 410 && position.y < 440)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
-        }
-        else if (position.x > 88 && position.x < 149 &&
-                 position.y > 319 && position.y < 380)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy2" object:nil];
-        }
+        self.step++;
     }
     else if (_step == 8)
     {
-        //准备进入第九步，判断是否点击了生成生物质的按钮/生成生物酶的按钮/放置红色细菌的按钮/放置褐色细菌的按钮
+        //准备进入第八步，判断是否点击了生成生物质的按钮/生成生物酶的按钮/放置红色细菌的按钮
         CGPoint position = touch.locationInWorld;
-        if (position.x > 160 && position.x < 310 &&
-            position.y > 410 && position.y < 440)
+        if (isR4)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
+            }
+            else if (position.x > 10 && position.x < 290 &&
+                     position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
+            }
+            else if (position.x > 88 && position.x < 149 &&
+                     position.y > 326 && position.y < 387)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy2" object:nil];
+            }
         }
-        else if (position.x > 10 && position.x < 290 &&
-            position.y > 410 && position.y < 440)
+        else
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
-        }
-        else if (position.x > 6 && position.x < 67 &&
-                 position.y > 319 && position.y < 380)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial2" object:nil];
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
+            }
+            else if (position.x > 10 && position.x < 290 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
+            }
+            else if (position.x > 88 && position.x < 149 &&
+                     position.y > 319 && position.y < 380)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickEnemy2" object:nil];
+            }
         }
     }
     else if (_step == 9)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"guideTouchBacterial" object:touch];
+        //准备进入第九步，判断是否点击了生成生物质的按钮/生成生物酶的按钮/放置红色细菌的按钮/放置褐色细菌的按钮
+        CGPoint position = touch.locationInWorld;
+        if(isR4)
+        {
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
+            }
+            else if (position.x > 10 && position.x < 290 &&
+                     position.y > 422 && position.y < 452)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
+            }
+            else if (position.x > 6 && position.x < 67 &&
+                     position.y > 326 && position.y < 387)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial2" object:nil];
+            }
+        }
+        else
+        {
+            if (position.x > 160 && position.x < 310 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBiomass2" object:nil];
+            }
+            else if (position.x > 10 && position.x < 290 &&
+                position.y > 410 && position.y < 440)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickScore2" object:nil];
+            }
+            else if (position.x > 6 && position.x < 67 &&
+                     position.y > 319 && position.y < 380)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"guideClickBacterial2" object:nil];
+            }
+        }
     }
     else if (_step == 10)
     {
-        self.step++;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"guideTouchBacterial" object:touch];
     }
     else if (_step == 11)
     {
@@ -162,6 +248,10 @@
     }
     else if (_step == 16)
     {
+        self.step++;
+    }
+    else if (_step == 17)
+    {
         [DataStorageManager sharedDataStorageManager].guide = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"guideFinish" object:nil];
     }
@@ -171,7 +261,7 @@
 
 -(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if(_step == 9)
+    if(_step == 10)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"guideTouchBacterialEnd" object:touch];
     }
@@ -185,14 +275,7 @@
     imgStep.spriteFrame = [CCSpriteFrame frameWithImageNamed:[NSString stringWithFormat:@"resources/guide_step%i.png", _step]];
     if (_step == 2)
     {
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
     else if(_step == 3)
     {
@@ -200,13 +283,13 @@
         arrow.visible = YES;
         if(isR4)
         {
-            
+            arrow.position = ccp(240.f, 423.f);
         }
         else
         {
-            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(240.f, 410.f);
         }
+        container.position = ccp(13.f, 103.f);
         mask.visible = NO;
     }
     else if(_step == 4)
@@ -215,13 +298,13 @@
         arrow.visible = YES;
         if(isR4)
         {
-            
+            arrow.position = ccp(80.f, 423.f);
         }
         else
         {
-            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(80.f, 410.f);
         }
+        container.position = ccp(13.f, 103.f);
         mask.visible = NO;
     }
     else if(_step == 5)
@@ -233,13 +316,13 @@
         arrow.visible = YES;
         if(isR4)
         {
-            
+            arrow.position = ccp(118.f, 360.f);
         }
         else
         {
-            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(118.f, 347.f);
         }
+        container.position = ccp(13.f, 103.f);
         mask.visible = NO;
     }
     else if(_step == 6)
@@ -251,55 +334,49 @@
         arrow.visible = YES;
         if(isR4)
         {
-            
+            arrow.position = ccp(41.f, 360.f);
         }
         else
         {
-            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(41.f, 347.f);
         }
+        container.position = ccp(13.f, 103.f);
         mask.visible = NO;
     }
     else if(_step == 7)
     {
-        //Cool 下面让我们来做更多的事情，首先再放置两个更多的红色细菌，如果生物酶不够那就想想我们第一步做了什么
-        btnContinue.visible = NO;
+        btnContinue.visible = YES;
         arrow.visible = NO;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
-        container.opacity = 0.6f;
-        mask.visible = NO;
+        container.position = ccp(13.f, 103.f);
+        container.opacity = 1.f;
+        mask.visible = YES;
     }
     else if(_step == 8)
     {
-        //好了吧？再放置两个更多的褐色细菌，如果生物酶不够那就想想我们第一步做了什么
+        //Cool 下面让我们来做更多的事情，首先再放置两个更多的红色细菌，如果生物酶不够那就想想我们第一步做了什么
         btnContinue.visible = NO;
         arrow.visible = NO;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
         container.opacity = 0.6f;
         mask.visible = NO;
     }
     else if(_step == 9)
+    {
+        //好了吧？再放置两个更多的褐色细菌，如果生物酶不够那就想想我们第一步做了什么
+        btnContinue.visible = NO;
+        arrow.visible = NO;
+        container.position = ccp(13.f, 103.f);
+        container.opacity = 0.6f;
+        mask.visible = NO;
+    }
+    else if(_step == 10)
     {
         //好了？唔，看来你并不需要我的帮助，好了，下面用你灵巧的手指移动褐色细菌，让任意细菌周围存在2个或以上的相同等级细菌，像那样
         btnContinue.visible = NO;
         arrow.visible = NO;
         if(isR4)
         {
-            
+            container.position = ccp(13.f, 363.f);
         }
         else
         {
@@ -308,111 +385,70 @@
         container.opacity = .8f;
         mask.visible = NO;
     }
-    else if(_step == 10)
+    else if(_step == 11)
     {
         //看见了吗？只要任意细菌周围存在2个或以上相同等级的细菌，他就会进化，这包括褐色和红色的细菌
         btnContinue.visible = YES;
         arrow.visible = NO;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 11)
+    else if(_step == 12)
     {
         //这里有个关键问题，红色细菌会攻击褐色细菌，当被进化的目标是褐色细菌，如果周围存在红色细菌，那么进化后细菌会被消灭
         btnContinue.visible = YES;
         arrow.visible = NO;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 12)
+    else if(_step == 13)
     {
         //当被进化的目标是红色细菌，只要周围存在2个以上相同等级(不论颜色)的细菌，他就会进化
         btnContinue.visible = YES;
         arrow.visible = NO;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 13)
+    else if(_step == 14)
     {
         //明白了吧？褐色与红色的细菌彼此对立又缺一不可。还有一点，红色细菌是无法移动的！
         btnContinue.visible = YES;
         arrow.visible = NO;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 14)
+    else if(_step == 15)
     {
         //你需要合理移动褐色细菌，来进化更多高等级的褐色细菌，以提高生物酶的生产效率，这个才是你的终极目标！
         arrow.visible = NO;
         btnContinue.visible = YES;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 15)
+    else if(_step == 16)
     {
         //最后一件事，看见这个瓶子了吗？这是激素，拖动这个到下面的方格子中会在1分钟之内提升100%生物酶的生产效率！
+        arrow.spriteFrame = [CCSpriteFrame frameWithImageNamed:@"resources/guide_circle.png"];
         arrow.visible = YES;
         btnContinue.visible = YES;
         mask.visible = YES;
         if(isR4)
         {
-            
+            arrow.position = ccp(200.f, 360.f);
         }
         else
         {
-            container.position = ccp(13.f, 103.f);
             arrow.position = ccp(200.f, 347.f);
         }
+        container.position = ccp(13.f, 103.f);
     }
-    else if(_step == 16)
+    else if(_step == 17)
     {
         //好了，就到这儿，我先把你的试验结果清理掉，你可以自己重新开始了，祝你好运！
         arrow.visible = NO;
         btnContinue.visible = YES;
         mask.visible = YES;
-        if(isR4)
-        {
-            
-        }
-        else
-        {
-            container.position = ccp(13.f, 103.f);
-        }
+        container.position = ccp(13.f, 103.f);
     }
 }
 

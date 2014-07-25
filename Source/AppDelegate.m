@@ -125,7 +125,7 @@
     
     //ad
     NSDictionary *adResult = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [NSNumber numberWithInt:0], @"result",
+                                      [NSNumber numberWithInt:1], @"result",
                                       [NSDictionary new], @"version", nil];
     [[DataStorageManager sharedDataStorageManager].config setObject:adResult forKey:@"ad"];
     

@@ -53,8 +53,6 @@
 		BE12CB47195861F2006F775D /* Becterial.m in Sources */ = {isa = PBXBuildFile; fileRef = BE12CB46195861F2006F775D /* Becterial.m */; };
 		BE12CB4A19586256006F775D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE12CB4919586256006F775D /* Images.xcassets */; };
 		BE1418AB196C2EF2009EA1D8 /* upgrade_message.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */; };
-		BE1497F8196EC153001035D8 /* libOpenIDFA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1497F6196EC153001035D8 /* libOpenIDFA.a */; };
-		BE1497F9196EC153001035D8 /* libYouMi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1497F7196EC153001035D8 /* libYouMi.a */; };
 		BE1497FC196EE642001035D8 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1497FB196EE642001035D8 /* GameCenterManager.m */; };
 		BE1835A6195FE9DF00860689 /* Killer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1835A5195FE9DF00860689 /* Killer.m */; };
 		BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3594D0196D859E00E36362 /* SystemConfiguration.framework */; };
@@ -69,6 +67,8 @@
 		BE5868C0196449A50007AF48 /* PZWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5868BF196449A50007AF48 /* PZWebManager.m */; };
 		BE58F2D21966F321009274E4 /* DataStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE58F2D11966F321009274E4 /* DataStorageManager.m */; };
 		BE63466819683636007E375F /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = BE63466719683636007E375F /* success.png */; };
+		BE64231219828B9800669D61 /* libYouMi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64231019828B9800669D61 /* libYouMi.a */; };
+		BE64231319828B9800669D61 /* libOpenIDFA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE64231119828B9800669D61 /* libOpenIDFA.a */; };
 		BE8751C2195DD999001D86B1 /* PZLabelScore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8751C1195DD999001D86B1 /* PZLabelScore.m */; };
 		BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */; };
 		BE89CDFB1962EEFE00994D13 /* CashStoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE89CDFA1962EEFE00994D13 /* CashStoreView.xib */; };
@@ -195,17 +195,6 @@
 		BE12CB46195861F2006F775D /* Becterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Becterial.m; path = Source/Becterial.m; sourceTree = "<group>"; };
 		BE12CB4919586256006F775D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = becterial/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		BE1418AA196C2EF2009EA1D8 /* upgrade_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = upgrade_message.png; path = Source/upgrade_message.png; sourceTree = "<group>"; };
-		BE1497ED196EC153001035D8 /* YouMiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiConfig.h; sourceTree = "<group>"; };
-		BE1497EE196EC153001035D8 /* YouMiDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiDelegateProtocol.h; sourceTree = "<group>"; };
-		BE1497EF196EC153001035D8 /* YouMiPointsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiPointsManager.h; sourceTree = "<group>"; };
-		BE1497F0196EC153001035D8 /* YouMiSpots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiSpots.h; sourceTree = "<group>"; };
-		BE1497F1196EC153001035D8 /* YouMiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiView.h; sourceTree = "<group>"; };
-		BE1497F2196EC153001035D8 /* YouMiWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWall.h; sourceTree = "<group>"; };
-		BE1497F3196EC153001035D8 /* YouMiWallAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallAppModel.h; sourceTree = "<group>"; };
-		BE1497F4196EC153001035D8 /* YouMiWallSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpot.h; sourceTree = "<group>"; };
-		BE1497F5196EC153001035D8 /* YouMiWallSpotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpotView.h; sourceTree = "<group>"; };
-		BE1497F6196EC153001035D8 /* libOpenIDFA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOpenIDFA.a; sourceTree = "<group>"; };
-		BE1497F7196EC153001035D8 /* libYouMi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYouMi.a; sourceTree = "<group>"; };
 		BE1497FA196EE642001035D8 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenterManager.h; path = Source/GameCenterManager.h; sourceTree = "<group>"; };
 		BE1497FB196EE642001035D8 /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameCenterManager.m; path = Source/GameCenterManager.m; sourceTree = "<group>"; };
 		BE1835A4195FE9DF00860689 /* Killer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Killer.h; path = Source/Killer.h; sourceTree = "<group>"; };
@@ -227,6 +216,18 @@
 		BE58F2D01966F321009274E4 /* DataStorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorageManager.h; path = Source/DataStorageManager.h; sourceTree = "<group>"; };
 		BE58F2D11966F321009274E4 /* DataStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataStorageManager.m; path = Source/DataStorageManager.m; sourceTree = "<group>"; };
 		BE63466719683636007E375F /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = success.png; path = Source/success.png; sourceTree = "<group>"; };
+		BE64230719828B9800669D61 /* YouMiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiConfig.h; sourceTree = "<group>"; };
+		BE64230819828B9800669D61 /* YouMiDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiDelegateProtocol.h; sourceTree = "<group>"; };
+		BE64230919828B9800669D61 /* YouMiPointsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiPointsManager.h; sourceTree = "<group>"; };
+		BE64230A19828B9800669D61 /* YouMiSpots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiSpots.h; sourceTree = "<group>"; };
+		BE64230B19828B9800669D61 /* YouMiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiView.h; sourceTree = "<group>"; };
+		BE64230C19828B9800669D61 /* YouMiWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWall.h; sourceTree = "<group>"; };
+		BE64230D19828B9800669D61 /* YouMiWallAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallAppModel.h; sourceTree = "<group>"; };
+		BE64230E19828B9800669D61 /* YouMiWallSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpot.h; sourceTree = "<group>"; };
+		BE64230F19828B9800669D61 /* YouMiWallSpotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallSpotView.h; sourceTree = "<group>"; };
+		BE64231019828B9800669D61 /* libYouMi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYouMi.a; sourceTree = "<group>"; };
+		BE64231119828B9800669D61 /* libOpenIDFA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOpenIDFA.a; sourceTree = "<group>"; };
+		BE64231419828BA000669D61 /* youmiconfuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = youmiconfuse.h; sourceTree = "<group>"; };
 		BE8751C0195DD999001D86B1 /* PZLabelScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PZLabelScore.h; path = Source/PZLabelScore.h; sourceTree = "<group>"; };
 		BE8751C1195DD999001D86B1 /* PZLabelScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PZLabelScore.m; path = Source/PZLabelScore.m; sourceTree = "<group>"; };
 		BE89CDF61962EE2200994D13 /* libMobClickGameLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickGameLibrary.a; sourceTree = "<group>"; };
@@ -287,24 +288,24 @@
 				BE3594D4196D873900E36362 /* CFNetwork.framework in Frameworks */,
 				BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */,
 				BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
+				BE64231219828B9800669D61 /* libYouMi.a in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				BE89CDF91962EE2200994D13 /* libMobClickGameLibrary.a in Frameworks */,
 				BE3610B1196ADF6E0085BAF2 /* MediaPlayer.framework in Frameworks */,
 				BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				BE058A9D19619405005271F1 /* StoreKit.framework in Frameworks */,
-				BE1497F8196EC153001035D8 /* libOpenIDFA.a in Frameworks */,
 				BE3594DC196D8B4700E36362 /* GameKit.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				BE058ACF1961B955005271F1 /* libSocialWechat.a in Frameworks */,
+				BE64231319828B9800669D61 /* libOpenIDFA.a in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
 				BE058ABF1961B18E005271F1 /* libUMSocial_Sdk_3.3.8.a in Frameworks */,
 				B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */,
-				BE1497F9196EC153001035D8 /* libYouMi.a in Frameworks */,
 				B77F1B4217B978D7009739AE /* CoreText.framework in Frameworks */,
 				BE058AD01961B955005271F1 /* libWeChatSDK.a in Frameworks */,
 			);
@@ -337,9 +338,9 @@
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
-				B7378993180767190076A88C /* MainScene.m */,
 				BE12CB45195861F2006F775D /* Becterial.h */,
 				BE12CB46195861F2006F775D /* Becterial.m */,
+				B7378993180767190076A88C /* MainScene.m */,
 				BE8751C0195DD999001D86B1 /* PZLabelScore.h */,
 				BE8751C1195DD999001D86B1 /* PZLabelScore.m */,
 				BE1835A4195FE9DF00860689 /* Killer.h */,
@@ -507,28 +508,13 @@
 		BE1497EB196EC153001035D8 /* youmi */ = {
 			isa = PBXGroup;
 			children = (
-				BE1497EC196EC153001035D8 /* include */,
-				BE1497F6196EC153001035D8 /* libOpenIDFA.a */,
-				BE1497F7196EC153001035D8 /* libYouMi.a */,
+				BE64231419828BA000669D61 /* youmiconfuse.h */,
+				BE64230619828B9800669D61 /* include */,
+				BE64231019828B9800669D61 /* libYouMi.a */,
+				BE64231119828B9800669D61 /* libOpenIDFA.a */,
 			);
 			name = youmi;
 			path = lib;
-			sourceTree = "<group>";
-		};
-		BE1497EC196EC153001035D8 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				BE1497ED196EC153001035D8 /* YouMiConfig.h */,
-				BE1497EE196EC153001035D8 /* YouMiDelegateProtocol.h */,
-				BE1497EF196EC153001035D8 /* YouMiPointsManager.h */,
-				BE1497F0196EC153001035D8 /* YouMiSpots.h */,
-				BE1497F1196EC153001035D8 /* YouMiView.h */,
-				BE1497F2196EC153001035D8 /* YouMiWall.h */,
-				BE1497F3196EC153001035D8 /* YouMiWallAppModel.h */,
-				BE1497F4196EC153001035D8 /* YouMiWallSpot.h */,
-				BE1497F5196EC153001035D8 /* YouMiWallSpotView.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		BE3610B4196AE0400085BAF2 /* UMSocial_ScreenShot_Sdk */ = {
@@ -550,6 +536,22 @@
 				BE3594D9196D87F100E36362 /* Reachability.m */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		BE64230619828B9800669D61 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BE64230719828B9800669D61 /* YouMiConfig.h */,
+				BE64230819828B9800669D61 /* YouMiDelegateProtocol.h */,
+				BE64230919828B9800669D61 /* YouMiPointsManager.h */,
+				BE64230A19828B9800669D61 /* YouMiSpots.h */,
+				BE64230B19828B9800669D61 /* YouMiView.h */,
+				BE64230C19828B9800669D61 /* YouMiWall.h */,
+				BE64230D19828B9800669D61 /* YouMiWallAppModel.h */,
+				BE64230E19828B9800669D61 /* YouMiWallSpot.h */,
+				BE64230F19828B9800669D61 /* YouMiWallSpotView.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		BE89CDF51962EE2200994D13 /* UmengGameAnalytics */ = {

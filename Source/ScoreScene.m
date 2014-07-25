@@ -206,6 +206,7 @@
 
 -(void)showScoreboard
 {
+    [YouMiWall enable];
     [YouMiWall showOffers:YES didShowBlock:^{
         NSLog(@"有米积分墙已显示");
     } didDismissBlock:^{

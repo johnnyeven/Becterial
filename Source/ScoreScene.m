@@ -21,6 +21,8 @@
 #import "DataStorageManager.h"
 #import "GameCenterManager.h"
 
+#import <AdSupport/AdSupport.h>
+
 #define dataStorageManagerConfig [DataStorageManager sharedDataStorageManager].config
 #define dataStorageManagerAchievement [DataStorageManager sharedDataStorageManager].achievementConst
 

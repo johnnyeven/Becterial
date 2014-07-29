@@ -82,6 +82,7 @@
 		BE89CE1F19630B9E00994D13 /* store_img_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BE89CE1C19630B9E00994D13 /* store_img_icon_bg.png */; };
 		BE89CE2219630DDE00994D13 /* CashStoreItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE89CE2119630DDE00994D13 /* CashStoreItemView.m */; };
 		BE92BE6A195F29A4006C17AB /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE92BE69195F29A4006C17AB /* GLKit.framework */; };
+		BEB049911987CA650019328D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB049901987CA650019328D /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BEB8FAB11970368800755936 /* UpgradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB01970368800755936 /* UpgradeView.xib */; };
 		BEB8FAB51970393800755936 /* upgrade-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB41970393800755936 /* upgrade-hd.png */; };
 		BEB8FAB71970394400755936 /* store-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB8FAB61970394400755936 /* store-hd.png */; };
@@ -247,6 +248,7 @@
 		BE89CE2119630DDE00994D13 /* CashStoreItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CashStoreItemView.m; path = Source/CashStoreItemView.m; sourceTree = "<group>"; };
 		BE92BE69195F29A4006C17AB /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BEACFDCB1959C592003C5AA7 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = define.h; path = Source/define.h; sourceTree = "<group>"; };
+		BEB049901987CA650019328D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BEB8FAB01970368800755936 /* UpgradeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpgradeView.xib; path = Source/UpgradeView.xib; sourceTree = "<group>"; };
 		BEB8FAB41970393800755936 /* upgrade-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "upgrade-hd.png"; path = "Source/upgrade-hd.png"; sourceTree = "<group>"; };
 		BEB8FAB61970394400755936 /* store-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "store-hd.png"; path = "Source/store-hd.png"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB049911987CA650019328D /* AdSupport.framework in Frameworks */,
 				BE3594D4196D873900E36362 /* CFNetwork.framework in Frameworks */,
 				BE3594D1196D859E00E36362 /* SystemConfiguration.framework in Frameworks */,
 				BE3610B9196AE0400085BAF2 /* libUMSocial_Sdk_ScreenShot_1.0.a in Frameworks */,
@@ -406,6 +409,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEB049901987CA650019328D /* AdSupport.framework */,
 				BE3594DB196D8B4700E36362 /* GameKit.framework */,
 				BE3594D3196D873900E36362 /* CFNetwork.framework */,
 				BE3594D0196D859E00E36362 /* SystemConfiguration.framework */,

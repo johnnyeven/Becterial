@@ -222,7 +222,8 @@
 -(void)btnAdTouch
 {
     [MobClick event:@"touchTaobaoUrl"];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://moesister.taobao.com/"]];
+    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://b.profzone.net/advertisement/get?idfa=%@", adId]]];
 }
 
 -(void)back
